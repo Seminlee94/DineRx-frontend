@@ -5,7 +5,11 @@ import Login from "./Auth/Login"
 import Home from "./Home/Home"
 
 function App() {
+
+
+  
   return (
+
     <BrowserRouter>
       <Switch>
 
