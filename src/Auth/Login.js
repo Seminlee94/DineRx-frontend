@@ -3,7 +3,8 @@ import './login.css'
 import PlacesAutocomplete from 'react-places-autocomplete';
 import { withRouter } from "react-router-dom"
 import avo2 from '../asset/images/avo2.png'
-import { Form, FormGroup, HelpBlock, Button, ButtonToolbar } from 'rsuite';
+import { Form, FormGroup, HelpBlock } from 'rsuite';
+import Button from '@material-ui/core/Button';
 // import {
 //     geocodeByaddress,
 //     geocodeByPlaceId,
@@ -12,10 +13,6 @@ import { Form, FormGroup, HelpBlock, Button, ButtonToolbar } from 'rsuite';
 
 
 export class Login extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = { possibleHospital: '' };
-//   }
  
     state = {
         possibleHospital: "",
@@ -27,13 +24,7 @@ export class Login extends Component {
 
     }
 
-    // logout(){
-    //         localStorage.clear()
-    // localStorage.removeItem("token")
-    // localStorage.removeItem("userId")
-    // }
-
-    loginSubmit = () => {
+    loginHandler = () => {
         fetch("http://localhost:3000/api/v1/login", {
             method: 'POST',
             headers: {
@@ -49,14 +40,15 @@ export class Login extends Component {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 localStorage.setItem("token", data.jwt)
                 localStorage.setItem("userId", data.user.id)
                 localStorage.setItem("name", data.user.name)
                 localStorage.setItem("diet", data.user.diet)
                 localStorage.setItem("allergy", data.user.allergy)
-                localStorage.setItem("hospital", data.user.hospital)
-                this.setState( () => ({ user: data.user }), () => this.props.history.push('/home'))
+                localStorage.setItem("room", data.user.room)
+                localStorage.setItem("hospital", data.user.hospital.name)
+                this.setState( () => ({ user: data.user }), () => this.props.history.push('/'))
             })
     }
 
@@ -102,95 +94,94 @@ export class Login extends Component {
 
             <div className="bottom-login">
 
-                <Form layout="horizontal" onSubmit={this.loginSubmit}>
+                <div className="bottom-login-form">
 
-            {/* Serach for hospital */}
+                    <Form layout="horizontal">
 
-                <PlacesAutocomplete
-                value={this.state.possibleHospital}
-                onChange={this.possibleHospitalHandler}
-                onSelect={this.handleSelect}
-                >
-                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                    <div>
-                        <div className="search-box" >
-                            <input
-                                {...getInputProps({
-                                placeholder: 'Search for a Hospital ...',
-                                className: 'location-search-input',
-                                })}
-                            />
-                                <button className="search-icon"><i class="material-icons">search </i></button>
+                {/* Serach for hospital */}
 
-                        </div>
-                        <div className="dropdown-container">
-                            {loading && <div>Loading...</div>}
-                            {suggestions.map(suggestion => {
-                            
-                            const style = suggestion.active
-                                ? { backgroundColor: '#42a5f5', cursor: 'pointer' }
-                                : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                            return (
-                                <div className="input-suggestion"
-                                    {...getSuggestionItemProps(suggestion, {
-                                        
-                                        style,
+                    <PlacesAutocomplete
+                    value={this.state.possibleHospital}
+                    onChange={this.possibleHospitalHandler}
+                    onSelect={this.handleSelect}
+                    >
+                    {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                        <div>
+                            <div className="search-box" >
+                                <input
+                                    {...getInputProps({
+                                    placeholder: 'Search for a Hospital ...',
+                                    className: 'location-search-input',
                                     })}
-                                    >
-                                    <i class="material-icons">location_on  </i> <span>{suggestion.description}</span>
-                                </div>
-                            );
-                            })}
+                                />
+                                    <button className="search-icon"><i class="material-icons">search </i></button>
+
+                            </div>
+                            <div className="dropdown-container">
+                                {loading && <div>Loading...</div>}
+                                {suggestions.map(suggestion => {
+                                
+                                const style = suggestion.active
+                                    ? { backgroundColor: '#42a5f5', cursor: 'pointer' }
+                                    : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                return (
+                                    <div className="input-suggestion"
+                                        {...getSuggestionItemProps(suggestion, {
+                                            
+                                            style,
+                                        })}
+                                        >
+                                        <i class="material-icons">location_on  </i> <span>{suggestion.description}</span>
+                                    </div>
+                                );
+                                })}
+                            </div>
                         </div>
+                    )}
+                    </PlacesAutocomplete>
+                
+                    <FormGroup>
+                        <input 
+                            name="name" 
+                            className="login-form" 
+                            placeholder="Enter full name"
+                            value={name}
+                            onChange={this.handleChange}
+                            />
+                    </FormGroup>
+
+                    <FormGroup>
+                        <input 
+                            name="password" 
+                            // type="number" 
+                            className="login-form" 
+                            placeholder="Medical Identification Number"
+                            value={password}
+                            onChange={this.handleChange}
+                            />
+                        <HelpBlock tooltip>What is MRN?</HelpBlock>
+                    </FormGroup>
+
+                    <FormGroup>
+                        <input 
+                            name="dob" 
+                            type="number" 
+                            className="login-form" 
+                            placeholder="Date of Birth (DD/MM/YY)"
+                            value={dob}
+                            onChange={this.handleChange}
+                            />
+                    </FormGroup>
+
+                    <div className="login-button">
+                        <Button onClick={this.loginHandler} variant="contained">Submit</Button>
                     </div>
-                )}
-                </PlacesAutocomplete>
-            
-                <FormGroup>
-                    <input 
-                        name="name" 
-                        className="login-form" 
-                        placeholder="Enter full name"
-                        value={name}
-                        onChange={this.handleChange}
-                        />
-                </FormGroup>
-
-                <FormGroup>
-                    <input 
-                        name="password" 
-                        // type="number" 
-                        className="login-form" 
-                        placeholder="Medical Identification Number"
-                        value={password}
-                        onChange={this.handleChange}
-                        />
-                    <HelpBlock tooltip>What is MRN?</HelpBlock>
-                </FormGroup>
-
-                <FormGroup>
-                    <input 
-                        name="dob" 
-                        type="number" 
-                        className="login-form" 
-                        placeholder="Date of Birth (DD/MM/YY)"
-                        value={dob}
-                        onChange={this.handleChange}
-                        />
-                </FormGroup>
-
-                {/* <FormGroup> */}
-                    {/* <ButtonToolbar>
-                        <Button 
-                            appearance="primary" 
-                            className="login-button"
-                            onSubmit={this.loginSubmit} >Submit</Button>
-                    </ButtonToolbar> */}
-                    <button className="login-button">Submit</button>
-                {/* </FormGroup> */}
 
 
-                </Form>
+
+                    </Form>
+                </div>
+
 
             </div>
 
