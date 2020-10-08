@@ -1,9 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
+/* body {
+    overflow-y: hidden;
+} */
+
 .search-box {
     display: flex;
     width: 100%;
     margin-top: 200px;
+}
+
+.search-box-active {
+    transition: all 0.5s ease;
+    transform: translateY(-20%);
 }
 
 .location-search-input{
@@ -48,7 +57,7 @@
 .bottom-login {
     margin-top: 100px;
     width: 100%;
-    height: 60vh;
+    height: 30%;
     /* text-align: center; */
     /* justify-content: center; */
 }
@@ -72,8 +81,54 @@
     font-size: 1rem;
 }
 
-.login-button {
-    width: 150px;
-    height: 50px;
+.login-form {
+    /* display: none; */
+    width: 500px;
+    height: 40px;
+    background: none;
+    border: 2px solid black;
+    border-radius: 5px;
+    transform: translateX(-500%);
 }
 
+.login-form-active {
+    display: block;
+    width: 500px;
+    height: 40px;
+    background: none;
+    border: 2px solid black;
+    border-radius: 5px;
+    color: black;
+    font-weight: bold;
+    margin-bottom: 25px;
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    transition: all 800ms ease;
+    transform: translateX(0%);
+}
+
+.login-button {
+    /* display: none; */
+    width: 150px;
+    height: 50px;
+    transform: translateX(-1000%);
+}
+
+.login-button-active {
+    width: 150px;
+    height: 50px;
+    transform: translateX(0%);
+    transition: all 1100ms ease;
+}
+
+.top-center {
+    text-align: center;
+    font-size: 100px;
+    font-weight: bold;
+    font-family: 'Pacifico', cursive;
+}
+
+.top-center-active {
+    transform: translateX(-1000%);
+    transition: all 0.7s ease;
+}

@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import './login.css'
+import React, { Component } from 'react';
 import PlacesAutocomplete from 'react-places-autocomplete';
-import { withRouter } from "react-router-dom"
-import avo2 from '../asset/images/avo2.png'
 import { Form, FormGroup, HelpBlock } from 'rsuite';
+import { withRouter } from "react-router-dom";
 import Button from '@material-ui/core/Button';
+import avo2 from '../asset/images/avo2.png';
+import './login.css';
 // import {
 //     geocodeByaddress,
 //     geocodeByPlaceId,
@@ -20,10 +20,38 @@ export class Login extends Component {
         name: "",
         password: "",
         dob: "",
-        user: {}
-
+        user: {},
+        hospitalClicked: false,
+        nameClicked: false,
+        passClicked: false,
+        dobClicked: false,
     }
 
+    // Dynamic form
+
+    showNameForm = () => {
+        this.setState({ hospitalClicked: true })
+    }
+
+    handleNameKeyPress = (event) => {
+        if(event.key === 'Enter'){
+          this.setState({ nameClicked: true })
+        }
+      }
+
+    handlePassKeyPress = (event) => {
+        if(event.key === 'Enter'){
+          this.setState({ passClicked: true })
+        }
+      }
+
+    handleDOBKeyPress = (event) => {
+        if(event.key === 'Enter'){
+          this.setState({ dobClicked: true })
+        }
+      }
+
+    // Log in fetch
     loginHandler = () => {
         fetch("http://localhost:3000/api/v1/login", {
             method: 'POST',
@@ -40,7 +68,6 @@ export class Login extends Component {
         })
             .then(res => res.json())
             .then(data => {
-                // console.log(data)
                 localStorage.setItem("token", data.jwt)
                 localStorage.setItem("userId", data.user.id)
                 localStorage.setItem("name", data.user.name)
@@ -52,6 +79,8 @@ export class Login extends Component {
             })
     }
 
+    
+    // form handling
     handleChange = (event) => {
         event.persist()
         this.setState(()=> ({
@@ -59,34 +88,49 @@ export class Login extends Component {
         }))
     }
 
-
+    //result from auto search
     possibleHospitalHandler = possibleHospital => {
         this.setState(() => ({ possibleHospital }),() => (this.hospitalState(possibleHospital)));
     };
 
+    //split to get only hospital
     hospitalState = possibleHospital => {
         let hospital = possibleHospital.split(", ")[0]
         this.setState(() => ({ hospital: hospital }))
     }
 
 
+    // logout(){
+    //     localStorage.clear()
+    // localStorage.removeItem("token")
+    // localStorage.removeItem("userId")
+    // }
+
+
+
  
     render() {
-        console.log(this.state)
 
         const {name} = this.state.name
         const {password} = this.state.password
         const {dob} =this.state.dob
+
+
         return (
 
         <>
-
+            {/* Login page Image */}
             <div className="top-login">
                 <img 
                     src={avo2}
                     style={{ height: "100%" }}
                     alt="DineRx"
                 />
+            </div>
+
+            {/* Welcome prompt */}
+            <div className={this.state.hospitalClicked ? "top-center-active" : "top-center" } >
+                Welcome to DineRx
             </div>
 
 
@@ -98,86 +142,86 @@ export class Login extends Component {
 
                     <Form layout="horizontal">
 
-                {/* Serach for hospital */}
-
-                    <PlacesAutocomplete
-                    value={this.state.possibleHospital}
-                    onChange={this.possibleHospitalHandler}
-                    onSelect={this.handleSelect}
-                    >
-                    {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                        <div>
-                            <div className="search-box" >
-                                <input
-                                    {...getInputProps({
-                                    placeholder: 'Search for a Hospital ...',
-                                    className: 'location-search-input',
-                                    })}
-                                />
-                                    <button className="search-icon"><i class="material-icons">search </i></button>
-
-                            </div>
-                            <div className="dropdown-container">
-                                {loading && <div>Loading...</div>}
-                                {suggestions.map(suggestion => {
-                                
-                                const style = suggestion.active
-                                    ? { backgroundColor: '#42a5f5', cursor: 'pointer' }
-                                    : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                                return (
-                                    <div className="input-suggestion"
-                                        {...getSuggestionItemProps(suggestion, {
-                                            
-                                            style,
+                {/* Auto Serach for hospital */}
+                        <PlacesAutocomplete
+                        value={this.state.possibleHospital}
+                        onChange={this.possibleHospitalHandler}
+                        onSelect={this.handleSelect}
+                        >
+                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                            <div>
+                                <div className={this.state.hospitalClicked ? "search-box-active" : "search-box" }>
+                                    <input
+                                        {...getInputProps({
+                                        placeholder: 'Search for a Hospital ...',
+                                        className: 'location-search-input',
                                         })}
+                                    />
+                                        <button className="search-icon" onClick={this.showNameForm}><i class="material-icons">search </i></button>
+                                </div>
+                                <div className="dropdown-container">
+                                    {loading && <div>Loading...</div>}
+                                    {suggestions.map(suggestion => {
+                                    
+                                    const style = suggestion.active
+                                        ? { backgroundColor: '#42a5f5', cursor: 'pointer' }
+                                        : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                    return (
+                                        <div className="input-suggestion"
+                                            {...getSuggestionItemProps(suggestion, {style,})}
                                         >
-                                        <i class="material-icons">location_on  </i> <span>{suggestion.description}</span>
-                                    </div>
-                                );
-                                })}
+                                            <i className="material-icons">location_on  </i> <span>{suggestion.description}</span>
+                                        </div>
+                                    );
+                                    })}
+                                </div>
                             </div>
+                        )}
+                        </PlacesAutocomplete>
+                    
+                {/* name */}
+                        <FormGroup>
+                            <input 
+                                name="name" 
+                                className={this.state.hospitalClicked ? "login-form-active" : "login-form" } 
+                                placeholder="Enter full name"
+                                value={name}
+                                onChange={this.handleChange}
+                                onKeyPress={this.handleNameKeyPress}
+                                />
+                        </FormGroup>
+                    
+                {/* password(MRN) */}
+                        <FormGroup>
+                            <input 
+                                name="password" 
+                                type="number"
+                                className={this.state.nameClicked ? "login-form-active" : "login-form"} 
+                                placeholder="Medical Identification Number"
+                                value={password}
+                                onChange={this.handleChange}
+                                onKeyPress={this.handlePassKeyPress}
+                                />
+                            <HelpBlock tooltip>What is MRN?</HelpBlock>
+                        </FormGroup>
+                    
+                {/* DOB */}
+                        <FormGroup>
+                            <input 
+                                name="dob" 
+                                type="number" 
+                                className={this.state.passClicked ? "login-form-active" : "login-form"}
+                                placeholder="Date of Birth (DD/MM/YY)"
+                                value={dob}
+                                onChange={this.handleChange}
+                                onKeyPress={this.handleDOBKeyPress}
+                                />
+                        </FormGroup>
+                    
+                {/* submit button */}
+                        <div className={this.state.dobClicked ? "login-button-active" : "login-button" }>
+                            <Button onClick={this.loginHandler} variant="contained">Submit</Button>
                         </div>
-                    )}
-                    </PlacesAutocomplete>
-                
-                    <FormGroup>
-                        <input 
-                            name="name" 
-                            className="login-form" 
-                            placeholder="Enter full name"
-                            value={name}
-                            onChange={this.handleChange}
-                            />
-                    </FormGroup>
-
-                    <FormGroup>
-                        <input 
-                            name="password" 
-                            // type="number" 
-                            className="login-form" 
-                            placeholder="Medical Identification Number"
-                            value={password}
-                            onChange={this.handleChange}
-                            />
-                        <HelpBlock tooltip>What is MRN?</HelpBlock>
-                    </FormGroup>
-
-                    <FormGroup>
-                        <input 
-                            name="dob" 
-                            type="number" 
-                            className="login-form" 
-                            placeholder="Date of Birth (DD/MM/YY)"
-                            value={dob}
-                            onChange={this.handleChange}
-                            />
-                    </FormGroup>
-
-                    <div className="login-button">
-                        <Button onClick={this.loginHandler} variant="contained">Submit</Button>
-                    </div>
-
-
 
                     </Form>
                 </div>

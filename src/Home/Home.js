@@ -4,6 +4,7 @@ import nyc from '../asset/images/nyc.jpeg'
 import Button from '@material-ui/core/Button';
 import { withRouter } from "react-router-dom"
 
+const moment = require("moment");
 
 
 class Home extends React.Component {
@@ -11,8 +12,9 @@ class Home extends React.Component {
 
 
 
+
     logoutHandler = () => {
-        console.log("clicked")
+        localStorage.clear()
         localStorage.removeItem("token")
         localStorage.removeItem("userId")
         localStorage.removeItem("name")
@@ -27,6 +29,7 @@ class Home extends React.Component {
         let userName = localStorage.getItem("name")
         // let userHospital = localStorage.getItem("hospital")
         console.log(userName)
+        console.log(moment())
 
         return (
 
@@ -34,7 +37,8 @@ class Home extends React.Component {
                 <div className="top-welcome">
                     <img 
                         src={nyc}
-                        style={{ width: "100%", height: "30vh" }} />
+                        style={{ width: "100%", height: "30vh" }}
+                        alt="city-img" />
                 </div>
                 <div className="welcome-city">
                     New York
