@@ -92,7 +92,7 @@ function Navbar() {
         onMouseEnter={onMouseEnter} 
         onMouseLeave={onMouseLeave}
       >
-          <faIcons.FaRegUser/>{dropdown ? <UserDropdown/> : null }
+          <faIcons.FaRegUser />{dropdown ? <UserDropdown/> : null }
       </li>
 
 

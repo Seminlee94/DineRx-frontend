@@ -1,7 +1,5 @@
 import  React, { useState } from "react";
 import "./OrderNow.css";
-// import { Alert, Dropdown } from 'rsuite';
-// import { render } from "react-dom";
 import 'rsuite/lib/styles/index.less'
 import * as faIcons from "react-icons/fa"
 import Breakfast from "../Meal/Breakfast"

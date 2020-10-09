@@ -1,12 +1,12 @@
 .dropdown-menu {
     height: 400px;
     width: 200px;
-    transform: translate(-31%, -3%);
+    transform: translate(-31%, -5%);
     position: absolute;
     list-style: none;
     text-align: start;
     background-color: #DCDCDCe6;
-    z-index: 5;
+    z-index: 9999;
 
   }
 
