@@ -14,10 +14,6 @@ class Breakfast extends React.Component {
         clicked: false,
         filteredCategory: []
     }
-
-
-
-    
     
     componentDidMount(){
         this.props.fetchMeals()
@@ -37,7 +33,10 @@ class Breakfast extends React.Component {
         // console.log(this.props)
         let newArray = this.props.meals
         let filteredArray = newArray.filter(el => el.breakfast === true)
-        return filteredArray.map(el => <MealCard key={el.id} meal={el} />)
+        return filteredArray.map((el) => (<MealCard 
+                key={el.id} 
+                meal={el} 
+            />))
     }
 
 

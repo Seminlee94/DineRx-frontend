@@ -1,12 +1,18 @@
 import React from 'react'
 
-function Product(props) {
+class Product extends React.Component {
 
-    console.log(props.product)
+    
 
-    return (
-        <h1>PRoduct info</h1>
-    )
+    render() {
+        // console.log(this.props.meal_id)
+        console.log(this.props)
+
+        return (
+            <h1>PRoduct info</h1>
+        )
+    }
+
 }
 
 export default Product

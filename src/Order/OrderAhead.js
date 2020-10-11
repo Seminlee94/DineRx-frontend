@@ -12,6 +12,7 @@ class OrderAhead extends React.Component {
     state = {
         showScroll: false,
     }
+    
 
     checkScrollTop = () => {    
         if (window.pageYOffset > 400){

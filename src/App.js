@@ -31,9 +31,9 @@ function App() {
           <OrderAhead/>
         </Route>
 
-        <Route path="/product">
+        <Route path="/product/:id">
           <Navbar />
-          <Product />
+          <Product meal="123" />
         </Route>
 
         <Route exact path="/">
