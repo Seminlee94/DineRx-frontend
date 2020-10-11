@@ -5,14 +5,14 @@ import * as faIcons from "react-icons/fa"
 import Breakfast from "../Meal/Breakfast"
 import Lunch from "../Meal/Lunch"
 import Dinner from "../Meal/Dinner"
-import breakfastImg from '../asset/images/breakfastImg.jpg'
+// import breakfastImg from '../asset/images/breakfastImg.jpg'
 import breakfastImg2 from '../asset/images/breakfastImg2.jpg'
-import lunchImg from '../asset/images/lunchImg.jpg'
+// import lunchImg from '../asset/images/lunchImg.jpg'
 import lunchImg2 from '../asset/images/lunchImg2.jpg'
-import dinnerImg from '../asset/images/dinnerImg.jpg'
-import dinnerImg2 from '../asset/images/dinnerImg2.jpg'
+// import dinnerImg from '../asset/images/dinnerImg.jpg'
+// import dinnerImg2 from '../asset/images/dinnerImg2.jpg'
 import dinnerImg3 from '../asset/images/dinnerImg3.jpg'
-import TimeOut from "./TimeOut"
+// import TimeOut from "./TimeOut"
 
 
 

@@ -1,58 +1,89 @@
-import React, { useState } from "react";
+import React from "react";
 import './OrderAhead.css'
 import Breakfast from "../Meal/Breakfast.js"
 import Lunch from "../Meal/Lunch.js"
 import Dinner from "../Meal/Dinner.js"
 import {FaArrowCircleUp} from 'react-icons/fa';
+import RightSidebar from '../Meal/Containers/RightSidebar'
 
 
-function OrderAhead() {
-    const [showScroll, setShowScroll] = useState(false)
+class OrderAhead extends React.Component {
 
-    const checkScrollTop = () => {    
-        if (!showScroll && window.pageYOffset > 400){
-           setShowScroll(true)    
-        } else if (showScroll && window.pageYOffset <= 400){
-           setShowScroll(false)    
+    state = {
+        showScroll: false,
+    }
+
+    checkScrollTop = () => {    
+        if (window.pageYOffset > 400){
+            this.setState({ showScroll: true })
+        } else if (window.pageYOffset <= 400){
+           this.setState({ showScroll: false })
         }  
      };
 
-    const scrollTop = () =>{
+
+    scrollTop = () =>{
         window.scrollTo({top: 0, behavior: 'smooth'});
     };
         
-    window.addEventListener('scroll', checkScrollTop)
+    componentDidMount() {
+        window.addEventListener('scroll', this.checkScrollTop);
+    }
 
-    return (
-        <>
-            <FaArrowCircleUp 
-                className="scrollTop" 
-                onClick={scrollTop} 
-                style={{height: 40, display: showScroll ? 'flex' : 'none'}}
-            />
-            <div className="meal-types">
-                <a href="#breakfast-meal" className="meal" >Breakfast</a>
+    render() {
+        return (
+            <>
+                <FaArrowCircleUp 
+                    className="scrollTop" 
+                    onClick={this.scrollTop} 
+                    style={{height: 40, display: this.state.showScroll ? 'flex' : 'none'}}
+                />
+                <div className="meal-types">
+                    <a href="#breakfast-meal" className="meal" >Breakfast</a>
+                        
+                    <a href="#lunch-meal" className="meal" >Lunch</a>
+                        
+                    <a href="#dinner-meal" className="meal" >Dinner</a>
                     
-                <a href="#lunch-meal" className="meal" >Lunch</a>
-                    
-                <a href="#dinner-meal" className="meal" >Dinner</a>
-                
-            </div>
+                </div>
 
-            <section>
+                <div className="order-ahead-page">
+                    <section>
+                        <div id="breakfast-meal">
+                            <>
+                                <div className="meal-type">
+                                    Breakfast
+                                </div>
+                                <Breakfast />
+                            </>
+                        </div>
+                        <div id="lunch-meal">
+                            <>
+                                <div className="meal-type">
+                                    Lunch
+                                </div>
+                                <Lunch />
+                            </>
+                        </div>
+                        <div id="dinner-meal">
+                            <>
+                                <div className="meal-type">
+                                    Dinner
+                                </div>
+                                <Dinner />
+                            </>
+                        </div>
+                    </section>
 
-                <div id="breakfast-meal">
-                    <Breakfast />
                 </div>
-                <div id="lunch-meal">
-                    <Lunch />
-                </div>
-                <div id="dinner-meal">
-                    <Dinner />
-                </div>
-            </section>
-        </>
-    )
+
+                <RightSidebar />
+
+
+            </>
+        )
+    }
+
 }
 
 
