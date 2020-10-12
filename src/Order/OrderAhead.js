@@ -4,7 +4,7 @@ import Breakfast from "../Meal/Breakfast.js"
 import Lunch from "../Meal/Lunch.js"
 import Dinner from "../Meal/Dinner.js"
 import {FaArrowCircleUp} from 'react-icons/fa';
-import RightSidebar from '../Meal/Containers/RightSidebar'
+import RightSidebar from './RightSidebar'
 
 
 class OrderAhead extends React.Component {

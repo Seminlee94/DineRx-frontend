@@ -1,5 +1,6 @@
 import React from 'react'
-import '../../Order/OrderAhead.css'
+import './OrderAhead.css'
+import RightSideItem from './Cart/RightSideItem'
 // import { connect } from 'react-redux'
 // import { getMeal } from '../../Redux/actions'
 
@@ -25,14 +26,7 @@ class RightSidebar extends React.Component {
 
         return(
             <div className={this.state.showSide ? "right-sidebar" : "right-sidebar-inactive"}>
-                <ul className="right-sidebar-ul">
-                    <li>item</li>
-                    <li>item</li>
-                    <li>item</li>
-                    <li>item</li>
-                    <li>item</li>
-                    <li>item</li>
-                </ul>
+                <RightSideItem />
             </div>
         )
     }

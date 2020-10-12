@@ -1,0 +1,18 @@
+.item-card {
+    margin-left: 10px;
+    border-bottom-style: dashed;
+    border-width: thin;
+    padding: 10px 0 10px 0;
+    display: flex;
+}
+
+.cart-container-top {
+    border-bottom-style: solid;
+    border-width: thin;
+    font-size: 30px;
+}
+
+.cart-container {
+    text-align: center;
+    overflow-y: scroll;
+}

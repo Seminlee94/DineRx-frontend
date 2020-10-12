@@ -28,8 +28,6 @@ class Home extends React.Component {
         
         let userName = localStorage.getItem("name")
         // let userHospital = localStorage.getItem("hospital")
-        console.log(userName)
-        console.log(moment())
 
         return (
 

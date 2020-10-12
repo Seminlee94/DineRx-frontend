@@ -24,7 +24,6 @@ class Product extends React.Component {
     }
 
     render() {
-        // let ingredients = this.props.meals.ingredients
 
         return (
             <div className="product-container">
@@ -50,9 +49,8 @@ class Product extends React.Component {
                     <div className="product-ingredient-top">
                         Ingredients in {this.props.meals.name}
                     </div>
-                    <div className="product-ingredient-details">
-                        <Ingredient />
-                    </div>
+
+                    <Ingredient />
                 </div>
 
                 <div className="product-nutrition-container">

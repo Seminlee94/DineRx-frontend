@@ -1,76 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../Meal.css'
 import { Link } from "react-router-dom"
-// import Navbar from "../../Navbar/Navbar"
-// import Product from "../Product"
+import { FiCheck } from 'react-icons/fi'
+import { FcCheckmark } from 'react-icons/fc'
 
-// class MealCard extends React.Component {
-
-
-    
-//     render() {
-        
-//         let meal_id = this.props.meal.id
-              
-//         // let newTo = { 
-//         //     pathname: `/product/${meal_id}`, 
-//         //     param1: meal_id
-//         // };
-
-    
-//         return(
-//             <>
-//                 <div>
-//                     <div className="meal-card" >
-//                         <>
-//                             <Link to={`product/${meal_id}`} >
-//                                 <img 
-//                                     className="meal-card-image" 
-//                                     src={this.props.meal.image} 
-//                                     alt={this.props.meal.name} 
-//                                     style={{ height:"220px", width: "200px" }} 
-//                                 />
-//                             </Link>
-
-
-        
-                        
-//                             <div className="meal-card-container">
-//                                 <div className="meal-card-name">
-//                                     {this.props.meal.name}
-//                                 </div>
-//                             </div>
-//                         </>
-
-//                     </div>
-//                 </div>
-
-//             </>
-    
-//         )
-//     }
-// }
 
 function MealCard(props) {
 
+    const [toggleState, setToggleState] = useState(false);
+
+    function toggle() {
+      setToggleState(toggleState ? false : true);
+    }
 
     let meal_id = props.meal.id
-
-
-    // const newTo = { 
-    //     pathname: `/product/${meal_id}`, 
-    //     param1: meal_id
-    //   };
 
     return(
 
         <div className="meal-card" >
             <>
-                <Link to={{ pathname: `product/${meal_id}`,
-                            state: { id: meal_id }
-                        }} >
-                    <img className="meal-card-image" src={props.meal.image} alt={props.meal.name} style={{ height:"220px", width: "200px" }} />
-                </Link>
+                <div className="meal-card-image-container">
+                    <div className="meal-check" onClick={toggle}>
+                        {toggleState ? <FcCheckmark />: <FiCheck /> }
+                    </div>
+                    <Link to={{ pathname: `product/${meal_id}`,
+                                state: { id: meal_id }
+                            }} >
+                        <img className="meal-card-image" src={props.meal.image} alt={props.meal.name} style={{ height:"220px", width: "200px" }} />
+                    </Link>    
+                </div>
             
                 <div className="meal-card-container">
                     <div className="meal-card-name">

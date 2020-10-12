@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { getIngredient } from '../../Redux/actions'
 import IngredientCard from '../Components/IngredientCard'
+import Shelf from '../Shelf/Shelf'
 import "../Meal.css"
 
 let meal_id = window.location.href.split("/").splice(-1)[0]
@@ -23,11 +24,9 @@ class Ingredient extends React.Component{
     
     
     render(){
-        // console.log(this.props.ingredients)
+        
         return (
-            <div className="ingredient-container">
-                {this.ingredients()}
-            </div>
+            <Shelf ingredients={this.ingredients()} />
         )
     }
 
@@ -43,4 +42,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Ingredient)
-// export default Ingredient

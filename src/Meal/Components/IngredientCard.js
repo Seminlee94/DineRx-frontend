@@ -10,7 +10,6 @@ class IngredientCard extends React.Component {
                  <div className="ingredient-card-image">
                     <img 
                         src={`https://spoonacular.com/cdn/ingredients_100x100/${this.props.ingredient.image}`}
-                        alt="ingredient-image"
                     />
                  </div>
         

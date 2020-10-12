@@ -69,6 +69,7 @@ export class Login extends Component {
             .then(res => res.json())
             .then(data => {
                 localStorage.setItem("token", data.jwt)
+                localStorage.setItem("user", data)
                 localStorage.setItem("userId", data.user.id)
                 localStorage.setItem("name", data.user.name)
                 localStorage.setItem("diet", data.user.diet)

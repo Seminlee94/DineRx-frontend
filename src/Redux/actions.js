@@ -33,6 +33,14 @@ export const getNutrition = (id) => {
     }
 }
 
+export const getUser = (id) => {
+    return function(dispatch){
+        fetch(`http://localhost:3000/api/v1/users/${id}`)
+            .then(resp => resp.json())
+            .then(data => dispatch({ type: "fetched_userFood", payload: data.foods }))
+    }
+} 
+
 
 
 //// Use getState for post request. getState gets current state
