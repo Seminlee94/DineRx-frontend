@@ -9,10 +9,42 @@
 .cart-container-top {
     border-bottom-style: solid;
     border-width: thin;
+    display: flex;
+}
+
+.cart-container-top-cart {
     font-size: 30px;
 }
 
-.cart-container {
+.accordion {
     text-align: center;
-    overflow-y: scroll;
+    overflow-y: hidden;
+}
+
+.contentBx {
+    position: relative;
+}
+
+
+.content {
+    position: relative;
+    background: #fff;
+    height: 0;
+    overflow: hidden;
+    transition: 0.5s;
+    overflow-y: auto;
+}
+
+.content-active {
+    transition: 0.5s;
+    height: 150px;
+    padding: 10px
+}
+
+.content-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding: 10px;
+    cursor: pointer;
 }

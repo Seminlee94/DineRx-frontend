@@ -2,76 +2,107 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { getUser } from '../../Redux/actions'
 import RightSideItemCard from './RightSideItemCard'
-import ListGroup from "react-bootstrap/ListGroup";
-import Accordion from "react-bootstrap/Accordion";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
+import './Cart.css'
+import * as faIcons from "react-icons/io"
+import * as bsIcons from "react-icons/bs"
+
 
 let user_id = localStorage.getItem("userId")
 
 class RightSideItem extends React.Component {
 
+    state = {
+        bclicked: false,
+        lclicked: false,
+        dclicked: false,
+    }
+
     componentDidMount(){
         this.props.fetchUser();
     }
+
+    breakfastClickHandler = () => {
+        this.setState({ bclicked: !this.state.bclicked })
+    }
+    lunchClickHandler = () => {
+        this.setState({ lclicked: !this.state.lclicked })
+    }
+    dinnerClickHandler = () => {
+        this.setState({ dclicked: !this.state.dclicked })
+    }
     
 
-    // userFoods = () => {
-        //     return this.props.userFoods.map(el => <RightSideItemCard key={el.id} meal={el} />)
-        // }
+    userBreakfastFoods = () => {
+        let filtered = this.props.userFoods.filter(food => food.breakfast)
+        return filtered.map(el => <RightSideItemCard key={el.id} meal={el} />)
+    }
+
+    userLunchFoods = () => {
+        let filtered = this.props.userFoods.filter(food => food.lunch)
+        return filtered.map(el => <RightSideItemCard key={el.id} meal={el} />)
+    }
+
+    userDinnerFoods = () => {
+        let filtered = this.props.userFoods.filter(food => food.dinner)
+        return filtered.map(el => <RightSideItemCard key={el.id} meal={el} />)
+    }
         
     render(){
+        return(
+            <div className="accordion">
+                <div className="cart-container-top">
+                    <div className="cart-icon">
+                        {this.state.cartClicked ? <bsIcons.BsArrowBarLeft /> : <bsIcons.BsArrowBarRight /> }
+                    </div>
 
-        let newArray = this.props.userFoods
-        let breakfastFiltered = newArray.filter(el => el.breakfast)
-        let lunchFiltered = newArray.filter(el => el.lunch)
-        let dinnerFiltered = newArray.filter(el => el.dinner)
-
-
-        const ShopMapper = [
-            { title: "Breakfast", mealType: breakfastFiltered },
-            { title: "Lunch", mealType: lunchFiltered },
-            { title: "Dinner", mealType: dinnerFiltered },
-
-          ];
-      
-          const ShopMap = ShopMapper.map(({ title, mealType }) => (
-            <Accordion style={{ marginTop: "5px", marginLeft: "5px" }}>
-              <Card style={{ border: 0, marginBottom: "5px" }}>
-                <Accordion.Toggle
-                  as={Button}
-                  variant="secondary"
-                  eventKey="0"
-                  style={{ textAlign: "left" }}
-                >
-                  {title}
-                </Accordion.Toggle>
-                <Accordion.Collapse eventKey="0">
-                  <ListGroup>
-                    {mealType.map((item) => (
-                      <ListGroup.Item
-                        key={item.id}
-                        style={{ cursor: "pointer" }}
-                      >
-                        {console.log(item)}
-                      </ListGroup.Item>
-                        // <RightSideItemCard key={item.id} meal={item} />
-                    ))}
-                  </ListGroup>
-                </Accordion.Collapse>
-              </Card>
-            </Accordion>
-          ));
-        
-            return(
-                <div className="cart-container">
-                    <div className="cart-container-top">
+                    <div className="cart-container-top-cart">
                         Cart
                     </div>
-                    {/* {this.userFoods()} */}
-                    {ShopMap}
                 </div>
-            )
+                <div className={this.state.bclicked ? "contentBx-active" : "contentBx" } >
+                    <div className="content-container" onClick={this.breakfastClickHandler} style={{ background: "#CCCCCB" }}>
+                        <div className="label">
+                            Breakfast
+                        </div>
+                        <div className="icon">
+                            {this.state.bclicked ? <faIcons.IoIosArrowUp /> : <faIcons.IoIosArrowDown /> }
+                        </div>
+                    </div>
+                    <div className={this.state.bclicked ? "content-active" :  "content" } >
+                        {this.userBreakfastFoods()}
+                    </div>
+                </div>
+
+                <div className={this.state.lclicked ? "contentBx-active" : "contentBx" }>
+                    <div className="content-container"  onClick={this.lunchClickHandler} style={{ background: "#B0B0AF " }}>
+                        <div className="label" >
+                            Lunch
+                        </div>
+                        <div className="icon">
+                            {this.state.lclicked ? <faIcons.IoIosArrowUp /> : <faIcons.IoIosArrowDown /> }
+                        </div>
+                    </div>
+                    <div className={this.state.lclicked ? "content-active" :  "content" }>
+                        {this.userLunchFoods()}
+                    </div>
+                </div>
+
+                <div className={this.state.dclicked ? "contentBx-active" : "contentBx" } >
+                    <div className="content-container" onClick={this.dinnerClickHandler} style={{ background: "#8A8A89 " }}>
+                        <div className="label" >
+                            Dinner
+                        </div>
+                        <div className="icon">
+                            {this.state.dclicked ? <faIcons.IoIosArrowUp /> : <faIcons.IoIosArrowDown /> }
+                        </div>
+                    </div>
+                    <div className={this.state.dclicked ? "content-active" :  "content" }>
+                        {this.userDinnerFoods()}
+                    </div>
+                </div>
+
+            </div>
+        )
     }
 }
 

@@ -18,8 +18,8 @@
     height:500px;
     width: 20%;
     border-style: solid;
-    border-width: thin;
-    border-radius: 10px;
+    /* border-width: thin; */
+    /* border-radius: 10px; */
 }
 
 .left-sidebar-ul {
