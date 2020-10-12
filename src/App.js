@@ -33,7 +33,7 @@ function App() {
 
         <Route path="/product/:id">
           <Navbar />
-          <Product meal="123" />
+          <Product />
         </Route>
 
         <Route exact path="/">

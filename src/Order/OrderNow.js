@@ -53,6 +53,7 @@ function OrderNow() {
                                         className="meal-pic"
                                         src={dinnerImg3}
                                         style= {{ width:"100%", height:"40vh"}}
+                                        alt="meal-pic"
                                     />
                                     <div className="ordernow-top-date" style={{ color: "#F7E6E6" }}>
                                         <div className="ordernow-date-and-day">
@@ -88,6 +89,7 @@ function OrderNow() {
                                         className="meal-pic"
                                         src={lunchImg2}
                                         style= {{ width:"100%", height:"40vh"}}
+                                        alt="meal-pic"
                                     />
                                     <div className="lunch-ordernow-top-date" style={{ color: "#642A02" }} >
                                         <div className="lunch-ordernow-date-and-day">
@@ -123,6 +125,7 @@ function OrderNow() {
                                         className="meal-pic"
                                         src={breakfastImg2}
                                         style= {{ width:"100%", height:"40vh"}}
+                                        alt="meal-pic"
                                     />
                                     <div className="breakfast-ordernow-top-date" style={{ color: "coral" }} >
                                             <div className="breakfast-ordernow-date">

@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../Order/OrderAhead.css'
-import { connect } from 'react-redux'
-import { getMeal } from '../../Redux/actions'
+// import { connect } from 'react-redux'
+// import { getMeal } from '../../Redux/actions'
 
 class RightSidebar extends React.Component {
 
