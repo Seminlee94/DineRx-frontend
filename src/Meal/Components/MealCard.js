@@ -2,7 +2,7 @@ import React from 'react'
 import '../Meal.css'
 import { Link } from "react-router-dom"
 import { connect } from 'react-redux'
-import { addUserFood } from '../../Redux/actions'
+import { allUserFood } from '../../Redux/actions'
 
 let user_id = localStorage.getItem("userId")
 
@@ -10,11 +10,13 @@ class MealCard extends React.Component {
 
     state = {
         toggleState: false,
-        mouseState: false
+        mouseState: false,
     }
 
-    addUserFood() {
-        this.props.addUserFood()
+    allUserFoodObj(meal_id) {
+        let userFoodObj = {meal_id: parseInt(meal_id), user_id: parseInt(user_id)}
+        // this.props.allUserFood(meal_id, user_id)
+        this.props.allUserFood(userFoodObj)
     }
 
     toggle = () => {
@@ -33,14 +35,9 @@ class MealCard extends React.Component {
         console.log("this")
     }
 
-    // viewHandler = () => {
-    //     console.log("view this")
-    // }
-    
-
-
     render() {
         let meal_id = this.props.meal.id
+        // console.log(meal_id, user_id)
         return(
     
             <div className="meal-card" >
@@ -52,7 +49,7 @@ class MealCard extends React.Component {
                         <div className="text" >
                             {(this.props.meal.breakfast && this.props.meal.lunch===false && this.props.meal.dinner===false) ?
                             
-                            <button className="breakfast-button" onClick={(event) => this.addUserFood(event)}>Add Breakfast</button>
+                            <button className="breakfast-button" onClick={() => this.allUserFoodObj(meal_id)}>Add Breakfast</button>
                             :
 
                             null
@@ -96,7 +93,8 @@ const mapStateToProps = (state) => {
 } 
 
 const mapDispatchToProps = (dispatch) => {
-    return { addUserFood: () => dispatch(addUserFood(user_id))}
+    return { allUserFood: (userFoodObj) => 
+        dispatch(allUserFood(userFoodObj))}
 }
 
 

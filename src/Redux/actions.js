@@ -43,13 +43,37 @@ export const getUser = (id) => {
     }
 } 
 
-export function addUserFood(id) {
-    const userFoods = fetch(`http://localhost:3000/api/v1/users/${id}`)
-        .then(resp => resp.json())
-        return {
-            type: 'add_userFood', userFoods
-        }
+export const allUserFood = (userFoodObj) => {
+    // return function(dispatch){
+        console.log(userFoodObj.meal_id, userFoodObj.user_id)
+        fetch("http://localhost:3000/api/v1/user_foods", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accepts": "application/json"
+            },
+            body: {
+                food_id: userFoodObj.meal_id,
+                user_id: userFoodObj.user_id
+            }
+        })
+            .then(resp => resp.json())
+            // .then(data => console.log(data, userFoodObj))
+            .then(data => console.log(data))
+                // dispatch({ type:"add_userFood", data }))
+    // }
 }
+
+// export function allUserFood(userFoodObj) {
+//     return (dispatch) => {
+//         dispatch({ type: 'START_ADDING_USERFOOD_REQUEST' })
+//             fetch("http://localhost:3000/api/v1/user_foods")
+//                 .then(resp => resp.json())
+//                 .then(dispatch({type: "add_userFood", userFoodObj
+
+//         }))
+//     }
+// }
 
 
 

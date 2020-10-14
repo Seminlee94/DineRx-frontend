@@ -19,14 +19,12 @@ const defaultState = {
     ingredients: [],
     nutritions: [],
     userFoods: [],
-    product: {}
+    product: {},
+    allUserFoods: []
 }
 
-// function notesReducer(){}
 function mealsReducer(state = defaultState.meals, action){
     switch(action.type) {
-        case "add meal": // post
-            return [...state, action.payload] 
         case "fetched_meals": // fetch ALL meals
             return action.payload  // same as defaultState/meals
         default:
@@ -65,8 +63,22 @@ function userFoodsReducer(state= defaultState.userFoods, action){
     switch(action.type) {
         case "fetched_userFood":
             return action.payload
+        default:
+            return state
+    }
+}
+
+function allUserFoodsReducer(state= { allUserFoods : [] }, action){
+    switch(action.type) {
+        // case "START_ADDING_USERFOOD_REQUEST"
+
         case "add_userFood":
-            return { ...state, userFoods: action.userFoods }
+            console.log(action, "in action")
+            const userFoodObj = { user_id: action.userFoodObj.user_id, meal_id: action.userFoodObj.meal_id }
+            return { 
+                ...state, 
+                allUserFoods: [ ...state.allUserFoods, userFoodObj ]
+            }
         default:
             return state
     }
@@ -77,7 +89,8 @@ const rootReducer = combineReducers({
     ingredients: ingredientsReducer,
     nutritions: nutritionsReducer,
     userFoods: userFoodsReducer,
-    product: productReducer
+    product: productReducer,
+    allUserFoods: allUserFoodsReducer
 })
 
 
