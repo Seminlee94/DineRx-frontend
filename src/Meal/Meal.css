@@ -47,9 +47,68 @@
 
 .meal-card-image {
     /* border-style:solid; */
+    /* position: relative;
+    z-index: 0; */
     border-radius: 50%;
     transition: all 300ms ease-in-out;
 }
+
+.overlay {
+    content: "";
+    top:20px;
+    left:95px;
+    right:95px;
+    bottom:25px;
+    background-color:#b4b2b2;
+    opacity: .75;
+    position:absolute;
+    z-index:9999;
+    border-radius: 50%;
+}
+
+.overlay-inactive{
+    display: none;
+}
+
+.breakfast-button {
+    margin-top: 30%;
+    background-color: hsl(14, 96%, 54%);
+    cursor: pointer;
+}
+.lunch-button {
+    margin-top: 15%;
+    background-color: hsl(14, 96%, 54%);
+    cursor: pointer;
+}
+.dinner-button {
+    margin-top: 15%;
+    background-color: hsl(14, 96%, 54%);
+    cursor: pointer;
+}
+.view-button {
+    margin-top: 15%;
+    background-color: hsl(14, 96%, 54%);
+    cursor: pointer;
+}
+
+
+
+button:hover {
+    background-color: #ff0000;
+}
+
+.box {
+
+    padding:20px;
+    /* border:1px solid #000; */
+    position:relative;
+    /* border-radius: 50%; */
+}
+
+.meal-card-image:hover .overlay {
+    width: 100%;
+    left: 0;
+  }
 
 .meal-card-image:hover {
     transform: scale(1.05)
@@ -232,3 +291,4 @@
     margin-top: 50px;
     padding: 0 30px 0 0px;
 }
+

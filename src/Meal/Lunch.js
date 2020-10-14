@@ -32,7 +32,7 @@ class Lunch extends React.Component {
     lunch = () => {
         let newArray = this.props.meals
         let filteredArray = newArray.filter(el => el.lunch === true)
-        return filteredArray.map(el => <MealCard key={el.id} meal={el} />)
+        return filteredArray.map(el => <MealCard key={el.id} meal={el} viewHandler={this.props.viewHandler} />)
     }
 
 
@@ -67,7 +67,7 @@ class Lunch extends React.Component {
      
                         <>
                     
-                            <FilteredMain meal={this.state.filteredCategory} />
+                            <FilteredMain meal={this.state.filteredCategory} viewHandler={this.props.viewHandler} />
                         </>
 
                     ) :

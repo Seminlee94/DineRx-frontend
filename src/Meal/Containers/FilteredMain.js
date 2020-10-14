@@ -8,7 +8,7 @@ class FilteredMain extends React.Component {
 
         
     breakfast = () => {
-        return this.props.meal.map(el => <MealCard key={el.id} meal={el} />)
+        return this.props.meal.map(el => <MealCard key={el.id} meal={el} viewHandler={this.props.viewHandler}/>)
     }
 
 

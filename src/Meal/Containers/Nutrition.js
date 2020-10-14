@@ -4,14 +4,14 @@ import { getNutrition } from '../../Redux/actions'
 import NutritionCard from '../Components/NutritionCard'
 import "../Meal.css"
 
-let meal_id = window.location.href.split("/").splice(-1)[0]
+// let meal_id = window.location.href.split("/").splice(-1)[0]
 
 class Nutrition extends React.Component{
 
 
-    componentDidMount(){
-        this.props.fetchMeals()
-    }
+    // componentDidMount(){
+    //     this.props.fetchMeals()
+    // }
 
     nutritions = () => {
         return this.props.nutritions.map(el => <NutritionCard key={el.id} nutrition={el} />)
@@ -32,13 +32,14 @@ class Nutrition extends React.Component{
 
 }
 
-const mapStateToProps = (state) => {
-    return { nutritions: state.nutritions }
-} 
+// const mapStateToProps = (state) => {
+//     return { nutritions: state.nutritions }
+// } 
 
 
-const mapDispatchToProps = (dispatch) => {
-    return { fetchMeals: () => dispatch(getNutrition(meal_id))}
-}
+// const mapDispatchToProps = (dispatch) => {
+//     return { fetchMeals: () => dispatch(getNutrition(meal_id))}
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Nutrition)
+// export default connect(mapStateToProps, mapDispatchToProps)(Nutrition)
+export default Nutrition

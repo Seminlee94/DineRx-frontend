@@ -4,7 +4,7 @@ import { getUser } from '../../Redux/actions'
 import RightSideItemCard from './RightSideItemCard'
 import './Cart.css'
 import * as faIcons from "react-icons/io"
-import * as bsIcons from "react-icons/bs"
+import * as cgIcons from "react-icons/cg"
 
 
 let user_id = localStorage.getItem("userId")
@@ -30,6 +30,9 @@ class RightSideItem extends React.Component {
     dinnerClickHandler = () => {
         this.setState({ dclicked: !this.state.dclicked })
     }
+    cartClickHandler = () => {
+        this.setState({ cartClicked: !this.state.cartClicked })
+    }
     
 
     userBreakfastFoods = () => {
@@ -49,10 +52,10 @@ class RightSideItem extends React.Component {
         
     render(){
         return(
-            <div className="accordion">
+            <div className={this.state.cartClicked ? "accordion-inactive" : "accordion"} >
                 <div className="cart-container-top">
-                    <div className="cart-icon">
-                        {this.state.cartClicked ? <bsIcons.BsArrowBarLeft /> : <bsIcons.BsArrowBarRight /> }
+                    <div className="cart-icon" onClick={this.cartClickHandler}>
+                        {this.state.cartClicked ? <cgIcons.CgArrowLeftR /> : <cgIcons.CgArrowRightR /> }
                     </div>
 
                     <div className="cart-container-top-cart">

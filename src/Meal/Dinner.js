@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { getMeal } from '../Redux/actions'
 import FilteredMain from './Containers/FilteredMain'
 // import LeftSidebar from './Containers/LeftSidebar'
-// import Main from './Containers/Main'
 
 
 class Dinner extends React.Component {
@@ -32,7 +31,7 @@ class Dinner extends React.Component {
     dinner = () => {
         let newArray = this.props.meals
         let filteredArray = newArray.filter(el => el.dinner === true)
-        return filteredArray.map(el => <MealCard key={el.id} meal={el} />)
+        return filteredArray.map(el => <MealCard key={el.id} meal={el} viewHandler={this.props.viewHandler} />)
     }
 
 
@@ -67,16 +66,16 @@ class Dinner extends React.Component {
      
                         <>
                     
-                            <FilteredMain meal={this.state.filteredCategory} />
+                            <FilteredMain meal={this.state.filteredCategory} viewHandler={this.props.viewHandler} />
                         </>
 
                     ) :
                         <div className="breakfast-container">
                             {this.dinner()}
                         </div>
-                        // <Main />
+
         
-                    }     
+                   }
 
 
             </div>

@@ -36,6 +36,7 @@ class Breakfast extends React.Component {
         return filteredArray.map((el) => (<MealCard 
                 key={el.id} 
                 meal={el} 
+                viewHandler={this.props.viewHandler}
             />))
     }
 
@@ -71,7 +72,7 @@ class Breakfast extends React.Component {
      
                         <>
                     
-                            <FilteredMain meal={this.state.filteredCategory} />
+                            <FilteredMain meal={this.state.filteredCategory} viewHandler={this.props.viewHandler} />
                         </>
 
                     ) :

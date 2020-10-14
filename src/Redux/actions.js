@@ -13,7 +13,8 @@ export const getProduct = (id) => {
     return function(dispatch){
         fetch(`http://localhost:3000/api/v1/foods/${id}`)
             .then(resp => resp.json())
-            .then(data => dispatch({ type: "fetched_product", payload: data }))    
+            .then(data => 
+                dispatch({ type: "fetched_product", payload: data }))    
     }
 }
 
@@ -21,7 +22,8 @@ export const getIngredient = (id) => {
     return function(dispatch){
         fetch(`http://localhost:3000/api/v1/foods/${id}`)
             .then(resp => resp.json())
-            .then(data => dispatch({ type: "fetched_ingredient", payload: data.ingredients }))    
+            .then(data => 
+                dispatch({ type: "fetched_ingredient", payload: data.ingredients }))    
     }
 }
 
@@ -40,6 +42,14 @@ export const getUser = (id) => {
             .then(data => dispatch({ type: "fetched_userFood", payload: data.foods }))
     }
 } 
+
+export function addUserFood(id) {
+    const userFoods = fetch(`http://localhost:3000/api/v1/users/${id}`)
+        .then(resp => resp.json())
+        return {
+            type: 'add_userFood', userFoods
+        }
+}
 
 
 

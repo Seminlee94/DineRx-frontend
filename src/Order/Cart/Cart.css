@@ -6,6 +6,14 @@
     display: flex;
 }
 
+.meal-card-name {
+    font-size: 16px;
+}
+
+.meal-card-icon {
+    margin-top: 10px;
+}
+
 .cart-container-top {
     border-bottom-style: solid;
     border-width: thin;
@@ -14,11 +22,20 @@
 
 .cart-container-top-cart {
     font-size: 30px;
+    margin-left: 32%;
 }
 
 .accordion {
     text-align: center;
     overflow-y: hidden;
+    transform: translateX(0%);
+    transition: 0.5s;
+}
+
+.accordion-inactive {
+    animation: moveSidebar 500ms ease;
+    transform: translateX(60%);
+    transition: 0.5s;
 }
 
 .contentBx {
@@ -38,7 +55,8 @@
 .content-active {
     transition: 0.5s;
     height: 150px;
-    padding: 10px
+    padding: 10px;
+    overflow-y: scroll;
 }
 
 .content-container {
@@ -46,5 +64,10 @@
     justify-content: space-between;
     position: relative;
     padding: 10px;
+    cursor: pointer;
+}
+
+.cart-icon {
+    margin-top: 6px;
     cursor: pointer;
 }

@@ -8,43 +8,53 @@ import OrderAhead from './Order/OrderAhead'
 import Navbar from './Navbar/Navbar'
 import Product from './Meal/Product'
 
-function App() {
+class App extends React.Component {
+
+  state = {
+    clickedId: null
+  }
+
+  viewHandler = (id) => {
+    this.setState(() => ({ clickedId: id }))
+  }
 
 
-  
-  return (
-
-    <BrowserRouter>
-      <Switch>
-
-        <Route path="/login">
-          <Login />
-        </Route>
-
-        <Route path="/ordernow">
-          <Navbar />
-          <OrderNow/>
-        </Route>
-
-        <Route path="/orderahead">
-          <Navbar/>
-          <OrderAhead/>
-        </Route>
-
-        <Route path="/product/:id">
-          <Navbar />
-          <Product />
-        </Route>
-
-        <Route exact path="/">
-
-          <Home />
-        </Route>
-
-      </Switch>
+  render() {
+    console.log(this.state)
+      return (
     
-    </BrowserRouter>
-  );
+        <BrowserRouter>
+          <Switch>
+    
+            <Route path="/login">
+              <Login />
+            </Route>
+    
+            <Route path="/ordernow">
+              <Navbar />
+              <OrderNow/>
+            </Route>
+    
+            <Route path="/orderahead">
+              <Navbar/>
+              <OrderAhead viewHandler={this.viewHandler}/>
+            </Route>
+    
+            <Route path="/product/:id">
+              <Navbar />
+              <Product clickedId={this.state.clickedId} />
+            </Route>
+    
+            <Route exact path="/">
+    
+              <Home />
+            </Route>
+    
+          </Switch>
+        
+        </BrowserRouter>
+      );
+  }
 }
 
 export default withRouter(App);

@@ -7,7 +7,8 @@ import "./Meal.css"
 import * as faIcons from "react-icons/io"
 
 
-let meal_id = window.location.href.split("/").splice(-1)[0]
+// let meal_id = window.location.href.split("/").splice(-1)[0]
+// console.log(this.props.clickedId)
 
 class Product extends React.Component {
 
@@ -16,7 +17,7 @@ class Product extends React.Component {
     }
 
     componentDidMount(){
-        this.props.fetchMeals()
+        this.props.fetchMeals(this.props.clickedId)
     }
 
     clickHandler = () => {
@@ -24,67 +25,87 @@ class Product extends React.Component {
     }
 
     render() {
+        // let mealIngredients = this.props.product.ingredients
+        // console.log(mealIngredients)
 
-        return (
+        // console.log(this.props.clickedId, "in product")
+        // console.log(this.props.product, "in product")
+
+        return ( 
             <div className="product-container">
+            <>
+            {this.props.product==={} 
+            
+            ?
+
+            null
+
+            :
+
+            <>
                 <div className="product-container-card">
                     <div className="product-image-container">
                         <img 
-                            src={this.props.meals.image} 
+                            src={this.props.product.image} 
                             className="product-image"
-                            alt={this.props.meals.name}
+                            alt={this.props.product.name}
                         />
                     </div>
                     <div className="product-details">
                         <div className="product-name">
-                            {this.props.meals.name}
+                            {this.props.product.name}
                         </div>
                         <div className="product-description">
-                            {this.props.meals.description}
+                            {this.props.product.description}
                         </div>
 
                     </div>
                 </div>
+
                 <div className="product-ingredient-container">
                     <div className="product-ingredient-top">
-                        Ingredients in {this.props.meals.name}
+                        Ingredients in {this.props.product.name}
                     </div>
 
-                    <Ingredient />
+                    <Ingredient ingredients={this.props.product.ingredients} />
                 </div>
 
                 <div className="product-nutrition-container">
                     <div className="product-blank"/>
-
-                    <div className="product-nutrition-top">
-                        Nutrition Information
-                    </div>
-                    <div className="view-summary-container" onClick={this.clickHandler}>
-                        <div className="view-summary">
-                            View Nutrition Summary
+                        <div className="product-nutrition-top">
+                            Nutrition Information
                         </div>
-                        <div className="view-summary-icon">
-                            {this.state.clicked ? <faIcons.IoIosArrowUp /> : <faIcons.IoIosArrowDown /> }
+                        <div className="view-summary-container" onClick={this.clickHandler}>
+                            <div className="view-summary">
+                                View Nutrition Summary
+                            </div>
+                            <div className="view-summary-icon">
+                                {this.state.clicked ? <faIcons.IoIosArrowUp /> : <faIcons.IoIosArrowDown /> }
+                            </div>
                         </div>
-                    </div>
                         <div className="product-nutrition-details">
-                            {this.state.clicked ? <Nutrition /> : null }
-                        </div>
+                            {this.state.clicked ? <Nutrition nutritions={this.props.product.nutritions} /> : null }
+                    </div>
                 </div>
+            </>
 
-            </div>
+            }
+
+            </>
+
+        </div>
         )
     }
 
 }
 
 const mapStateToProps = (state) => {
-    return { meals: state.meals }
+    return { product: state.product }
 } 
 
 
 const mapDispatchToProps = (dispatch) => {
-    return { fetchMeals: () => dispatch(getProduct(meal_id))}
+    return { fetchMeals: (clickedId) => dispatch(getProduct(clickedId))}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product)
