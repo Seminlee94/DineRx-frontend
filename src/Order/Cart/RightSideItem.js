@@ -38,18 +38,17 @@ class RightSideItem extends React.Component {
     userBreakfastFoods = () => {
         console.log(this.props, "right side item")
         let filtered = this.props.userFoods.filter(food => food.breakfast)
-        // let filtered = this.props.userFoods.filter(food => console.log(food))
-        return filtered.map(el => <RightSideItemCard key={el.id} meal={el} />)
+        return filtered.map(el => <RightSideItemCard  meal={el} />)
     }
 
     userLunchFoods = () => {
         let filtered = this.props.userFoods.filter(food => food.lunch)
-        return filtered.map(el => <RightSideItemCard key={el.id} meal={el} />)
+        return filtered.map(el => <RightSideItemCard  meal={el} />)
     }
 
     userDinnerFoods = () => {
         let filtered = this.props.userFoods.filter(food => food.dinner)
-        return filtered.map(el => <RightSideItemCard key={el.id} meal={el} />)
+        return filtered.map(el => <RightSideItemCard  meal={el} />)
     }
         
     render(){

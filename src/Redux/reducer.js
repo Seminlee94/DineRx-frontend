@@ -68,16 +68,22 @@ function userFoodsReducer(state= defaultState.userFoods, action){
     }
 }
 
-function allUserFoodsReducer(state= { allUserFoods : [] }, action){
+function allUserFoodsReducer(state= { allUserFoods : {} }, action){
     switch(action.type) {
-        // case "START_ADDING_USERFOOD_REQUEST"
+        case "START_ADDING_USERFOOD_REQUEST":
+            return {
+                ...state,
+                allUserFoods: [...state.allUserFoods],
+                requesting: true
+              }
 
         case "add_userFood":
             console.log(action, "in action")
             const userFoodObj = { user_id: action.userFoodObj.user_id, meal_id: action.userFoodObj.meal_id }
             return { 
                 ...state, 
-                allUserFoods: [ ...state.allUserFoods, userFoodObj ]
+                allUserFoods: [ ...state.allUserFoods, userFoodObj ],
+                requesting: false
             }
         default:
             return state

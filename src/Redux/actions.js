@@ -44,49 +44,20 @@ export const getUser = (id) => {
 } 
 
 export const allUserFood = (userFoodObj) => {
-    // return function(dispatch){
-        console.log(userFoodObj.meal_id, userFoodObj.user_id)
+    return function(dispatch){
+        dispatch({ type: 'START_ADDING_USERFOOD_REQUEST' })
         fetch("http://localhost:3000/api/v1/user_foods", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Accepts": "application/json"
             },
-            body: {
+            body: JSON.stringify({
                 food_id: userFoodObj.meal_id,
                 user_id: userFoodObj.user_id
-            }
+            })
         })
             .then(resp => resp.json())
-            // .then(data => console.log(data, userFoodObj))
-            .then(data => console.log(data))
-                // dispatch({ type:"add_userFood", data }))
-    // }
+            .then(data => console.log(data, userFoodObj))
+    }
 }
-
-// export function allUserFood(userFoodObj) {
-//     return (dispatch) => {
-//         dispatch({ type: 'START_ADDING_USERFOOD_REQUEST' })
-//             fetch("http://localhost:3000/api/v1/user_foods")
-//                 .then(resp => resp.json())
-//                 .then(dispatch({type: "add_userFood", userFoodObj
-
-//         }))
-//     }
-// }
-
-
-
-//// Use getState for post request. getState gets current state
-// export const getMeal = () => {
-//     console.log("first dispatch invoked")
-//     return function(dispatch, getState){
-//         console.log("nested function invoked")
-//         fetch("http://localhost:3000/api/v1/foods")
-
-//             .then(resp => resp.json())
-//             // .then(data => dispatch({ type: "fetched meals", payload: data }))
-//             .then(data => console.log(data))
-    
-//     }
-// }
