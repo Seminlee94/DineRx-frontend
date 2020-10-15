@@ -45,6 +45,10 @@
   margin-left: 41%;
 }
 
+.dropdown-container {
+    margin-right: 300px;
+}
+
 .top-login {
     width: 100%;
     height: 30vh;

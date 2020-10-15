@@ -35,15 +35,15 @@ export const getNutrition = (id) => {
     }
 }
 
-export const getUser = (id) => {
+export const getUser = () => {
     return function(dispatch){
-        fetch(`http://localhost:3000/api/v1/users/${id}`)
+        fetch("http://localhost:3000/api/v1/user_foods")
             .then(resp => resp.json())
-            .then(data => dispatch({ type: "fetched_userFood", payload: data.foods }))
+            .then(data => dispatch({ type: "fetched_userFood", payload: data }))
     }
 } 
 
-export const allUserFood = (userFoodObj) => {
+export const addUserFood = (userFoodObj) => {
     return function(dispatch){
         dispatch({ type: 'START_ADDING_USERFOOD_REQUEST' })
         fetch("http://localhost:3000/api/v1/user_foods", {
@@ -52,12 +52,21 @@ export const allUserFood = (userFoodObj) => {
                 "Content-Type": "application/json",
                 "Accepts": "application/json"
             },
-            body: JSON.stringify({
-                food_id: userFoodObj.meal_id,
-                user_id: userFoodObj.user_id
-            })
+            body: JSON.stringify(userFoodObj)
         })
             .then(resp => resp.json())
-            .then(data => console.log(data, userFoodObj))
+            .then(dispatch({ type: "add_userFood", userFoodObj }))
+    }
+}
+
+export const deleteUserFood = (id) => {
+    console.log(id, typeof id)
+    let id_string = id.toString()
+    return function(dispatch){
+        // dispatch({ type: 'START_DELETING_USERFOOD_REQUEST' })
+        fetch(`http://localhost:3000/api/v1/user_foods/${id_string}`, {
+            method: "DELETE"
+        })
+            .then(dispatch({ type: "delete_userFood", id }))
     }
 }

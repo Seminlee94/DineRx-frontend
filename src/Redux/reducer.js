@@ -1,26 +1,12 @@
 import { combineReducers } from 'redux'
 
-// const rootReducer = (state = { meals: [] }, action) => {
-
-//     switch(action.type) {
-//         case "add meal":
-//             return { ...state, meals: [...state.meals, action.payload] }
-//         case "fetched_meals":
-//             return { ...state, meals: action.payload }
-//         default:
-//             return state
-
-//     }
-// }
-
-
 const defaultState = {
     meals: [],
     ingredients: [],
     nutritions: [],
     userFoods: [],
     product: {},
-    allUserFoods: []
+    addUserFood: {}
 }
 
 function mealsReducer(state = defaultState.meals, action){
@@ -61,30 +47,50 @@ function nutritionsReducer(state= defaultState.nutritions, action){
 
 function userFoodsReducer(state= defaultState.userFoods, action){
     switch(action.type) {
+        // case "START_DELETING_USERFOOD_REQUEST":
+        //     return {
+        //         ...state,
+        //         userFood: [ ...state.userFood ],
+        //         requesting: true
+        //     }
         case "fetched_userFood":
             return action.payload
+        case "delete_userFood":
+            // console.log(state, action.id, typeof action.id)
+            // console.log(state)
+            const userFoods = state.filter(obj => obj.id !== action.id )
+            // console.log(userFoods)
+        return { 
+            ...state, 
+            userFoods: { userFoods },
+            }
         default:
             return state
     }
 }
 
-function allUserFoodsReducer(state= { allUserFoods : {} }, action){
+// function addUserFoodReducer(state=defaultState.addUserFood, action){
+function addUserFoodReducer(state= defaultState.addUserFood , action){
     switch(action.type) {
         case "START_ADDING_USERFOOD_REQUEST":
             return {
                 ...state,
-                allUserFoods: [...state.allUserFoods],
+                addUserFood: {...state.addUserFood},
                 requesting: true
               }
 
         case "add_userFood":
-            console.log(action, "in action")
-            const userFoodObj = { user_id: action.userFoodObj.user_id, meal_id: action.userFoodObj.meal_id }
+            // console.log(state.userFoods)
             return { 
                 ...state, 
-                allUserFoods: [ ...state.allUserFoods, userFoodObj ],
-                requesting: false
+                addUserFood: { ...state.addUserFood, action },
+                // userFoods: [...state.userFoods, action ],
+                requesting: false,
             }
+            // {
+            //     ...state, 
+            //     userFoods: {...state.userFoods, action}
+            // }
         default:
             return state
     }
@@ -96,7 +102,7 @@ const rootReducer = combineReducers({
     nutritions: nutritionsReducer,
     userFoods: userFoodsReducer,
     product: productReducer,
-    allUserFoods: allUserFoodsReducer
+    addUserFood: addUserFoodReducer
 })
 
 

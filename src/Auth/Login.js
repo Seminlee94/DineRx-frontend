@@ -62,7 +62,7 @@ export class Login extends Component {
             body: JSON.stringify({
                 name: this.state.name,
                 password: this.state.password,
-                // hospital: this.state.hospital,
+                hospital: this.state.hospital,
                 dob: this.state.dob
             })
         })

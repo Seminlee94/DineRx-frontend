@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom"
 import { connect } from 'react-redux'
 import { getUser } from '../../Redux/actions'
 import RightSideItemCard from './RightSideItemCard'
@@ -36,19 +37,18 @@ class RightSideItem extends React.Component {
     
 
     userBreakfastFoods = () => {
-        console.log(this.props, "right side item")
-        let filtered = this.props.userFoods.filter(food => food.breakfast)
-        return filtered.map(el => <RightSideItemCard  meal={el} />)
+        let filtered = this.props.userFoods.filter(food => (food.meal_types==="breakfast" && food.user_id === parseInt(user_id)))
+        return filtered.map(el => <RightSideItemCard key={el.id} meal={el.food} userFood_id={el.id} />)
     }
 
     userLunchFoods = () => {
-        let filtered = this.props.userFoods.filter(food => food.lunch)
-        return filtered.map(el => <RightSideItemCard  meal={el} />)
+        let filtered = this.props.userFoods.filter(food => (food.meal_types==="lunch" && food.user_id === parseInt(user_id)))
+        return filtered.map(el => <RightSideItemCard key={el.id} meal={el.food} userFood_id={el.id} />)
     }
 
     userDinnerFoods = () => {
-        let filtered = this.props.userFoods.filter(food => food.dinner)
-        return filtered.map(el => <RightSideItemCard  meal={el} />)
+        let filtered = this.props.userFoods.filter(food => (food.meal_types==="dinner" && food.user_id === parseInt(user_id)))
+        return filtered.map(el => <RightSideItemCard  key={el.id} meal={el.food} userFood_id={el.id} />)
     }
         
     render(){
@@ -104,6 +104,12 @@ class RightSideItem extends React.Component {
                         {this.userDinnerFoods()}
                     </div>
                 </div>
+                <Link to={{ pathname: 'cart' }} >
+                    <div className="go-to-cart">
+                        Go to Cart
+                    </div>
+                </Link>
+
 
             </div>
         )
@@ -115,7 +121,7 @@ const mapStateToProps = (state) => {
 } 
 
 const mapDispatchToProps = (dispatch) => {
-    return { fetchUser: () => dispatch(getUser(user_id))}
+    return { fetchUser: () => dispatch(getUser())}
 }
 
 

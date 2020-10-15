@@ -7,6 +7,7 @@ import OrderNow from './Order/OrderNow'
 import OrderAhead from './Order/OrderAhead'
 import Navbar from './Navbar/Navbar'
 import Product from './Meal/Product'
+import Cart from './Order/Cart/Cart'
 
 class App extends React.Component {
 
@@ -20,7 +21,6 @@ class App extends React.Component {
 
 
   render() {
-    console.log(this.state)
       return (
     
         <BrowserRouter>
@@ -43,6 +43,11 @@ class App extends React.Component {
             <Route path="/product/:id">
               <Navbar />
               <Product clickedId={this.state.clickedId} />
+            </Route>
+
+            <Route path="/cart" >
+              <Navbar />
+              <Cart />
             </Route>
     
             <Route exact path="/">

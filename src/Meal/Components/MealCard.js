@@ -2,7 +2,7 @@ import React from 'react'
 import '../Meal.css'
 import { Link } from "react-router-dom"
 import { connect } from 'react-redux'
-import { allUserFood } from '../../Redux/actions'
+import { addUserFood } from '../../Redux/actions'
 
 let user_id = localStorage.getItem("userId")
 
@@ -13,10 +13,10 @@ class MealCard extends React.Component {
         mouseState: false,
     }
 
-    allUserFoodObj(meal_id) {
-        let userFoodObj = {meal_id: parseInt(meal_id), user_id: parseInt(user_id)}
-        // this.props.allUserFood(meal_id, user_id)
-        this.props.allUserFood(userFoodObj)
+    addUserFood(meal_id, meal_type) {
+        let userFoodObj = {food_id: parseInt(meal_id), user_id: parseInt(user_id), meal_types: meal_type, meal_schedule: "order_ahead" }
+        // console.log(userFoodObj)
+        this.props.addUserFood(userFoodObj)
     }
 
     toggle = () => {
@@ -49,15 +49,15 @@ class MealCard extends React.Component {
                         <div className="text" >
                             {(this.props.meal.breakfast && this.props.meal.lunch===false && this.props.meal.dinner===false) ?
                             
-                            <button className="breakfast-button" onClick={() => this.allUserFoodObj(meal_id)}>Add Breakfast</button>
+                            <button className="breakfast-button" onClick={() => this.addUserFood(meal_id, "breakfast")}>Add Breakfast</button>
                             :
 
                             null
                             }
                             {(this.props.meal.lunch && this.props.meal.dinner) ?
                             <>
-                            <button className="lunch-button" onClick={this.addHandler}>Add Lunch</button>
-                            <button className="dinner-button" onClick={this.addHandler}>Add Dinner</button>
+                            <button className="lunch-button" onClick={() => this.addUserFood(meal_id, "lunch")}>Add Lunch</button>
+                            <button className="dinner-button" onClick={() => this.addUserFood(meal_id, "dinner")}>Add Dinner</button>
                             </>
                             :
                             null
@@ -89,12 +89,13 @@ class MealCard extends React.Component {
 }
         
 const mapStateToProps = (state) => {
+    // console.log(state)
     return { userFoods: state.userFoods }
 } 
 
 const mapDispatchToProps = (dispatch) => {
-    return { allUserFood: (userFoodObj) => 
-        dispatch(allUserFood(userFoodObj))}
+    return { addUserFood: (userFoodObj) => 
+        dispatch(addUserFood(userFoodObj))}
 }
 
 

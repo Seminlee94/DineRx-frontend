@@ -26,6 +26,7 @@ class RightSidebar extends React.Component {
             <div className={this.state.showSide ? "right-sidebar" : "right-sidebar-inactive"}>
                 <RightSideItem />
             </div>
+
         )
     }
 }

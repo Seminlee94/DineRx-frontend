@@ -14,6 +14,8 @@
     margin-top: 10px;
 }
 
+
+
 .cart-container-top {
     border-bottom-style: solid;
     border-width: thin;
@@ -71,3 +73,100 @@
     margin-top: 6px;
     cursor: pointer;
 }
+
+.go-to-cart {
+    border-style: solid;
+    background-color: #6D6D6C;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.go-to-cart:hover {
+    background-color: #080155
+}
+
+.cart-meal-combined {
+    width: 80%;
+    height: auto;
+    /* border-style: solid; */
+    margin-top: 7%;
+    margin-left: 10%;
+    /* overflow-y: scroll; */
+    /* overflow-x: hidden; */
+}
+
+.incart-meal-now {
+    border-style: solid;
+    width: 100%;
+    height: 600px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+
+.incart-meal-ahead {
+    border-style: solid;
+    width: 100%;
+    height: 600px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+
+.incart-header {
+    font-size: 75px;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.incart-radio-option {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    background-color: #D3D3D3;
+    justify-content: center;
+    line-height: 50px;
+}
+
+.radio {
+    padding: 0 50px 0 0;
+}
+
+.incart-image-container {
+    margin-left: 8%;
+    width: 350px;
+    margin-top: 30px;
+    height: 350px;
+}
+
+.incart-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.incart-meal-container {
+    margin-left: 40px;
+    display: flex;
+}
+
+.incart-meal-card {
+    width: 25%;
+    height: 90%;
+}
+
+.incart-meal-name {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 30px;
+    width: 80%;
+    height: 120px;
+}
+
+.incart-buttons {
+    width: 80%;
+    text-align: center;
+}
+
+
