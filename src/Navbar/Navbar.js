@@ -5,6 +5,9 @@ import * as faIcons from "react-icons/fa"
 import UserDropdown from './Dropdown/UserDropdown'
 import RoomDropdown from './Dropdown/RoomDropdown'
 import AllergyDropdown from './Dropdown/AllergyDropdown'
+import RestrictionDropdown from './Dropdown/RestrictionDropdown'
+import DietDropdown from './Dropdown/DietDropdown'
+import NameDropdown from './Dropdown/NameDropdown'
 import 'rsuite/lib/styles/index.less'
 
 
@@ -16,6 +19,9 @@ function Navbar() {
   const [dropdown, setDropdown] = useState(false);
   const [roomDropdown, setroomDropdown] = useState(false);
   const [allergyDropdown, setallergyDropdown] = useState(false);
+  const [restrictionDropdown, setrestrictionDropdown] = useState(false);
+  const [dietDropdown, setdietDropdown] = useState(false);
+  const [nameDropdown, setnameDropdown] = useState(false);
 
   // const handleClick = () => setClick(!click);
   // const closeMobileMenu = () => setClick(false);
@@ -67,9 +73,56 @@ function Navbar() {
       setallergyDropdown(false);
     }
   }
+
+  const restrictionDropdownEnter = () => {
+    if (window.innerWidth < 600) {
+      setrestrictionDropdown(false);
+    } else {
+      setrestrictionDropdown(true);
+    }
+  }
+
+  const restrictionDropdownLeave = () => {
+    if (window.innerWidth < 600) {
+      setrestrictionDropdown(false);
+    } else {
+      setrestrictionDropdown(false);
+    }
+  }
+
+  const dietDropdownEnter = () => {
+    if (window.innerWidth < 600) {
+      setdietDropdown(false);
+    } else {
+      setdietDropdown(true);
+    }
+  }
+
+  const dietDropdownLeave = () => {
+    if (window.innerWidth < 600) {
+      setdietDropdown(false);
+    } else {
+      setdietDropdown(false);
+    }
+  }
+  const nameDropdownEnter = () => {
+    if (window.innerWidth < 600) {
+      setnameDropdown(false);
+    } else {
+      setnameDropdown(true);
+    }
+  }
+
+  const nameDropdownLeave = () => {
+    if (window.innerWidth < 600) {
+      setnameDropdown(false);
+    } else {
+      setnameDropdown(false);
+    }
+  }
   
-  let userName = localStorage.getItem("name")
-  // let userDiet = localStorage.getItem("Regu")
+  // let userName = localStorage.getItem("name")
+  // let userDiet = localStorage.getItem("diet")
   // let userAllergy = localStorage.getItem("allergy")
 
 
@@ -80,10 +133,13 @@ function Navbar() {
 
       {/* <div className={state.clicked ? "nav-menu active" : "nav-menu"}> */}
       <div className="nav-menu">
-        <li className="navbar-box">{userName}</li>
-        <li className="navbar-box">Regular</li>
+        {/* <li className="navbar-box">{userName}</li>
+        <li className="navbar-box">{userDiet}</li> */}
+        <li className="navbar-box" onMouseEnter={nameDropdownEnter} onMouseLeave={nameDropdownLeave}>Name{nameDropdown ? <NameDropdown /> : null }</li>
+        <li className="navbar-box" onMouseEnter={dietDropdownEnter} onMouseLeave={dietDropdownLeave}>Diet{dietDropdown ? <DietDropdown /> : null }</li>
         <li className="navbar-box" onMouseEnter={allergyDropdownEnter} onMouseLeave={allergyDropdownLeave}>Allergy{allergyDropdown ? <AllergyDropdown /> : null }</li>
         <li className="navbar-box" onMouseEnter={roomDropdownEnter} onMouseLeave={roomDropdownLeave}>Room{roomDropdown ? <RoomDropdown /> : null }</li>
+        <li className="navbar-box" onMouseEnter={restrictionDropdownEnter} onMouseLeave={restrictionDropdownLeave}>Restrictions{restrictionDropdown ? <RestrictionDropdown /> : null }</li>
       </div>
 
 

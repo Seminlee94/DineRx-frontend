@@ -73,9 +73,10 @@ export class Login extends Component {
                 localStorage.setItem("userId", data.user.id)
                 localStorage.setItem("name", data.user.name)
                 localStorage.setItem("diet", data.user.diet)
-                localStorage.setItem("allergy", data.user.allergy)
+                localStorage.setItem("allergies", data.user.allergies.map(allergy=>allergy.name))
                 localStorage.setItem("room", data.user.room)
                 localStorage.setItem("hospital", data.user.hospital.name)
+                localStorage.setItem("restriction", data.user.restrictions)
                 this.setState( () => ({ user: data.user }), () => this.props.history.push('/'))
             })
     }

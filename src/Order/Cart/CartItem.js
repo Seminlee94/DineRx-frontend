@@ -1,8 +1,11 @@
 import React from 'react'
 import "./Cart.css"
+import { Link } from "react-router-dom"
 
 function CartItem(props){
-    console.log(props.meal.food)
+    let filteredCalories = props.meal.food.nutritions.filter(obj => obj.title === "Calories")
+    console.log(filteredCalories[0].title, filteredCalories[0].amount)
+    let meal_id = props.meal.food_id
     return (
         // <div className="cart-meal-container">
             <div className="incart-meal-card">
@@ -18,8 +21,16 @@ function CartItem(props){
                     {props.meal.food.name}
                 </div>
 
+                <div className="incart-meal-calories">
+                    {filteredCalories[0].amount} {filteredCalories[0].title}
+                </div>
+
+
+
                 <div className="incart-buttons">
-                    <button>Edit</button>
+                    <Link to={{ pathname: `product/${meal_id}` }}>
+                        <button onClick={() => props.viewHandler(meal_id)}>Edit</button>
+                    </Link>
                     <button>Delete</button>
                 </div>
 

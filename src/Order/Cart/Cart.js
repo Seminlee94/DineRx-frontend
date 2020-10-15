@@ -18,22 +18,22 @@ class Cart extends React.Component {
 
     userFoodsNow = () => {
         let filteredMeal = this.props.userFoods.filter(obj => (obj.user_id === parseInt(user_id) && obj.meal_schedule === "order_now"))
-        return filteredMeal.map(obj => <CartItem key={obj.id} meal={obj} />)
+        return filteredMeal.map(obj => <CartItem key={obj.id} meal={obj} viewHandler={this.props.viewHandler}/>)
     }
 
     userFoodsAheadBreakfast = () => {
         let filteredMeal = this.props.userFoods.filter(obj => (obj.user_id === parseInt(user_id) && obj.meal_schedule === "order_ahead" && obj.meal_types==="breakfast") )
-        return filteredMeal.map(obj => <CartItem key={obj.id} meal={obj} />)
+        return filteredMeal.map(obj => <CartItem key={obj.id} meal={obj} viewHandler={this.props.viewHandler} />)
     }
 
     userFoodsAheadLunch = () => {
         let filteredMeal = this.props.userFoods.filter(obj => (obj.user_id === parseInt(user_id) && obj.meal_schedule === "order_ahead" && obj.meal_types==="lunch") )
-        return filteredMeal.map(obj => <CartItem key={obj.id} meal={obj} />)
+        return filteredMeal.map(obj => <CartItem key={obj.id} meal={obj} viewHandler={this.props.viewHandler}/>)
     }
 
     userFoodsAheadDinner = () => {
         let filteredMeal = this.props.userFoods.filter(obj => (obj.user_id === parseInt(user_id) && obj.meal_schedule === "order_ahead" && obj.meal_types==="dinner") )
-        return filteredMeal.map(obj => <CartItem key={obj.id} meal={obj} />)
+        return filteredMeal.map(obj => <CartItem key={obj.id} meal={obj} viewHandler={this.props.viewHandler}/>)
     }
 
     handleOptionChange = (changeEvent) => {
@@ -43,8 +43,11 @@ class Cart extends React.Component {
     }
 
     render() {
-        // console.log(typeof user_id, user_id)
-        // console.log(filteredUser)
+
+        let food_calories = this.props.userFoods.map(obj => obj.food.nutritions.filter(nutrition => nutrition.title==="Calories"))
+        let food_calories_filter = (food_calories.map(array => array[0]))
+        let food_calories_amounts = food_calories_filter.map(calorie => parseInt(calorie.amount))
+        let food_calories_sum = food_calories_amounts.reduce((a,b) => a+b, 0)
 
         return(
 
@@ -95,6 +98,7 @@ class Cart extends React.Component {
                         <div className="incart-meal-container">
                             {this.userFoodsNow()}
                         </div>
+
                     </div> 
                     : null}
 
@@ -104,6 +108,10 @@ class Cart extends React.Component {
 
                         <div className="incart-meal-container">
                             {this.userFoodsAheadBreakfast()} 
+                        </div>
+
+                        <div className="incart-calories-sum">
+                            {food_calories_sum}
                         </div>
                     </div> 
                     : null}
@@ -115,6 +123,10 @@ class Cart extends React.Component {
                         <div className="incart-meal-container">
                             {this.userFoodsAheadLunch()} 
                         </div>
+
+                        <div className="incart-calories-sum">
+                            {food_calories_sum}
+                        </div>
                     </div> 
                         : null}
 
@@ -123,6 +135,10 @@ class Cart extends React.Component {
 
                         <div className="incart-meal-container">
                             {this.userFoodsAheadDinner()} 
+                        </div>
+
+                        <div className="incart-calories-sum">
+                            {food_calories_sum}
                         </div>
                     </div> 
                         : null}

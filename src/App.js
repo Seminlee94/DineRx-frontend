@@ -47,7 +47,7 @@ class App extends React.Component {
 
             <Route path="/cart" >
               <Navbar />
-              <Cart />
+              <Cart viewHandler={this.viewHandler}/>
             </Route>
     
             <Route exact path="/">
