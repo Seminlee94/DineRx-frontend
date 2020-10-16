@@ -54,14 +54,14 @@ export const addUserFood = (userFoodObj) => {
             body: JSON.stringify(userFoodObj)
         })
             .then(resp => resp.json())
-            .then(dispatch({ type: "add_userFood", payload: userFoodObj }))
+            .then(data => dispatch({ type: "add_userFood", payload: data }))
     }
 }
+
 
 export const deleteUserFood = (id) => {
     let id_string = id.toString()
     return function(dispatch){
-        // dispatch({ type: 'START_DELETING_USERFOOD_REQUEST' })
         fetch(`http://localhost:3000/api/v1/user_foods/${id_string}`, {
             method: "DELETE"
         })

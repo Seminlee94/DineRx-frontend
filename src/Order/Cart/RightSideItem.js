@@ -37,7 +37,7 @@ class RightSideItem extends React.Component {
     
 
     userFoods = (meal) => {
-        console.log(this.props.userFoods)
+        // console.log(this.props.userFoods)
         let filtered = this.props.userFoods.filter(food => (food.meal_types===meal && food.user_id === parseInt(user_id)))
         return filtered.map(el => <RightSideItemCard key={el.id} meal={el.food} userFood_id={el.id} />)
     }

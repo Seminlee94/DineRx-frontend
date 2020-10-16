@@ -52,10 +52,7 @@ function userFoodsReducer(state= defaultState.userFoods, action){
 
         case "add_userFood":
         console.log(state, action.payload)
-            return { 
-                // ...state, 
-                userFoods: [ ...state, action.payload ],
-            }
+            return  [ ...state, action.payload ]
 
         case "delete_userFood":
             const userFoods = state.filter(obj => obj.id !== action.id )
@@ -71,33 +68,6 @@ function userFoodsReducer(state= defaultState.userFoods, action){
     }
 }
 
-
-// function addUserFoodReducer(state=defaultState.addUserFood, action){
-// function addUserFoodReducer(state= defaultState.addUserFood , action){
-//     switch(action.type) {
-//         case "START_ADDING_USERFOOD_REQUEST":
-//             return {
-//                 ...state,
-//                 addUserFood: {...state.addUserFood},
-//                 requesting: true
-//               }
-
-//         case "add_userFood":
-//             // console.log(state.userFoods)
-//             return { 
-//                 ...state, 
-//                 addUserFood: { ...state.addUserFood, action },
-//                 // userFoods: [...state.userFoods, action ],
-//                 requesting: false,
-//             }
-//             // {
-//             //     ...state, 
-//             //     userFoods: {...state.userFoods, action}
-//             // }
-//         default:
-//             return state
-//     }
-// }
     
 const rootReducer = combineReducers({
     meals: mealsReducer,

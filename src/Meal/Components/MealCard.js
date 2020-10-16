@@ -84,7 +84,7 @@ class MealCard extends React.Component {
 }
         
 const mapStateToProps = (state) => {
-    // console.log(state)
+    // console.log(state.userFoods)
     return { userFoods: state.userFoods }
 } 
 

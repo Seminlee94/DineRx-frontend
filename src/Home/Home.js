@@ -16,11 +16,14 @@ class Home extends React.Component {
     logoutHandler = () => {
         localStorage.clear()
         localStorage.removeItem("token")
+        localStorage.removeItem("user")
         localStorage.removeItem("userId")
         localStorage.removeItem("name")
         localStorage.removeItem("diet")
-        localStorage.removeItem("allergy")
-        // localStorage.removeItem("hospital")
+        localStorage.removeItem("allergies")
+        localStorage.removeItem("room")
+        localStorage.removeItem("hospital")
+        localStorage.removeItem("restriction")
         this.props.history.push('/login')
       };
 
