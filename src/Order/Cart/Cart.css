@@ -99,7 +99,7 @@
 .incart-meal-now {
     border-style: solid;
     width: 100%;
-    height: 800px;
+    height: 700px;
     overflow-x: scroll;
     overflow-y: hidden;
 }
@@ -108,7 +108,7 @@
 .incart-meal-ahead {
     border-style: solid;
     width: 100%;
-    height: 800px;
+    height: 700px;
     overflow-x: scroll;
     overflow-y: hidden;
 }
@@ -141,31 +141,33 @@
 }
 
 .incart-image {
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
     border-radius: 50%;
 }
 
 .incart-meal-container {
     margin-left: 40px;
     display: flex;
+    width: auto;
 }
 
 .incart-meal-card {
-    width: 25%;
+    width: 350px;
     height: 90%;
+    padding: 0 30px 0 0;
 }
 
 .incart-meal-name {
     text-align: center;
     margin-top: 20px;
     font-size: 30px;
-    width: 80%;
+    width: 100%;
     height: 120px;
 }
 
 .incart-buttons {
-    width: 80%;
+    width: 100%;
     text-align: center;
 }
 
@@ -173,14 +175,21 @@
     text-align: center;
     font-size: 50px;
     font-weight: bold;
-    width: 80%;
+    width: 100%;
     margin-bottom: 30px;
 }
 
-.incart-calories-sum {
+.incart-calorie-container {
     text-align: center;
     font-size: 50px;
     margin-top: 50px;
+    height: 200px;
 }
 
+.incart-place-order {
+    margin-top: 50px;
+}
 
+.time-pick {
+    margin-top: 20px;
+}

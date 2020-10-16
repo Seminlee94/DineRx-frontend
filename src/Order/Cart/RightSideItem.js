@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom"
 import { connect } from 'react-redux'
-import { getUser } from '../../Redux/actions'
+import { getUserFood } from '../../Redux/actions'
 import RightSideItemCard from './RightSideItemCard'
 import './Cart.css'
 import * as faIcons from "react-icons/io"
@@ -19,7 +19,7 @@ class RightSideItem extends React.Component {
     }
 
     componentDidMount(){
-        this.props.fetchUser();
+        this.props.fetchUserFood();
     }
 
     breakfastClickHandler = () => {
@@ -36,21 +36,12 @@ class RightSideItem extends React.Component {
     }
     
 
-    userBreakfastFoods = () => {
-        let filtered = this.props.userFoods.filter(food => (food.meal_types==="breakfast" && food.user_id === parseInt(user_id)))
+    userFoods = (meal) => {
+        console.log(this.props.userFoods)
+        let filtered = this.props.userFoods.filter(food => (food.meal_types===meal && food.user_id === parseInt(user_id)))
         return filtered.map(el => <RightSideItemCard key={el.id} meal={el.food} userFood_id={el.id} />)
     }
 
-    userLunchFoods = () => {
-        let filtered = this.props.userFoods.filter(food => (food.meal_types==="lunch" && food.user_id === parseInt(user_id)))
-        return filtered.map(el => <RightSideItemCard key={el.id} meal={el.food} userFood_id={el.id} />)
-    }
-
-    userDinnerFoods = () => {
-        let filtered = this.props.userFoods.filter(food => (food.meal_types==="dinner" && food.user_id === parseInt(user_id)))
-        return filtered.map(el => <RightSideItemCard  key={el.id} meal={el.food} userFood_id={el.id} />)
-    }
-        
     render(){
         return(
             <div className={this.state.cartClicked ? "accordion-inactive" : "accordion"} >
@@ -73,7 +64,7 @@ class RightSideItem extends React.Component {
                         </div>
                     </div>
                     <div className={this.state.bclicked ? "content-active" :  "content" } >
-                        {this.userBreakfastFoods()}
+                        {this.userFoods("breakfast")}
                     </div>
                 </div>
 
@@ -87,7 +78,7 @@ class RightSideItem extends React.Component {
                         </div>
                     </div>
                     <div className={this.state.lclicked ? "content-active" :  "content" }>
-                        {this.userLunchFoods()}
+                        {this.userFoods("lunch")}
                     </div>
                 </div>
 
@@ -101,7 +92,7 @@ class RightSideItem extends React.Component {
                         </div>
                     </div>
                     <div className={this.state.dclicked ? "content-active" :  "content" }>
-                        {this.userDinnerFoods()}
+                        {this.userFoods("dinner")}
                     </div>
                 </div>
                 <Link to={{ pathname: 'cart' }} >
@@ -117,11 +108,12 @@ class RightSideItem extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log(state, state.userFoods)
     return { userFoods: state.userFoods }
 } 
 
 const mapDispatchToProps = (dispatch) => {
-    return { fetchUser: () => dispatch(getUser())}
+    return { fetchUserFood: () => dispatch(getUserFood())}
 }
 
 

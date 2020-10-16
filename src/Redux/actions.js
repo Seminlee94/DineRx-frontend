@@ -35,7 +35,7 @@ export const getNutrition = (id) => {
     }
 }
 
-export const getUser = () => {
+export const getUserFood = () => {
     return function(dispatch){
         fetch("http://localhost:3000/api/v1/user_foods")
             .then(resp => resp.json())
@@ -45,7 +45,6 @@ export const getUser = () => {
 
 export const addUserFood = (userFoodObj) => {
     return function(dispatch){
-        dispatch({ type: 'START_ADDING_USERFOOD_REQUEST' })
         fetch("http://localhost:3000/api/v1/user_foods", {
             method: "POST",
             headers: {
@@ -55,12 +54,11 @@ export const addUserFood = (userFoodObj) => {
             body: JSON.stringify(userFoodObj)
         })
             .then(resp => resp.json())
-            .then(dispatch({ type: "add_userFood", userFoodObj }))
+            .then(dispatch({ type: "add_userFood", payload: userFoodObj }))
     }
 }
 
 export const deleteUserFood = (id) => {
-    console.log(id, typeof id)
     let id_string = id.toString()
     return function(dispatch){
         // dispatch({ type: 'START_DELETING_USERFOOD_REQUEST' })

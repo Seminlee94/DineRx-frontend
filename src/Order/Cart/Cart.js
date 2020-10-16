@@ -1,10 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getUser } from '../../Redux/actions'
+import { getUserFood } from '../../Redux/actions'
 import './Cart.css'
 import CartItem from './CartItem'
+import TimePick from './TimePick'
 
 let user_id = localStorage.getItem("userId")
+let user_restriction = localStorage.getItem("restriction")
 
 class Cart extends React.Component {
 
@@ -13,7 +15,7 @@ class Cart extends React.Component {
     }
 
     componentDidMount(){
-        this.props.fetchUser()
+        this.props.fetchUserFood()
     }
 
     userFoodsNow = () => {
@@ -21,19 +23,9 @@ class Cart extends React.Component {
         return filteredMeal.map(obj => <CartItem key={obj.id} meal={obj} viewHandler={this.props.viewHandler}/>)
     }
 
-    userFoodsAheadBreakfast = () => {
-        let filteredMeal = this.props.userFoods.filter(obj => (obj.user_id === parseInt(user_id) && obj.meal_schedule === "order_ahead" && obj.meal_types==="breakfast") )
+    userFoodsAhead = (meal) => {
+        let filteredMeal = this.props.userFoods.filter(obj => (obj.user_id === parseInt(user_id) && obj.meal_schedule === "order_ahead" && obj.meal_types===meal) )
         return filteredMeal.map(obj => <CartItem key={obj.id} meal={obj} viewHandler={this.props.viewHandler} />)
-    }
-
-    userFoodsAheadLunch = () => {
-        let filteredMeal = this.props.userFoods.filter(obj => (obj.user_id === parseInt(user_id) && obj.meal_schedule === "order_ahead" && obj.meal_types==="lunch") )
-        return filteredMeal.map(obj => <CartItem key={obj.id} meal={obj} viewHandler={this.props.viewHandler}/>)
-    }
-
-    userFoodsAheadDinner = () => {
-        let filteredMeal = this.props.userFoods.filter(obj => (obj.user_id === parseInt(user_id) && obj.meal_schedule === "order_ahead" && obj.meal_types==="dinner") )
-        return filteredMeal.map(obj => <CartItem key={obj.id} meal={obj} viewHandler={this.props.viewHandler}/>)
     }
 
     handleOptionChange = (changeEvent) => {
@@ -48,6 +40,14 @@ class Cart extends React.Component {
         let food_calories_filter = (food_calories.map(array => array[0]))
         let food_calories_amounts = food_calories_filter.map(calorie => parseInt(calorie.amount))
         let food_calories_sum = food_calories_amounts.reduce((a,b) => a+b, 0)
+        let restriction_calorie = user_restriction.split(" ")[2]
+        let calorie_exceed = food_calories_sum > restriction_calorie
+
+        // let breakfast_time = 
+
+        // const breakfast = time > 7 && time < 11
+        // const lunch = time > 12 && time < 16
+        // const dinner = time > 17 && time < 21
 
         return(
 
@@ -55,93 +55,123 @@ class Cart extends React.Component {
                 <div className="incart-header">
                     My Cart
                 </div>
+
                 <form className="incart-radio-option">
-                <div className="radio">
-                <label>
-                    <input type="radio" value="order_now"
-                                checked={this.state.selectedOption === 'order_now'} 
-                                onChange={this.handleOptionChange} />
-                    Order Now
-                </label>
-                </div>
-                <div className="radio">
-                <label>
-                    <input type="radio" value="order_ahead-breakfast"
-                                checked={this.state.selectedOption === 'order_ahead-breakfast'} 
-                                onChange={this.handleOptionChange} />
-                    Order Ahead Breakfast
-                </label>
-                </div>
-                <div className="radio">
-                <label>
-                    <input type="radio" value="order_ahead_lunch"
-                                checked={this.state.selectedOption === 'order_ahead_lunch'} 
-                                onChange={this.handleOptionChange} />
-                    Order Ahead Lunch
-                </label>
-                </div>
-                <div className="radio">
-                <label>
-                    <input type="radio" value="order_ahead_dinner" 
-                                checked={this.state.selectedOption === 'order_ahead_dinner'} 
-                                onChange={this.handleOptionChange} />
-                    Order Ahead Dinner
-                </label>
-                </div>
+
+                    <div className="radio">
+                        <label>
+                            <input type="radio" value="order_now"
+                                        checked={this.state.selectedOption === 'order_now'} 
+                                        onChange={this.handleOptionChange} />
+                            Order Now
+                        </label>
+                    </div>
+
+                    <div className="radio">
+                        <label>
+                            <input type="radio" value="order_ahead-breakfast"
+                                        checked={this.state.selectedOption === 'order_ahead-breakfast'} 
+                                        onChange={this.handleOptionChange} />
+                            Order Ahead Breakfast
+                        </label>
+                    </div>
+                    
+                    <div className="radio">
+                        <label>
+                            <input type="radio" value="order_ahead_lunch"
+                                        checked={this.state.selectedOption === 'order_ahead_lunch'} 
+                                        onChange={this.handleOptionChange} />
+                            Order Ahead Lunch
+                        </label>
+                    </div>
+
+                    <div className="radio">
+                        <label>
+                            <input type="radio" value="order_ahead_dinner" 
+                                        checked={this.state.selectedOption === 'order_ahead_dinner'} 
+                                        onChange={this.handleOptionChange} />
+                            Order Ahead Dinner
+                        </label>
+                    </div>
+
                 </form>
 
 
                 {this.state.selectedOption==='order_now' ? 
                     <div className="incart-meal-now">
-   
-
                         <div className="incart-meal-container">
                             {this.userFoodsNow()}
                         </div>
 
                     </div> 
-                    : null}
+                : null}
 
                 {this.state.selectedOption==='order_ahead-breakfast' ? 
-                    <div className="incart-meal-ahead">
+                    <>
 
+                        <div className="incart-meal-ahead">
+                            <div className="incart-meal-container">
+                                {this.userFoodsAhead("breakfast")} 
+                            </div>
+                        </div> 
 
-                        <div className="incart-meal-container">
-                            {this.userFoodsAheadBreakfast()} 
+                        <div className="incart-calorie-container">
+                            The total calorie in your cart is <span style={calorie_exceed ? {color: "red"} :  {color: "black"} } >{food_calories_sum}</span>.
+                            {food_calories_sum > restriction_calorie 
+                            ? 
+                            <div>Calorie in the cart exceeds your restriction. Please remove items.</div> 
+                            : 
+                            <TimePick />}
                         </div>
 
-                        <div className="incart-calories-sum">
-                            {food_calories_sum}
-                        </div>
-                    </div> 
-                    : null}
+                    </>
+                : null}
 
                 {this.state.selectedOption==='order_ahead_lunch' ? 
-                    <div className="incart-meal-ahead">
+                    <>
+                        <div className="incart-meal-ahead">
+                            <div className="incart-meal-container">
+                                {this.userFoodsAhead("lunch")} 
+                            </div>
+                        </div> 
 
-
-                        <div className="incart-meal-container">
-                            {this.userFoodsAheadLunch()} 
+                        <div className="incart-calorie-container">
+                            The total calorie in your cart is <span style={calorie_exceed ? {color: "red"} :  {color: "black"} } >{food_calories_sum}</span>.
+                            {food_calories_sum > restriction_calorie 
+                            ? 
+                            <div>Calorie in the cart exceeds your restriction. Please remove items.</div> 
+                            : 
+                            <TimePick />}
                         </div>
 
-                        <div className="incart-calories-sum">
-                            {food_calories_sum}
-                        </div>
-                    </div> 
-                        : null}
+                    </>
+                : null}
 
                 {this.state.selectedOption==='order_ahead_dinner' ? 
-                    <div className="incart-meal-ahead">
 
-                        <div className="incart-meal-container">
-                            {this.userFoodsAheadDinner()} 
-                        </div>
+                    <>
+                        <div className="incart-meal-ahead">
+                            <div className="incart-meal-container">
+                                {this.userFoodsAhead("dinner")} 
+                            </div>
+                        </div> 
 
-                        <div className="incart-calories-sum">
-                            {food_calories_sum}
-                        </div>
-                    </div> 
-                        : null}
+                        <div className="incart-calorie-container" >
+                            The total calorie in your cart is <span style={calorie_exceed ? {color: "red"} :  {color: "black"} } >{food_calories_sum}</span>.
+                            
+                            <div className="incart-order">
+                                {food_calories_sum > restriction_calorie 
+                                ? 
+                                <div>Calorie in the cart exceeds your restriction. Please remove items.</div> 
+                                : 
+                                <TimePick />}
+                            </div>
+
+                        </div>                        
+                    </>
+
+                : null}
+
             </>
         )
     }
@@ -152,7 +182,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return {fetchUser: () => dispatch(getUser())}
+    return {fetchUserFood: () => dispatch(getUserFood())}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)

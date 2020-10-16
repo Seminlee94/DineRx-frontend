@@ -6,7 +6,7 @@ const defaultState = {
     nutritions: [],
     userFoods: [],
     product: {},
-    addUserFood: {}
+    // addUserFood: {}
 }
 
 function mealsReducer(state = defaultState.meals, action){
@@ -47,54 +47,57 @@ function nutritionsReducer(state= defaultState.nutritions, action){
 
 function userFoodsReducer(state= defaultState.userFoods, action){
     switch(action.type) {
-        // case "START_DELETING_USERFOOD_REQUEST":
-        //     return {
-        //         ...state,
-        //         userFood: [ ...state.userFood ],
-        //         requesting: true
-        //     }
         case "fetched_userFood":
             return action.payload
-        case "delete_userFood":
-            // console.log(state, action.id, typeof action.id)
-            // console.log(state)
-            const userFoods = state.filter(obj => obj.id !== action.id )
-            // console.log(userFoods)
-        return { 
-            ...state, 
-            userFoods: { userFoods },
-            }
-        default:
-            return state
-    }
-}
-
-// function addUserFoodReducer(state=defaultState.addUserFood, action){
-function addUserFoodReducer(state= defaultState.addUserFood , action){
-    switch(action.type) {
-        case "START_ADDING_USERFOOD_REQUEST":
-            return {
-                ...state,
-                addUserFood: {...state.addUserFood},
-                requesting: true
-              }
 
         case "add_userFood":
-            // console.log(state.userFoods)
+        console.log(state, action.payload)
+            return { 
+                // ...state, 
+                userFoods: [ ...state, action.payload ],
+            }
+
+        case "delete_userFood":
+            const userFoods = state.filter(obj => obj.id !== action.id )
+            
             return { 
                 ...state, 
-                addUserFood: { ...state.addUserFood, action },
-                // userFoods: [...state.userFoods, action ],
-                requesting: false,
+                userFoods: { userFoods },
             }
-            // {
-            //     ...state, 
-            //     userFoods: {...state.userFoods, action}
-            // }
-        default:
-            return state
+                
+    default:
+        return state
+
     }
 }
+
+
+// function addUserFoodReducer(state=defaultState.addUserFood, action){
+// function addUserFoodReducer(state= defaultState.addUserFood , action){
+//     switch(action.type) {
+//         case "START_ADDING_USERFOOD_REQUEST":
+//             return {
+//                 ...state,
+//                 addUserFood: {...state.addUserFood},
+//                 requesting: true
+//               }
+
+//         case "add_userFood":
+//             // console.log(state.userFoods)
+//             return { 
+//                 ...state, 
+//                 addUserFood: { ...state.addUserFood, action },
+//                 // userFoods: [...state.userFoods, action ],
+//                 requesting: false,
+//             }
+//             // {
+//             //     ...state, 
+//             //     userFoods: {...state.userFoods, action}
+//             // }
+//         default:
+//             return state
+//     }
+// }
     
 const rootReducer = combineReducers({
     meals: mealsReducer,
@@ -102,7 +105,7 @@ const rootReducer = combineReducers({
     nutritions: nutritionsReducer,
     userFoods: userFoodsReducer,
     product: productReducer,
-    addUserFood: addUserFoodReducer
+    // addUserFood: addUserFoodReducer
 })
 
 

@@ -15,7 +15,6 @@ class MealCard extends React.Component {
 
     addUserFood(meal_id, meal_type) {
         let userFoodObj = {food_id: parseInt(meal_id), user_id: parseInt(user_id), meal_types: meal_type, meal_schedule: "order_ahead" }
-        // console.log(userFoodObj)
         this.props.addUserFood(userFoodObj)
     }
 
@@ -29,10 +28,6 @@ class MealCard extends React.Component {
 
     mouseLeaveHandler = () => {
         this.setState({ mouseState: false })
-    }
-
-    addHandler = () => {
-        console.log("this")
     }
 
     render() {
