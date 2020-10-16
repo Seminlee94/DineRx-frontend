@@ -48,22 +48,18 @@ function nutritionsReducer(state= defaultState.nutritions, action){
 function userFoodsReducer(state= defaultState.userFoods, action){
     switch(action.type) {
         case "fetched_userFood":
+            console.log(state, action.payload)
             return action.payload
 
         case "add_userFood":
-        console.log(state, action.payload)
             return  [ ...state, action.payload ]
 
         case "delete_userFood":
-            const userFoods = state.filter(obj => obj.id !== action.id )
-            
-            return { 
-                ...state, 
-                userFoods: { userFoods },
-            }
-                
-    default:
-        return state
+            console.log(state, action.payload.id)
+            console.log(state.filter(obj => obj.id !== action.payload.id ))
+            return state.filter(obj => obj.id !== action.payload.id )
+        default:
+            return state
 
     }
 }

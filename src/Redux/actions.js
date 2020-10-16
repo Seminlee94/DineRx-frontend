@@ -65,6 +65,8 @@ export const deleteUserFood = (id) => {
         fetch(`http://localhost:3000/api/v1/user_foods/${id_string}`, {
             method: "DELETE"
         })
-            .then(dispatch({ type: "delete_userFood", id }))
+            .then(resp => resp.json())
+            .then(data => dispatch({ type: "delete_userFood", payload: {data, id} }))
+            
     }
 }

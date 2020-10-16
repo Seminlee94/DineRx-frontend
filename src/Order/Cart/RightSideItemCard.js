@@ -32,6 +32,11 @@ class RightSideItemCard extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    console.log(state, state.userFoods)
+    return { userFoods: state.userFoods }
+} 
         
 const mapDispatchToProps = (dispatch) => {
     return { deleteUserFood: (id) => 
@@ -39,4 +44,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(null, mapDispatchToProps)(RightSideItemCard)
+export default connect(mapStateToProps, mapDispatchToProps)(RightSideItemCard)

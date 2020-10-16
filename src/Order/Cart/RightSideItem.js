@@ -34,6 +34,10 @@ class RightSideItem extends React.Component {
     cartClickHandler = () => {
         this.setState({ cartClicked: !this.state.cartClicked })
     }
+
+    deleteUserFood = (id) => {
+        this.props.deleteUserFood(id)
+    }
     
 
     userFoods = (meal) => {
