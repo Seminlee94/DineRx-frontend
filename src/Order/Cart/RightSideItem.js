@@ -112,7 +112,6 @@ class RightSideItem extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state, state.userFoods)
     return { userFoods: state.userFoods }
 } 
 

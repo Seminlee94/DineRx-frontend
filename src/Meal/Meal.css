@@ -282,9 +282,9 @@ button:hover {
 .meal-item-card {
     display: flex;
     margin-top: 50px;
-    margin-left: 19%;
     width: 100%;
     height: auto;
+    justify-content: center;
 }
 
 .meal-shelf-button {

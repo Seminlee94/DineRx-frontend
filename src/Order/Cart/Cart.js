@@ -4,6 +4,7 @@ import { getUserFood } from '../../Redux/actions'
 import './Cart.css'
 import CartItem from './CartItem'
 import TimePick from './TimePick'
+import { Link } from "react-router-dom"
 
 let user_id = localStorage.getItem("userId")
 let user_restriction = localStorage.getItem("restriction")
@@ -48,6 +49,10 @@ class Cart extends React.Component {
         // const breakfast = time > 7 && time < 11
         // const lunch = time > 12 && time < 16
         // const dinner = time > 17 && time < 21
+
+        let breakfast_present = this.props.userFoods.filter(obj => obj.meal_types === "breakfast")
+        let lunch_present = this.props.userFoods.filter(obj => obj.meal_types === "lunch")
+        let dinner_present = this.props.userFoods.filter(obj => obj.meal_types === "dinner")
 
         return(
 
@@ -111,7 +116,21 @@ class Cart extends React.Component {
 
                         <div className="incart-meal-ahead">
                             <div className="incart-meal-container">
-                                {this.userFoodsAhead("breakfast")} 
+                                {breakfast_present.length > 0 ? 
+                                    this.userFoodsAhead("breakfast")
+                                :
+                                <div className="empty-cart-container">
+                                    <div className="empty-cart">Breakfast order is empty! </div>
+                                    <div className="empty-cart">Would you like to order your breakfast ahead?</div>
+                                    <div className="empty-cart-button">
+                                        <Link to={{ pathname: '/orderahead'}} >
+                                            <button>Order Ahead</button>
+                                        </Link>
+                                    </div>
+
+                                </div>
+
+                                } 
                             </div>
                         </div> 
 
@@ -131,7 +150,21 @@ class Cart extends React.Component {
                     <>
                         <div className="incart-meal-ahead">
                             <div className="incart-meal-container">
-                                {this.userFoodsAhead("lunch")} 
+                            {lunch_present.length > 0 ? 
+                                    this.userFoodsAhead("lunch")
+                                :
+                                <div className="empty-cart-container">
+                                    <div className="empty-cart">Lunch order is empty! </div>
+                                    <div className="empty-cart">Would you like to order your lunch ahead?</div>
+                                    <div className="empty-cart-button">
+                                        <Link to={{ pathname: '/orderahead'}} >
+                                            <button>Order Ahead</button>
+                                        </Link>
+                                    </div>
+
+                                </div>
+
+                                } 
                             </div>
                         </div> 
 
@@ -152,7 +185,21 @@ class Cart extends React.Component {
                     <>
                         <div className="incart-meal-ahead">
                             <div className="incart-meal-container">
-                                {this.userFoodsAhead("dinner")} 
+                            {dinner_present.length > 0 ? 
+                                    this.userFoodsAhead("dinner")
+                                :
+                                    <div className="empty-cart-container">
+                                        <div className="empty-cart">Dinner order is empty! </div>
+                                        <div className="empty-cart">Would you like to order your dinner ahead?</div>
+                                        <div className="empty-cart-button">
+                                            <Link to={{ pathname: '/orderahead'}} >
+                                                <button>Order Ahead</button>
+                                            </Link>
+                                        </div>
+
+                                    </div>
+
+                                } 
                             </div>
                         </div> 
 

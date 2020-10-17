@@ -193,3 +193,19 @@
 .time-pick {
     margin-top: 20px;
 }
+
+.empty-cart {
+    font-size: 50px;
+    text-align: center;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.empty-cart-container {
+    width: 100%;
+}
+
+.empty-cart-button {
+    text-align: center;
+    margin-top: 50px;
+}
