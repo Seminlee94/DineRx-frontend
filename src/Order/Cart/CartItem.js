@@ -19,39 +19,37 @@ class CartItem extends React.Component {
 
         return (
 
-                <div className="incart-meal-card">
-                    <div className="incart-image-container">
-                        <img 
-                            src={this.props.meal.food.image} 
-                            alt="meal-picture" 
-                            className="incart-image" 
-                        />
-                    </div>
-    
-                    <div className="incart-meal-name">
-                        {this.props.meal.food.name}
-                    </div>
-    
-                    <div className="incart-meal-calories">
-                        {filteredCalories[0].amount} {filteredCalories[0].title}
-                    </div>
-    
-    
-    
-                    <div className="incart-buttons">
-                        <Link to={{ pathname: `product/${meal_id}` }}>
-                            <button onClick={() => this.props.viewHandler(meal_id)}>Edit</button>
-                        </Link>
-                        <button onClick={() => this.deleteUserFood(this.props.meal.id)}>Delete</button>
-                    </div>
-    
-    
+            <div className="incart-meal-card">
+
+                <div className="incart-image-container">
+                    <img 
+                        src={this.props.meal.food.image} 
+                        alt="meal-picture" 
+                        className="incart-image" 
+                    />
                 </div>
+
+                <div className="incart-meal-name">
+                    {this.props.meal.food.name}
+                </div>
+
+                <div className="incart-meal-calories">
+                    {filteredCalories[0].amount} {filteredCalories[0].title}
+                </div>
+
+
+
+                <div className="incart-buttons">
+                    <Link to={{ pathname: `product/${meal_id}` }}>
+                        <button onClick={() => this.props.viewHandler(meal_id)}>Edit</button>
+                    </Link>
+                    <button onClick={() => this.deleteUserFood(this.props.meal.id)}>Delete</button>
+                </div>
+
+            </div>
 
         )
     }
-
-
 }
 
 const mapDispatchToProps = (dispatch) => {

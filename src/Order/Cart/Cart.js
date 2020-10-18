@@ -44,15 +44,16 @@ class Cart extends React.Component {
         let restriction_calorie = user_restriction.split(" ")[2]
         let calorie_exceed = food_calories_sum > restriction_calorie
 
-        // let breakfast_time = 
-
-        // const breakfast = time > 7 && time < 11
-        // const lunch = time > 12 && time < 16
-        // const dinner = time > 17 && time < 21
+        // let time = 0;
+        // let breakfast_available_time = 7 < time < 11
+        // let lunch_available_time = 12 < time < 16
+        // let dinner_available_time = 17 < time < 21
 
         let breakfast_present = this.props.userFoods.filter(obj => obj.meal_types === "breakfast")
         let lunch_present = this.props.userFoods.filter(obj => obj.meal_types === "lunch")
         let dinner_present = this.props.userFoods.filter(obj => obj.meal_types === "dinner")
+
+        console.log(this.props.userFoods)
 
         return(
 
@@ -140,7 +141,15 @@ class Cart extends React.Component {
                             ? 
                             <div>Calorie in the cart exceeds your restriction. Please remove items.</div> 
                             : 
-                            <TimePick />}
+                            <>
+                            <div className="incart-place-order">
+                                <h6>Place Order!</h6> <em>Breakfast time is from 7 AM to 11 AM</em>
+                            </div>
+                            <div className="incart-time-pick">
+                                <TimePick  />
+                            </div>
+                            </>
+                        }
                         </div>
 
                     </>
@@ -174,7 +183,15 @@ class Cart extends React.Component {
                             ? 
                             <div>Calorie in the cart exceeds your restriction. Please remove items.</div> 
                             : 
-                            <TimePick />}
+                            <>
+                            <div className="incart-place-order">
+                                <h6>Place Order!</h6> <em>Lunch time is from 12 PM to 4 PM</em>
+                            </div>
+                            <div className="incart-time-pick">
+                                <TimePick />
+                            </div>
+                            </>
+                        }
                         </div>
 
                     </>
@@ -211,8 +228,14 @@ class Cart extends React.Component {
                                 ? 
                                 <div>Calorie in the cart exceeds your restriction. Please remove items.</div> 
                                 : 
-                                <TimePick />
-                                // null
+                                <>
+                                    <div className="incart-place-order">
+                                        <h6>Place Order!</h6> <em>Dinner time is from 5 PM to 9 PM</em>
+                                    </div>
+                                    <div className="incart-time-pick">
+                                        <TimePick />
+                                    </div>
+                                </>
                                 }
                             </div>
 

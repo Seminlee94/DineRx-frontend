@@ -1,38 +1,14 @@
 import React from 'react'
-import 'date-fns'
-import Grid from '@material-ui/core/Grid'
-import DateFnsUtils from '@date-io/date-fns'
-import {
-    MuiPickersUtilsProvider,
-    KeyboardTimePicker,
-    TimePickerView,
-    TimePicker 
-} from '@material-ui/pickers'
 import './Cart.css'
 import { Field, Form } from 'react-final-form'
+import TimePickerComponent from './TimePickerComponent'
 
 
-function TimePick() {
-    const [selectedDate, setSelectedDate] = React.useState(
-        new Date()
-    )
-
-    const handleDateChange = (date) => {
-        setSelectedDate(date)
-    }
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault()
-    //     console.log(e.target)
-    // }
-
+function TimePick(props) {
+    // console.log(props.schedule)
 
     return (
         <>
-        
-            <div className="incart-place-order">
-                <button>Place Order!</button>
-            </div>
             
             <Form onSubmit={(formObj) => {
                 console.log(formObj)
@@ -41,31 +17,18 @@ function TimePick() {
                     <form onSubmit={handleSubmit}>
 
 
-                    <Field name="time">
+                    <Field name="timePickerField">
+                        {({ input }) => (
+                            <TimePickerComponent onChange={time => input.onChange(time)} />
 
-                    {({ input }) => (
+                        )}
 
-                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                            <Grid container justify='space-around'>
-
-                            <KeyboardTimePicker 
-                                ampm={false}
-                                variant="inline"
-                                label="With keyboard"
-                                value={selectedDate}
-                                onChange={handleDateChange}
-                                // input = {selectedDate}
-                                {...input}
-                            />
-                            </Grid>
-                        </MuiPickersUtilsProvider>
-                    )} 
                     </Field>
 
 
                         <div className="time-pick">
                         </div>
-                        <button>Submit</button>
+                        <button type="submit">Submit</button>
 
 
                     </form>
