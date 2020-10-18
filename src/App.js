@@ -32,7 +32,7 @@ class App extends React.Component {
     
             <Route path="/ordernow">
               <Navbar />
-              <OrderNow/>
+              <OrderNow viewHandler={this.viewHandler} />
             </Route>
     
             <Route path="/orderahead">

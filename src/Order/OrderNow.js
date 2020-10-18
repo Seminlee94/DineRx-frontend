@@ -8,10 +8,11 @@ import Dinner from "../Meal/Dinner"
 import breakfastImg2 from '../asset/images/breakfastImg2.jpg'
 import lunchImg2 from '../asset/images/lunchImg2.jpg'
 import dinnerImg3 from '../asset/images/dinnerImg3.jpg'
+import RightSidebarNow from './RightSidebarNow'
 
 
 
-function OrderNow() {
+function OrderNow(props) {
     let time = new Date().toLocaleTimeString('en-GB')
 
     const[attentionClicked, setattentionClicked] = useState(false)
@@ -19,6 +20,8 @@ function OrderNow() {
 
 
     const [Ctime, setCtime] = useState(time)
+
+
     const updateTime = () => {
         time = new Date().toLocaleTimeString('en-GB')
         setCtime(time)
@@ -66,8 +69,11 @@ function OrderNow() {
                                     </div>
                                     
                                 </div>
-
-                                <Dinner />
+                                
+                                <div className="order-now-container">
+                                   <Dinner viewHandler={props.viewHandler} schedule="order_now" />
+                                </div>
+                                <RightSidebarNow schedule="order_now"/>
                             </>
 
                             :
@@ -101,9 +107,12 @@ function OrderNow() {
                                             
                                     </div>
                                     
-                                </div>
+                            </div>
 
-                                <Lunch />
+                                <div className="order-now-container">
+                                    <Lunch viewHandler={props.viewHandler} schedule="order_now" />
+                                </div>
+                                <RightSidebarNow schedule="order_now"/>
                             </>
 
                             :
@@ -137,7 +146,11 @@ function OrderNow() {
                                     
                                 </div>
 
-                                <Breakfast />
+                                
+                                <div className="order-now-container">
+                                    <Breakfast viewHandler={props.viewHandler} schedule="order_now" />
+                                </div>
+                                <RightSidebarNow schedule="order_now"/>
                             </>
 
                             :

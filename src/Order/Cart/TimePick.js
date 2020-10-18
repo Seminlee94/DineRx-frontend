@@ -5,9 +5,11 @@ import DateFnsUtils from '@date-io/date-fns'
 import {
     MuiPickersUtilsProvider,
     KeyboardTimePicker,
-    KeyboarddatePicker
+    TimePickerView,
+    TimePicker 
 } from '@material-ui/pickers'
 import './Cart.css'
+import { Field, Form } from 'react-final-form'
 
 
 function TimePick() {
@@ -19,35 +21,60 @@ function TimePick() {
         setSelectedDate(date)
     }
 
-    console.log(selectedDate)
+    // const handleSubmit = (e) => {
+    //     e.preventDefault()
+    //     console.log(e.target)
+    // }
+
+
     return (
-        
         <>
+        
             <div className="incart-place-order">
                 <button>Place Order!</button>
             </div>
-
-            <div className="time-pick">
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <Grid container justify='space-around'>
-
-                        <KeyboardTimePicker 
-                            ampm={false}
-                            variant="inline"
-                            label="With keyboard"
-                            value={selectedDate}
-                            onChange={handleDateChange}
-                            
-                        
-                        />
+            
+            <Form onSubmit={(formObj) => {
+                console.log(formObj)
+            }}>
+                {({ handleSubmit }) => (
+                    <form onSubmit={handleSubmit}>
 
 
-                    </Grid>
-                </MuiPickersUtilsProvider>
-            </div>
+                    <Field name="time">
 
-            <button>Submit</button>
-        </>
+                    {({ input }) => (
+
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <Grid container justify='space-around'>
+
+                            <KeyboardTimePicker 
+                                ampm={false}
+                                variant="inline"
+                                label="With keyboard"
+                                value={selectedDate}
+                                onChange={handleDateChange}
+                                // input = {selectedDate}
+                                {...input}
+                            />
+                            </Grid>
+                        </MuiPickersUtilsProvider>
+                    )} 
+                    </Field>
+
+
+                        <div className="time-pick">
+                        </div>
+                        <button>Submit</button>
+
+
+                    </form>
+                )}
+
+
+            </Form>
+
+        </> 
     )
 }
 

@@ -211,7 +211,9 @@ class Cart extends React.Component {
                                 ? 
                                 <div>Calorie in the cart exceeds your restriction. Please remove items.</div> 
                                 : 
-                                <TimePick />}
+                                <TimePick />
+                                // null
+                                }
                             </div>
 
                         </div>                        

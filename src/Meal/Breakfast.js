@@ -1,6 +1,7 @@
 import React from 'react';
 import "./Meal.css"
 import MealCard from './Components/MealCard'
+import MealCardNow from './Components/MealCardNow'
 import { connect } from 'react-redux'
 import { getMeal } from '../Redux/actions'
 import FilteredMain from './Containers/FilteredMain'
@@ -20,7 +21,6 @@ class Breakfast extends React.Component {
     }
     
     shopSideBarClicker = (category) => {
-        // console.log("clicked", category)
         let filteredCategory = this.props.meals.filter(el => el.category === category)
         this.setState(() => ({
           filteredCategory: [...filteredCategory],
@@ -29,8 +29,7 @@ class Breakfast extends React.Component {
     }
 
 
-    breakfast = () => {
-        // console.log(this.props)
+    breakfastAhead = () => {
         let newArray = this.props.meals
         let filteredArray = newArray.filter(el => el.breakfast === true)
         return filteredArray.map((el) => (<MealCard 
@@ -40,16 +39,21 @@ class Breakfast extends React.Component {
             />))
     }
 
-
-    // submitHandler = (e) => {
-    //     e.preventDefault()
-    //     this.props.submitHandler
-    // }
+    breakfastNow = () => {
+        let newArray = this.props.meals
+        let filteredArray = newArray.filter(el => el.breakfast === true)
+        return filteredArray.map((el) => (<MealCardNow 
+                key={el.id} 
+                meal={el} 
+                viewHandler={this.props.viewHandler}
+            />))
+    }
 
     render() {
         let filteredArray = this.props.meals.filter(el => el.breakfast === true)
         let filteredCategory = filteredArray.map(el => el.category)
         let uniqueCategory = [...new Set(filteredCategory)]
+
         
         return (
             <div className="order-ahead-container">
@@ -76,9 +80,21 @@ class Breakfast extends React.Component {
                         </>
 
                     ) :
-                        <div className="breakfast-container">
-                            {this.breakfast()}
-                        </div>
+                    
+                    <div className="breakfast-container">
+                        {this.props.schedule === "order_ahead" 
+                        
+                        ?
+                        
+                        this.breakfastAhead()
+
+                        :
+
+                        this.breakfastNow()
+                    
+                        }
+
+                    </div>
         
                     }     
 
@@ -90,8 +106,6 @@ class Breakfast extends React.Component {
     }
 }
 
-///read action
-
 const mapStateToProps = (state) => {
     return { meals: state.meals }
 } 
@@ -101,14 +115,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-////write action
-// const mapDispatchToProps = (dispatch) => {
-//     //////dispatch: to take in an action and then call our reducer and pass that action into the reducer//////
-//     return { submitHandler: (mealObj) => dispatch({type: "add meal", payload: mealObj}) }     ->
-        // return  { submitHandler: (mealObj) => dispatch(addMeal())}
-// }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Breakfast)
-// export default connect(null, mapDispatchToProps)(Breakfast)
-
-// export default Breakfast

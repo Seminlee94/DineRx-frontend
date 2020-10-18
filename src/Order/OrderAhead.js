@@ -55,7 +55,7 @@ class OrderAhead extends React.Component {
                                 <div className="meal-type">
                                     Breakfast
                                 </div>
-                                <Breakfast viewHandler={this.props.viewHandler}/>
+                                <Breakfast viewHandler={this.props.viewHandler} schedule="order_ahead" />
                             </>
                         </div>
                         <div id="lunch-meal">
@@ -63,7 +63,7 @@ class OrderAhead extends React.Component {
                                 <div className="meal-type">
                                     Lunch
                                 </div>
-                                <Lunch viewHandler={this.props.viewHandler}/>
+                                <Lunch viewHandler={this.props.viewHandler} schedule="order_ahead" />
                             </>
                         </div>
                         <div id="dinner-meal">
@@ -71,14 +71,14 @@ class OrderAhead extends React.Component {
                                 <div className="meal-type">
                                     Dinner
                                 </div>
-                                <Dinner viewHandler={this.props.viewHandler}/>
+                                <Dinner viewHandler={this.props.viewHandler} schedule="order_ahead" />
                             </>
                         </div>
                     </section>
 
                 </div>
 
-                <RightSidebar />
+                <RightSidebar schedule="order_ahead"/>
 
 
             </>

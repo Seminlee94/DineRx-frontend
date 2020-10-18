@@ -2,16 +2,16 @@ import React from 'react'
 import './OrderAhead.css'
 import RightSideItem from './Cart/RightSideItem'
 
-class RightSidebar extends React.Component {
+class RightSidebarNow extends React.Component {
 
     state = {
         showSide: false
     }
 
     checkScrollTop = () => {    
-        if (window.pageYOffset > 1000){
+        if (window.pageYOffset > 600){
             this.setState({ showSide: true })
-        } else if (window.pageYOffset <= 1000){
+        } else if (window.pageYOffset <= 600){
            this.setState({ showSide: false })
         }  
      };
@@ -21,7 +21,7 @@ class RightSidebar extends React.Component {
     }
 
     render() {
-
+        
         return(
             <div className={this.state.showSide ? "right-sidebar" : "right-sidebar-inactive"}>
                 <RightSideItem schedule={this.props.schedule} />
@@ -33,4 +33,4 @@ class RightSidebar extends React.Component {
 
 
 
-export default RightSidebar
+export default RightSidebarNow
