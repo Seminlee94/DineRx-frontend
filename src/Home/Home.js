@@ -30,7 +30,7 @@ class Home extends React.Component {
     render(){
         
         let userName = localStorage.getItem("name")
-        // let userHospital = localStorage.getItem("hospital")
+        let userHospital = localStorage.getItem("hospital")
 
         return (
 
@@ -45,9 +45,7 @@ class Home extends React.Component {
                     New York
                 </div>
                 <div className="welcome-hospital">
-                    {/* Welcome to {userHospital}, */}
-                    Welcome
-                    {userName} 
+                    Welcome to {userHospital}, {userName} 
                 </div>
 
                 <div className="order-buttons">

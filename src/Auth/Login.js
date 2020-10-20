@@ -5,11 +5,6 @@ import { withRouter } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import avo2 from '../asset/images/avo2.png';
 import './login.css';
-// import {
-//     geocodeByaddress,
-//     geocodeByPlaceId,
-//     getLatLng,
-//   } from 'react-places-autocomplete';
 
 
 export class Login extends Component {
@@ -100,16 +95,6 @@ export class Login extends Component {
         let hospital = possibleHospital.split(", ")[0]
         this.setState(() => ({ hospital: hospital }))
     }
-
-
-    // logout(){
-    //     localStorage.clear()
-    // localStorage.removeItem("token")
-    // localStorage.removeItem("userId")
-    // }
-
-
-
  
     render() {
 

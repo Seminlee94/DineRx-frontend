@@ -8,6 +8,7 @@ import OrderAhead from './Order/OrderAhead'
 import Navbar from './Navbar/Navbar'
 import Product from './Meal/Product'
 import Cart from './Order/Cart/Cart'
+import MyOrders from './Order/MyOrders'
 
 class App extends React.Component {
 
@@ -29,6 +30,11 @@ class App extends React.Component {
             <Route path="/login">
               <Login />
             </Route>
+
+            <Route path="/myorders">
+              <Navbar />
+              <MyOrders />
+            </Route>
     
             <Route path="/ordernow">
               <Navbar />
@@ -43,6 +49,10 @@ class App extends React.Component {
             <Route path="/product/:id">
               <Navbar />
               <Product clickedId={this.state.clickedId} />
+            </Route>
+
+            <Route path="/diet">
+              <Navbar/>
             </Route>
 
             <Route path="/cart" >

@@ -5,8 +5,6 @@ import MealCardNow from './Components/MealCardNow'
 import { connect } from 'react-redux'
 import { getMeal } from '../Redux/actions'
 import FilteredMain from './Containers/FilteredMain'
-// import LeftSidebar from './Containers/LeftSidebar'
-// import Main from './Containers/Main'
 
 
 class Breakfast extends React.Component {
@@ -29,24 +27,22 @@ class Breakfast extends React.Component {
     }
 
 
-    breakfastAhead = () => {
+    breakfast = () => {
         let newArray = this.props.meals
         let filteredArray = newArray.filter(el => el.breakfast === true)
-        return filteredArray.map((el) => (<MealCard 
+        if(this.props.schedule==="order_ahead"){
+            return filteredArray.map((el) => (<MealCard 
+                    key={el.id} 
+                    meal={el} 
+                    viewHandler={this.props.viewHandler}
+                />))
+        } else {
+            return filteredArray.map((el) => (<MealCardNow 
                 key={el.id} 
                 meal={el} 
                 viewHandler={this.props.viewHandler}
             />))
-    }
-
-    breakfastNow = () => {
-        let newArray = this.props.meals
-        let filteredArray = newArray.filter(el => el.breakfast === true)
-        return filteredArray.map((el) => (<MealCardNow 
-                key={el.id} 
-                meal={el} 
-                viewHandler={this.props.viewHandler}
-            />))
+        }
     }
 
     render() {
@@ -72,28 +68,14 @@ class Breakfast extends React.Component {
                     </ul>
                 </div>
 
-                   {this.state.clicked ? (
-     
-                        <>
+                   {this.state.clicked ? 
                     
-                            <FilteredMain meal={this.state.filteredCategory} viewHandler={this.props.viewHandler} />
-                        </>
+                    <FilteredMain meal={this.state.filteredCategory} viewHandler={this.props.viewHandler} />
 
-                    ) :
+                    :
                     
                     <div className="breakfast-container">
-                        {this.props.schedule === "order_ahead" 
-                        
-                        ?
-                        
-                        this.breakfastAhead()
-
-                        :
-
-                        this.breakfastNow()
-                    
-                        }
-
+                        {this.breakfast()}
                     </div>
         
                     }     

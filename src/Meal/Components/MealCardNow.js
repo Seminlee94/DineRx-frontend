@@ -13,8 +13,9 @@ class MealCard extends React.Component {
         mouseState: false,
     }
 
-    addUserFood(meal_id, meal_type) {
-        let userFoodObj = {food_id: parseInt(meal_id), user_id: parseInt(user_id), meal_types: meal_type, meal_schedule: "order_ahead" }
+    addUserFood(meal_id) {
+        // let userFoodObj = {food_id: parseInt(meal_id), user_id: parseInt(user_id), meal_types: meal_type, meal_schedule: "order_ahead" }
+        let userFoodObj = {food_id: parseInt(meal_id), user_id: parseInt(user_id), meal_schedule: "order_now" }
         this.props.addUserFood(userFoodObj)
     }
 
@@ -33,8 +34,6 @@ class MealCard extends React.Component {
     render() {
         let meal_id = this.props.meal.id
 
-        // console.log(this.props.schedule)
-
         return(
     
             <div className="meal-card" >
@@ -45,10 +44,11 @@ class MealCard extends React.Component {
                     <div className={this.state.mouseState ? "overlay" : "overlay-inactive"} onMouseLeave={this.mouseLeaveHandler}>
                         <div className="text" >
 
+                            <button className="breakfast-button" onClick={() => this.addUserFood(meal_id)}>Add Cart</button>
                             
-                            {(this.props.meal.breakfast && this.props.meal.lunch===false && this.props.meal.dinner===false) ?
+                            {/* {(this.props.meal.breakfast && this.props.meal.lunch===false && this.props.meal.dinner===false) ?
                             
-                            <button className="breakfast-button" onClick={() => this.addUserFood(meal_id, "breakfast")}>Add Breakfast</button>
+                            <button className="breakfast-button" onClick={() => this.addUserFood(meal_id, "breakfast")}>Add Cart</button>
                             :
 
                             null
@@ -61,7 +61,7 @@ class MealCard extends React.Component {
                             </>
                             :
                             null
-                            }
+                            } */}
 
 
                             <Link to={{ pathname: `product/${meal_id}`,

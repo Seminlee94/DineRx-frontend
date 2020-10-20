@@ -37,6 +37,9 @@ class UserDropdown extends React.Component {
                             <a className="dropdown-list" href="/diet" onClick={()=>this.handleClick}>About my Diet</a>
                         </div>
                         <div className="dropdown-item">
+                            <a className="dropdown-list" href="/myorders" onClick={()=>this.handleClick}>My Orders</a>
+                        </div>
+                        <div className="dropdown-item">
                             <a className="dropdown-list" href="/previousorders" onClick={()=>this.handleClick}>Previous Orders</a>
                         </div>
                         <div className="dropdown-item">

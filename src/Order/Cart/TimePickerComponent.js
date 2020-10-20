@@ -1,53 +1,47 @@
 import React from 'react'
+import './Cart.css'
 import 'date-fns'
 import Grid from '@material-ui/core/Grid'
 import DateFnsUtils from '@date-io/date-fns'
 import {
     MuiPickersUtilsProvider,
-    KeyboardTimePicker,
-    TimePickerView,
-    TimePicker 
+    KeyboardDateTimePicker
+
 } from '@material-ui/pickers'
 
-// export const TimePickerComponent = () => {
-// function TimePickerComponent(){
 class TimePickerComponent extends React.Component {
 
     state = {
-        date: new Date()
+        date: new Date(),
+        maxDate: new Date(Date.now() + (3600 * 1000 * 24))
     }
 
-    // const [selectedDate, setSelectedDate] = React.useState(
-    //     new Date()
-    // )
 
     handleDateChange = (selectedDate) => {
         this.setState({ date: selectedDate })
         this.props.onChange(selectedDate)
-        // setSelectedDate(date)
     }
 
     render() {
-        // console.log(this.props.onChange(time))
+
         return (
     
-    
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <Grid container justify='space-around'>
-                
-                <KeyboardTimePicker 
-                    ampm={false}
-                    variant="inline"
-                    label="Choose Time"
-                    value={this.state.date}
-                    // value={selectedDate}
-                    onChange={this.handleDateChange}
-                />
-                
-                </Grid>
-            </MuiPickersUtilsProvider>
-    
-    
+                <div className="date-picker">
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <Grid container justify='space-around'>
+                        
+                        <KeyboardDateTimePicker 
+                            ampm={false}
+                            value={this.state.date}
+                            onChange={this.handleDateChange}
+                            label="Choose Date and Time"
+                            disablePast={true}
+                            maxDate={this.state.maxDate}
+                        />
+                        
+                        </Grid>
+                    </MuiPickersUtilsProvider>
+                </div>
     
         )
     }

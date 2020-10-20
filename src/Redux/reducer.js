@@ -5,6 +5,7 @@ const defaultState = {
     ingredients: [],
     nutritions: [],
     userFoods: [],
+    userOrders: [],
     product: {},
 }
 
@@ -61,6 +62,20 @@ function userFoodsReducer(state= defaultState.userFoods, action){
     }
 }
 
+function userOrdersReducer(state= defaultState.userOrders, action){
+    switch(action.type) {
+        case "fetched_userOrder":
+            return action.payload
+
+        case "delete_userOrder":
+            return state.filter(obj => obj.id !== action.payload.id )
+
+        default:
+            return state
+
+    }
+}
+
     
 const rootReducer = combineReducers({
     meals: mealsReducer,
@@ -68,6 +83,7 @@ const rootReducer = combineReducers({
     nutritions: nutritionsReducer,
     userFoods: userFoodsReducer,
     product: productReducer,
+    userOrders: userOrdersReducer,
 })
 
 

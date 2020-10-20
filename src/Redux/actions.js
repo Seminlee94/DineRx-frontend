@@ -43,6 +43,14 @@ export const getUserFood = () => {
     }
 } 
 
+export const getUserOrder = () => {
+    return function(dispatch){
+        fetch("http://localhost:3000/api/v1/user_orders")
+            .then(resp => resp.json())
+            .then(data => dispatch({ type: "fetched_userOrder", payload: data }))
+    }
+}
+
 export const addUserFood = (userFoodObj) => {
     return function(dispatch){
         fetch("http://localhost:3000/api/v1/user_foods", {
@@ -58,7 +66,6 @@ export const addUserFood = (userFoodObj) => {
     }
 }
 
-
 export const deleteUserFood = (id) => {
     let id_string = id.toString()
     return function(dispatch){
@@ -68,5 +75,16 @@ export const deleteUserFood = (id) => {
             .then(resp => resp.json())
             .then(data => dispatch({ type: "delete_userFood", payload: {data, id} }))
             
+    }
+}
+
+export const deleteUserOrder = (id) => {
+    let id_string = id.toString()
+    return function(dispatch){
+        fetch(`http://localhost:3000/api/v1/user_orders/${id_string}`, {
+            method: "DELETE"
+        })
+            .then(resp => resp.json())
+            .then(data => dispatch({ type: "delete_userOrder", payload: {data, id} }))
     }
 }

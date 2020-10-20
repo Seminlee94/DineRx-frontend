@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
-/* body {
-    overflow-y: hidden;
-} */
-
 .search-box {
     display: flex;
     width: 100%;
@@ -42,12 +38,9 @@
   align-items: center;
   font-weight: bold;
   color: black;
-  margin-left: 41%;
 }
 
-.dropdown-container {
-    margin-right: 300px;
-}
+
 
 .top-login {
     width: 100%;
@@ -62,12 +55,9 @@
     margin-top: 100px;
     width: 100%;
     height: 30%;
-    /* text-align: center; */
-    /* justify-content: center; */
 }
 
 .bottom-login-form {
-    /* justify-content: center; */
     width: 30%;
     margin-left: 39%;
 }
@@ -112,7 +102,6 @@
 }
 
 .login-button {
-    /* display: none; */
     width: 150px;
     height: 50px;
     transform: translateX(-1000%);
