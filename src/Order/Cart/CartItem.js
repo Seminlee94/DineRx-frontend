@@ -33,7 +33,7 @@ class CartItem extends React.Component {
                     {this.props.meal.food.name}
                 </div>
 
-                <div className="incart-meal-calories">
+                <div className="incart-meal-card-calories">
                     {filteredCalories[0].amount} {filteredCalories[0].title}
                 </div>
 
@@ -41,9 +41,12 @@ class CartItem extends React.Component {
 
                 <div className="incart-buttons">
                     <Link to={{ pathname: `product/${meal_id}` }}>
-                        <button onClick={() => this.props.viewHandler(meal_id)}>Edit</button>
+                        <button onClick={() => this.props.viewHandler(meal_id)}>View</button>
                     </Link>
-                    <button onClick={() => this.deleteUserFood(this.props.meal.id)}>Delete</button>
+                </div>
+
+                <div className="incart-buttons">
+                    <button onClick={() => this.deleteUserFood(this.props.meal.id)}>Remove</button>
                 </div>
 
             </div>

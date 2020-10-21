@@ -20,6 +20,7 @@ class Home extends React.Component {
         localStorage.removeItem("userId")
         localStorage.removeItem("name")
         localStorage.removeItem("diet")
+        localStorage.removeItem("department")
         localStorage.removeItem("allergies")
         localStorage.removeItem("room")
         localStorage.removeItem("hospital")

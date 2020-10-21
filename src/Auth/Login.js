@@ -68,6 +68,7 @@ export class Login extends Component {
                 localStorage.setItem("userId", data.user.id)
                 localStorage.setItem("name", data.user.name)
                 localStorage.setItem("diet", data.user.diet)
+                localStorage.setItem("department", data.user.department)
                 localStorage.setItem("allergies", data.user.allergies.map(allergy=>allergy.name))
                 localStorage.setItem("room", data.user.room)
                 localStorage.setItem("hospital", data.user.hospital.name)

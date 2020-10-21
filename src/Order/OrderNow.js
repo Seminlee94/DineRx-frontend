@@ -33,9 +33,9 @@ function OrderNow(props) {
     let noSecond = time.split(":")
     const date = new Date().toLocaleDateString()
     const day = new Date().toLocaleString('en-us', {weekday:'long'})
-    const breakfast = noSecond[0] > 7 && noSecond[0] < 11
-    const lunch = noSecond[0] > 12 && noSecond[0] < 16
-    const dinner = noSecond[0] > 17 && noSecond[0] < 21
+    const breakfast = noSecond[0] >= 7 && noSecond[0] < 11
+    const lunch = noSecond[0] >= 12 && noSecond[0] < 16
+    const dinner = noSecond[0] >= 17 && noSecond[0] < 21
     const TimeOut = (breakfast === false && lunch === false && dinner === false)
 
 

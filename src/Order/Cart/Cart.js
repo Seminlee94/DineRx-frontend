@@ -13,7 +13,8 @@ class Cart extends React.Component {
 
     state = {
         selectedOption: "",
-        userOrders: []
+        userOrders: [],
+        submitted: false
     }
 
     componentDidMount(){
@@ -41,18 +42,37 @@ class Cart extends React.Component {
         });
     }
 
+    mealCaloriesAhead = (meal_schedule, meal_type) => {
+        let meal_filter_ahead = this.props.userFoods.filter(obj => ((obj.meal_schedule===meal_schedule) && (obj.meal_types===meal_type)))
+        let meal_nutrition_ahead = meal_filter_ahead.map(obj => obj.food.nutritions.filter(nutrition => nutrition.title==="Calories"))
+        let meal_calories_filter = meal_nutrition_ahead.map(arr => arr[0])
+        let meal_calories_amounts = meal_calories_filter.map(calorie => parseInt(calorie.amount))
+        return  meal_calories_amounts.reduce((a,b) => a+b, 0)
+    }
+
+    mealCaloriesNow = (meal_schedule) => {
+        let meal_filter_now = this.props.userFoods.filter(obj => obj.meal_schedule===meal_schedule)
+        let meal_nutrition_now = meal_filter_now.map(obj => obj.food.nutritions.filter(nutrition => nutrition.title==="Calories"))
+        let meal_calories_filter = meal_nutrition_now.map(arr => arr[0])
+        let meal_calories_amounts = meal_calories_filter.map(calorie => parseInt(calorie.amount))
+        return  meal_calories_amounts.reduce((a,b) => a+b, 0)
+    }
+
+
     render() {
-        let food_calories = this.props.userFoods.map(obj => obj.food.nutritions.filter(nutrition => nutrition.title==="Calories"))
-        let food_calories_filter = (food_calories.map(array => array[0]))
+        let userFoods_ahead = this.props.userFoods.filter(obj => obj.meal_schedule==="order_ahead")
+        let food_calories_ahead = userFoods_ahead.map(obj => obj.food.nutritions.filter(nutrition => nutrition.title === "Calories"))
+        let food_calories_filter = (food_calories_ahead.map(array => array[0]))
         let food_calories_amounts = food_calories_filter.map(calorie => parseInt(calorie.amount))
         let food_calories_sum = food_calories_amounts.reduce((a,b) => a+b, 0)
+
         let restriction_calorie = user_restriction.split(" ")[2]
         let calorie_exceed = food_calories_sum > restriction_calorie
 
-
-        let breakfast_present = this.props.userFoods.filter(obj => obj.meal_types === "breakfast")
-        let lunch_present = this.props.userFoods.filter(obj => obj.meal_types === "lunch")
-        let dinner_present = this.props.userFoods.filter(obj => obj.meal_types === "dinner")
+        let order_now_present = this.props.userFoods.filter(obj => obj.meal_schedule === "order_now" )
+        let breakfast_present = this.props.userFoods.filter(obj => obj.meal_types === "breakfast" && obj.meal_schedule === "order_ahead")
+        let lunch_present = this.props.userFoods.filter(obj => obj.meal_types === "lunch" && obj.meal_schedule === "order_ahead")
+        let dinner_present = this.props.userFoods.filter(obj => obj.meal_types === "dinner" && obj.meal_schedule === "order_ahead")
 
         return(
 
@@ -103,12 +123,54 @@ class Cart extends React.Component {
 
 
                 {this.state.selectedOption==='order_now' ? 
+
                     <div className="incart-meal-now">
+
                         <div className="incart-meal-container">
-                            {this.userFoodsNow()}
+                            {order_now_present.length > 0 ?
+
+                                <>
+                                    <div className="incart-meal">
+                                        {this.userFoodsNow()}
+                                    </div>
+
+                                    <div className="incart-order">
+                                        <div className="incart-form">
+                                            <div className="incart-place-order">
+                                                <h6>Place Order!</h6>
+                                            </div>
+
+                                            <div className="incart-meal-calories">
+                                                Total calories in this meal: <br/><b>{this.mealCaloriesNow("order_now")}</b> calories
+                                            </div>
+
+                                            <div className="incart-meal-calories">
+                                                Total calories in order ahead: <br/><b>{food_calories_sum}</b> calories
+                                            </div>
+
+                                            <div className="incart-time-pick">
+                                                <TimePick meal={order_now_present} schedule="order_now" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </>
+
+                            :
+                            <div className="empty-cart-container">
+                                    <div className="empty-cart">Order is empty! </div>
+                                    <div className="empty-cart">Would you like to order now?</div>
+                                    <div className="empty-cart-button">
+                                        <Link to={{ pathname: '/ordernow'}} >
+                                            <button>Order Now</button>
+                                        </Link>
+                                    </div>
+
+                                </div>
+                        }
                         </div>
 
                     </div> 
+
                 : null}
 
                 {this.state.selectedOption==='order_ahead-breakfast' ? 
@@ -117,7 +179,58 @@ class Cart extends React.Component {
                         <div className="incart-meal-ahead">
                             <div className="incart-meal-container">
                                 {breakfast_present.length > 0 ? 
-                                    this.userFoodsAhead("breakfast")
+                                    <>
+                                        <div className="incart-meal">
+                                            {this.userFoodsAhead("breakfast")}
+                                        </div>
+
+
+                                        <div className="incart-order">
+
+                                            {food_calories_sum > restriction_calorie 
+                                            ? 
+                                            <div className="incart-form">
+                                                <div className="incart-exceed-top">
+                                                    Caution
+                                                </div>
+                                                <div className="incart-exceed-center">
+                                                    You have <span style={calorie_exceed ? {color: "red"} :  {color: "black"} }>{food_calories_sum}</span> calories in the cart. 
+                                                    You can't submit orders until you meet the restricted calorie amount.
+                                                </div>
+                                            </div> 
+
+                                            : 
+                                                <>
+                                                    {this.state.userOrders.filter(obj => obj.order_id === 1).length > 0
+                                                    
+                                                    ? 
+                                                    
+                                                    null 
+                                                    
+                                                    :
+                                                        <div className="incart-form">
+                                                            <div className="incart-place-order">
+                                                                <h6>Place Order!</h6> <em>Breakfast time is from 7 AM to 11 AM</em>
+                                                            </div>
+
+                                                            <div className="incart-meal-calories">
+                                                                Total calories in this meal: <br/><b>{this.mealCaloriesAhead("order_ahead", "breakfast")}</b> calories
+                                                            </div>
+
+                                                            <div className="incart-meal-calories">
+                                                                Total calories in order ahead: <br/><b>{food_calories_sum}</b> calories
+                                                            </div>
+
+                                                            <div className="incart-time-pick">
+                                                                <TimePick meal={breakfast_present} type="breakfast" schedule="order_ahead" />
+                                                            </div>
+                                                        </div>
+
+                                                    }
+                                                </>
+                                            }
+                                        </div>
+                                    </>
                                 :
                                 <div className="empty-cart-container">
                                     <div className="empty-cart">Breakfast order is empty! </div>
@@ -134,34 +247,6 @@ class Cart extends React.Component {
                             </div>
                         </div> 
 
-                        <div className="incart-calorie-container">
-                            The total calorie in your cart is <span style={calorie_exceed ? {color: "red"} :  {color: "black"} } >{food_calories_sum}</span>.
-                            {food_calories_sum > restriction_calorie 
-                            ? 
-                            <div>Calorie in the cart exceeds your restriction. Please remove items.</div> 
-                            : 
-                            <>
-                                {this.state.userOrders.filter(obj => obj.order_id === 1).length > 0
-                                
-                                ? 
-                                
-                                null 
-                                
-                                :
-                                    <>
-                                        <div className="incart-place-order">
-                                            <h6>Place Order!</h6> <em>Breakfast time is from 7 AM to 11 AM</em>
-                                        </div>
-                                        <div className="incart-time-pick">
-                                            <TimePick meal={breakfast_present} type="breakfast" schedule="order_ahead" />
-                                        </div>
-                                    </>
-
-                                }
-                            </>
-                        }
-                        </div>
-
                     </>
                 : null}
 
@@ -170,7 +255,60 @@ class Cart extends React.Component {
                         <div className="incart-meal-ahead">
                             <div className="incart-meal-container">
                             {lunch_present.length > 0 ? 
-                                    this.userFoodsAhead("lunch")
+                                    <>
+                                        <div className="incart-meal">
+                                            {this.userFoodsAhead("lunch")}
+                                        </div>
+                                        
+                                            <div className="incart-order">
+
+                                                {food_calories_sum > restriction_calorie 
+                                                ? 
+                                                <div className="incart-form">
+                                                    <div className="incart-exceed-top">
+                                                        Caution
+                                                    </div>
+                                                    <div className="incart-exceed-center">
+                                                        You have <span style={calorie_exceed ? {color: "red"} :  {color: "black"} }>{food_calories_sum}</span> calories in the cart. 
+                                                        You can't submit orders until you meet the restricted calorie amount.
+                                                    </div>
+                                                </div> 
+                                                : 
+                                                <>
+                                                        {this.state.userOrders.filter(obj => obj.order_id === 2).length > 0
+                                                            
+                                                        ? 
+                                                        
+                                                        null 
+                                                        
+                                                        :
+                                                        <div className="incart-form">
+                                                            <div className="incart-place-order">
+                                                                <h6>Place Order!</h6> <em>Lunch time is from 12 PM to 4 PM</em>
+                                                            </div>
+
+                                                            <div className="incart-meal-calories">
+                                                                Total calories in this meal: <br/><b>{this.mealCaloriesAhead("order_ahead", "lunch")}</b> calories
+                                                            </div>
+
+                                                            <div className="incart-meal-calories">
+                                                                Total calories in order ahead: <br/><b>{food_calories_sum}</b> calories
+                                                            </div>
+
+
+                                                            <div className="incart-time-pick">
+                                                                <TimePick meal={lunch_present} type="lunch" schedule="order_ahead" />
+                                                            </div>
+                                                        </div>
+
+                                                        }
+
+                                                </>
+                                                }
+                                                </div>
+                                            {/* </div> */}
+                                    </>
+
                                 :
                                 <div className="empty-cart-container">
                                     <div className="empty-cart">Lunch order is empty! </div>
@@ -187,34 +325,6 @@ class Cart extends React.Component {
                             </div>
                         </div> 
 
-                        <div className="incart-calorie-container">
-                            The total calorie in your cart is <span style={calorie_exceed ? {color: "red"} :  {color: "black"} } >{food_calories_sum}</span>.
-                            {food_calories_sum > restriction_calorie 
-                            ? 
-                            <div>Calorie in the cart exceeds your restriction. Please remove items.</div> 
-                            : 
-                            <>
-                                {this.state.userOrders.filter(obj => obj.order_id === 2).length > 0
-                                    
-                                ? 
-                                
-                                null 
-                                
-                                :
-                                    <>
-                                        <div className="incart-place-order">
-                                            <h6>Place Order!</h6> <em>Lunch time is from 12 PM to 4 PM</em>
-                                        </div>
-                                        <div className="incart-time-pick">
-                                            <TimePick meal={lunch_present} type="lunch" schedule="order_ahead" />
-                                        </div>
-                                    </>
-
-                                }
-
-                            </>
-                        }
-                        </div>
 
                     </>
                 : null}
@@ -225,7 +335,64 @@ class Cart extends React.Component {
                         <div className="incart-meal-ahead">
                             <div className="incart-meal-container">
                             {dinner_present.length > 0 ? 
-                                    this.userFoodsAhead("dinner")
+                                    <>
+                                        <div className="incart-meal">
+                                            {this.userFoodsAhead("dinner")}
+                                        </div>
+
+                                        {/* <div className="incart-calorie-container" > */}
+                                            {/* The total calorie in your cart is <span style={calorie_exceed ? {color: "red"} :  {color: "black"} } >{food_calories_sum}</span>. */}
+                                            
+                                            <div className="incart-order">
+                                                {food_calories_sum > restriction_calorie 
+                                                ? 
+
+                                                    <div className="incart-form">
+                                                        <div className="incart-exceed-top">
+                                                            Caution
+                                                        </div>
+                                                        <div className="incart-exceed-center">
+                                                            You have <span style={calorie_exceed ? {color: "red"} :  {color: "black"} }>{food_calories_sum}</span> calories in the cart. 
+                                                            You can't submit orders until you meet the restricted calorie amount.
+                                                        </div>
+                                                    </div> 
+  
+                                                : 
+                                                <>
+                                                    {this.state.userOrders.filter(obj => obj.order_id === 3).length > 0
+                                                    
+                                                    ? 
+                                                    
+                                                    null 
+                                                    
+                                                    :
+                                                        <div className="incart-form">
+                                                            <div className="incart-place-order">
+                                                                <h6>Place Order!</h6> <em>Dinner time is from 5 PM to 9 PM</em>
+                                                            </div>
+
+                                                            <div className="incart-meal-calories">
+                                                                Total calories in this meal: <br/><b>{this.mealCaloriesAhead("order_ahead", "dinner")}</b> calories
+                                                            </div>
+
+                                                            <div className="incart-meal-calories">
+                                                                Total calories in order ahead: <br/><b>{food_calories_sum}</b> calories
+                                                            </div>
+
+                                                            <div className="incart-time-pick">
+                                                                <TimePick meal={dinner_present} type="dinner" schedule="order_ahead" />
+                                                            </div>
+                                                        </div>
+                    
+                                                    }
+
+                                                </>
+                                                }
+                                            </div>
+
+                                        {/* </div> */}
+
+                                    </>
                                 :
                                     <div className="empty-cart-container">
                                         <div className="empty-cart">Dinner order is empty! </div>
@@ -242,38 +409,6 @@ class Cart extends React.Component {
                             </div>
                         </div> 
 
-                        <div className="incart-calorie-container" >
-                            The total calorie in your cart is <span style={calorie_exceed ? {color: "red"} :  {color: "black"} } >{food_calories_sum}</span>.
-                            
-                            <div className="incart-order">
-                                {food_calories_sum > restriction_calorie 
-                                ? 
-                                <div>Calorie in the cart exceeds your restriction. Please remove items.</div> 
-                                : 
-                                <>
-                                    {this.state.userOrders.filter(obj => obj.order_id === 3).length > 0
-                                    
-                                    ? 
-                                    
-                                    null 
-                                    
-                                    :
-                                        <>
-                                            <div className="incart-place-order">
-                                                <h6>Place Order!</h6> <em>Dinner time is from 5 PM to 9 PM</em>
-                                            </div>
-                                            <div className="incart-time-pick">
-                                                <TimePick meal={dinner_present} type="dinner" schedule="order_ahead" />
-                                            </div>
-                                        </>
-    
-                                    }
-
-                                </>
-                                }
-                            </div>
-
-                        </div>                        
                     </>
 
                 : null}

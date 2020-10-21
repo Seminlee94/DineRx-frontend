@@ -10,10 +10,11 @@ function TimePick(props) {
     let user_id = props.meal.map(obj => obj.user_id)[0]
     let meal_type = props.type
     let meal_schedule = props.schedule
+    let date = new Date()
+    const options = {  weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
 
 
     const addUserOrder = (time, user_id, order_id) => {
-        console.log(time)
         fetch("http://localhost:3000/api/v1/user_orders", {
         method: "POST",
         headers: {
@@ -31,20 +32,17 @@ function TimePick(props) {
         .then(window.alert("Order has been successful!"))
     }
     
-    console.log(props)
-
+    console.log(props.schedule)
     return (
         <>
             
             <Form onSubmit={(time) => {
-                const options = {  weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
                 let time_field = time.timePickerField.toLocaleTimeString('en-us', options)
-                console.log(time_field)
                 let time_hour = time_field.split(", ")[3].split(":")[0]
 
-                const breakfast_time = time_hour >= 7 && time_hour <= 11
-                const lunch_time = time_hour >= 12 && time_hour <= 16
-                const dinner_time = time_hour >= 17 && time_hour <= 21
+                const breakfast_time = time_hour >= 7 && time_hour < 11
+                const lunch_time = time_hour >= 12 && time_hour < 16
+                const dinner_time = time_hour >= 17 && time_hour < 21
 
 
                 if(meal_type === "breakfast" && meal_schedule === "order_ahead" && breakfast_time){
@@ -65,14 +63,8 @@ function TimePick(props) {
                 else if(meal_type === "dinner" && meal_schedule === "order_ahead" && (dinner_time===false)){
                     window.alert("The cafeteria is open 5 PM to 9 PM for dinner")
                 } 
-                else if(meal_type === "breakfast" && meal_schedule === "order_now"){
+                else if(meal_schedule === "order_now"){
                     addUserOrder(time_field, user_id, 4)
-                }
-                else if(meal_type === "lunch" && meal_schedule === "order_now"){
-                    addUserOrder(time_field, user_id, 5)
-                }
-                else if(meal_type === "dinner" && meal_schedule === "order_now"){
-                    addUserOrder(time_field, user_id, 6)
                 }
 
             }}>
@@ -82,10 +74,9 @@ function TimePick(props) {
                 {({ handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
 
-
                         <Field name="timePickerField" className="time-picker-field">
                             {({ input }) => (
-                                <TimePickerComponent onChange={time => input.onChange(time)} />
+                                <TimePickerComponent schedule={props.schedule} onChange={time => input.onChange(time)} />
                             )}
 
                         </Field>

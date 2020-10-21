@@ -23,8 +23,14 @@ class TimePickerComponent extends React.Component {
     }
 
     render() {
+        const options = {  weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
 
         return (
+            <>
+
+            {this.props.schedule==="order_ahead" 
+            
+            ?
     
                 <div className="date-picker">
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -42,7 +48,15 @@ class TimePickerComponent extends React.Component {
                         </Grid>
                     </MuiPickersUtilsProvider>
                 </div>
-    
+
+            :
+
+                <div>
+                    {this.state.date.toLocaleDateString('en-us', options)}
+                </div>
+
+            }
+            </>
         )
     }
 }
