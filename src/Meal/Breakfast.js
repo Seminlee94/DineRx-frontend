@@ -5,6 +5,8 @@ import MealCardNow from './Components/MealCardNow'
 import { connect } from 'react-redux'
 import { getMeal } from '../Redux/actions'
 import FilteredMain from './Containers/FilteredMain'
+import IconCard from "./Components/IconCard.json"
+import { Icons } from '@material-ui/core';
 
 let userDiet = localStorage.getItem("diet")
 
@@ -51,11 +53,13 @@ class Breakfast extends React.Component {
         let filteredCategory = filteredArray.map(el => el.category)
         let uniqueCategory = [...new Set(filteredCategory)]
 
+
+
         
         return (
             <div className="order-ahead-container">
-                <div className="left-sidebar">
-                    <ul className="left-sidebar-ul">
+                <div className="left-sidebar-breakfast">
+                    <ul className="left-sidebar-ul-breakfast">
                         {uniqueCategory.map((item, index) => {
                             return (
                                 <li 
