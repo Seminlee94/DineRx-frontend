@@ -75,12 +75,17 @@
 }
 
 .go-to-cart {
-    border-style: solid;
+    /* border-style: solid; */
+    margin-top: 5px;
     background-color: #8b8b89;
     color: white;
     font-size: 30px;
     cursor: pointer;
     text-align: center;
+}
+
+.go-cart-href {
+    text-decoration: none;
 }
 
 .go-to-cart:hover {
@@ -158,9 +163,8 @@
     height: 120px;
 }
 
-.incart-buttons {
-    width: 100%;
-    text-align: center;
+.order-button {
+    text-decoration: none;
 }
 
 .incart-meal-calories {
@@ -218,6 +222,10 @@
 .incart-time-pick {
     margin-top: 50px;
     padding: 50px 0 70px 0;
+}
+
+.cart-href {
+    text-decoration: none;
 }
 
 .form-submit {

@@ -7,6 +7,7 @@ import { getMeal } from '../Redux/actions'
 import FilteredMain from './Containers/FilteredMain'
 // import LeftSidebar from './Containers/LeftSidebar'
 
+let userDiet = localStorage.getItem("diet")
 
 class Dinner extends React.Component {
 
@@ -17,7 +18,7 @@ class Dinner extends React.Component {
 
 
     componentDidMount(){
-        this.props.fetchMeals()
+        this.props.fetchMeals(userDiet)
     }
     
     shopSideBarClicker = (category) => {
@@ -52,8 +53,6 @@ class Dinner extends React.Component {
     let filteredArray = this.props.meals.filter(el => el.dinner === true)
     let filteredCategory = filteredArray.map(el => el.category)
     let uniqueCategory = [...new Set(filteredCategory)]
-
-    console.log(this.props.schedule)
     
     return (
 
@@ -116,7 +115,7 @@ const mapStateToProps = (state) => {
 } 
 
 const mapDispatchToProps = (dispatch) => {
-    return { fetchMeals: () => dispatch(getMeal())}
+    return { fetchMeals: (userDiet) => dispatch(getMeal(userDiet))}
 }
 
 

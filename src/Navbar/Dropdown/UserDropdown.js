@@ -33,7 +33,7 @@ class UserDropdown extends React.Component {
             <>
 
                     <div onClick={()=>this.handleClick} className={this.state.click ? 'dropdown-menu clicked' : 'dropdown-menu'}>
-                    {/* <div onClick={()=>this.handleClick} className= 'dropdown-menu' > */}
+
                         <div className="dropdown-item">
                             <a className="dropdown-list" href="/diet" onClick={()=>this.handleClick}>About my Diet</a>
                         </div>

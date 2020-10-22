@@ -19,7 +19,14 @@ class MyOrders extends React.Component {
 
     render() {
 
+        // console.log(this.props.userOrders.filter(obj => console.log(obj.order.meal_types)))
+        // console.log(this.props.userOrders.filter(obj => obj.meal_type==="lunch"))
+        let breakfast_order = this.props.userOrders.filter(obj => obj.order.meal_types==="breakfast")
+        let lunch_order = this.props.userOrders.filter(obj => obj.order.meal_types==="lunch")
+        let dinner_order = this.props.userOrders.filter(obj => obj.order.meal_types==="dinner")
 
+
+        console.log(breakfast_order)
         return(
             <div className="myorders-list">
 
@@ -28,36 +35,68 @@ class MyOrders extends React.Component {
                 </div>
 
                 <div className="myorders-list-items">
-                    {this.props.userOrders.length > 0 
 
-                    ? 
-                        <div className="myorders-ahead">
-                            <div className="myorders-container">
-                                <div className="myorders-container-top">
-                                    Order Ahead - Breakfast
-                                </div>
-                                {this.userOrder(1) }
+                    <div className="myorders-ahead">
+                        <div className="myorders-container">
+                            <div className="myorders-container-top">
+                                Order Ahead - Breakfast
+                            </div>
+                            {breakfast_order.length > 0
+
+                            ?   
+    
+                                this.userOrder(1) 
+
+                            :
+
+                            <div className="myorders-empty">
+                                You don't have any submitted order.
                             </div>
 
-                            <div className="myorders-container">
-                                <div className="myorders-container-top">
-                                    Order Ahead - Lunch
-                                </div>
-                                {this.userOrder(2) }
-                            </div>
 
-                            <div className="myorders-container">
-                                <div className="myorders-container-top">
-                                    Order Ahead - Dinner
+                            }
+                        </div>
+
+                        <div className="myorders-container">
+                            <div className="myorders-container-top">
+                                Order Ahead - Lunch
+                            </div>
+                                {lunch_order.length > 0
+
+                                ?   
+
+                                    this.userOrder(2) 
+
+                                :
+
+                                <div className="myorders-empty">
+                                    You don't have any submitted order.
                                 </div>
-                                {this.userOrder(3) }
+
+
+                                }
+                        </div>
+
+                        <div className="myorders-container">
+                            <div className="myorders-container-top">
+                                Order Ahead - Dinner
+                            </div>
+                                {dinner_order.length > 0
+
+                                ?   
+
+                                    this.userOrder(3) 
+
+                                :
+
+                                <div className="myorders-empty">
+                                    You don't have any submitted order.
+                                </div>
+
+
+                                }
                             </div>
                         </div>
-                    
-                    : 
-                    
-                    null}
-
                 </div>
 
             </div>

@@ -14,11 +14,9 @@ class FilteredMain extends React.Component {
 
     render() {
 
-        // console.log("filteredmain", this.props.meal)
         return (
             <div className="breakfast-container">
                 {this.breakfast()}
-                {/* <MealContainer breakfast={this.state.breakfastArray} /> */}
             </div>
     
         )

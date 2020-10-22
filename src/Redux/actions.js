@@ -1,11 +1,15 @@
+import { $CombinedState } from "redux"
+
 export const addMeal = (mealObj) => ({ type: "add_meal", payload: mealObj })
 
-export const getMeal = () => {
+export const getMeal = (diet) => {
+    // console.log(diet.toLowerCase())
+    // let diet_lowercase = diet.toLowerCase()
     return function(dispatch){
         fetch("http://localhost:3000/api/v1/foods")
-
             .then(resp => resp.json())
-            .then(data => dispatch({ type: "fetched_meals", payload: data }))    
+            .then(data => dispatch({ type: "fetched_meals", payload: data })) 
+                //  data.filter(obj => `${obj.diet_lowercase}` ===true))   
     }
 }
 

@@ -2,7 +2,7 @@ import React from 'react'
 import './Cart.css'
 import { Field, Form } from 'react-final-form'
 import TimePickerComponent from './TimePickerComponent'
-
+import Button from '@material-ui/core/Button';
 
 
 function TimePick(props) {    
@@ -81,7 +81,15 @@ function TimePick(props) {
 
                         </Field>
 
-                        <button type="submit" className="form-submit">Submit</button>
+                        <Button
+                            type="submit"
+                            className="form-submit"
+                            variant="contained" 
+                            color="primary" 
+                            style={{ marginLeft: "20" }}>
+                            Submit
+                        </Button>
+                        {/* <button type="submit" className="form-submit">Submit</button> */}
 
 
                     </form>

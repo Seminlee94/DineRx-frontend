@@ -8,6 +8,7 @@ import FilteredMain from './Containers/FilteredMain'
 // import LeftSidebar from './Containers/LeftSidebar'
 // import Main from './Containers/Main'
 
+let userDiet = localStorage.getItem("diet")
 
 class Lunch extends React.Component {
 
@@ -18,7 +19,7 @@ class Lunch extends React.Component {
 
 
     componentDidMount(){
-        this.props.fetchMeals()
+        this.props.fetchMeals(userDiet)
     }
     
     shopSideBarClicker = (category) => {
@@ -104,7 +105,7 @@ const mapStateToProps = (state) => {
 } 
 
 const mapDispatchToProps = (dispatch) => {
-    return { fetchMeals: () => dispatch(getMeal())}
+    return { fetchMeals: (userDiet) => dispatch(getMeal(userDiet))}
 }
 
 

@@ -5,6 +5,7 @@ import './Cart.css'
 import CartItem from './CartItem'
 import TimePick from './TimePick'
 import { Link } from "react-router-dom"
+import Button from '@material-ui/core/Button';
 
 let user_id = localStorage.getItem("userId")
 let user_restriction = localStorage.getItem("restriction")
@@ -43,7 +44,7 @@ class Cart extends React.Component {
     }
 
     mealCaloriesAhead = (meal_schedule, meal_type) => {
-        let meal_filter_ahead = this.props.userFoods.filter(obj => ((obj.meal_schedule===meal_schedule) && (obj.meal_types===meal_type)))
+        let meal_filter_ahead = this.props.userFoods.filter(obj => (obj.user_id ===parseInt(user_id) && (obj.meal_schedule===meal_schedule) && (obj.meal_types===meal_type)))
         let meal_nutrition_ahead = meal_filter_ahead.map(obj => obj.food.nutritions.filter(nutrition => nutrition.title==="Calories"))
         let meal_calories_filter = meal_nutrition_ahead.map(arr => arr[0])
         let meal_calories_amounts = meal_calories_filter.map(calorie => parseInt(calorie.amount))
@@ -51,7 +52,7 @@ class Cart extends React.Component {
     }
 
     mealCaloriesNow = (meal_schedule) => {
-        let meal_filter_now = this.props.userFoods.filter(obj => obj.meal_schedule===meal_schedule)
+        let meal_filter_now = this.props.userFoods.filter(obj => (obj.user_id ===parseInt(user_id) && (obj.meal_schedule===meal_schedule)))
         let meal_nutrition_now = meal_filter_now.map(obj => obj.food.nutritions.filter(nutrition => nutrition.title==="Calories"))
         let meal_calories_filter = meal_nutrition_now.map(arr => arr[0])
         let meal_calories_amounts = meal_calories_filter.map(calorie => parseInt(calorie.amount))
@@ -60,7 +61,7 @@ class Cart extends React.Component {
 
 
     render() {
-        let userFoods_ahead = this.props.userFoods.filter(obj => obj.meal_schedule==="order_ahead")
+        let userFoods_ahead = this.props.userFoods.filter(obj => (obj.user_id ===parseInt(user_id) && (obj.meal_schedule==="order_ahead")))
         let food_calories_ahead = userFoods_ahead.map(obj => obj.food.nutritions.filter(nutrition => nutrition.title === "Calories"))
         let food_calories_filter = (food_calories_ahead.map(array => array[0]))
         let food_calories_amounts = food_calories_filter.map(calorie => parseInt(calorie.amount))
@@ -69,10 +70,10 @@ class Cart extends React.Component {
         let restriction_calorie = user_restriction.split(" ")[2]
         let calorie_exceed = food_calories_sum > restriction_calorie
 
-        let order_now_present = this.props.userFoods.filter(obj => obj.meal_schedule === "order_now" )
-        let breakfast_present = this.props.userFoods.filter(obj => obj.meal_types === "breakfast" && obj.meal_schedule === "order_ahead")
-        let lunch_present = this.props.userFoods.filter(obj => obj.meal_types === "lunch" && obj.meal_schedule === "order_ahead")
-        let dinner_present = this.props.userFoods.filter(obj => obj.meal_types === "dinner" && obj.meal_schedule === "order_ahead")
+        let order_now_present = this.props.userFoods.filter(obj => (obj.user_id ===parseInt(user_id) && (obj.meal_schedule === "order_now")))
+        let breakfast_present = this.props.userFoods.filter(obj => (obj.user_id ===parseInt(user_id) && (obj.meal_types === "breakfast") && (obj.meal_schedule === "order_ahead")))
+        let lunch_present = this.props.userFoods.filter(obj => (obj.user_id ===parseInt(user_id) && (obj.meal_types === "lunch") && (obj.meal_schedule === "order_ahead")))
+        let dinner_present = this.props.userFoods.filter(obj => (obj.user_id ===parseInt(user_id) && (obj.meal_types === "dinner") && (obj.meal_schedule === "order_ahead")))
 
         return(
 
@@ -160,8 +161,15 @@ class Cart extends React.Component {
                                     <div className="empty-cart">Order is empty! </div>
                                     <div className="empty-cart">Would you like to order now?</div>
                                     <div className="empty-cart-button">
-                                        <Link to={{ pathname: '/ordernow'}} >
-                                            <button>Order Now</button>
+                                        <Link to={{ pathname: '/ordernow'}} className="order-button">
+                                            <Button 
+                                                variant="contained" 
+                                                color="primary" 
+                                                href="/orderahead"
+                                                style={{ marginLeft: "20" }}
+                                                >
+                                                    Order Now
+                                            </Button>
                                         </Link>
                                     </div>
 
@@ -236,8 +244,15 @@ class Cart extends React.Component {
                                     <div className="empty-cart">Breakfast order is empty! </div>
                                     <div className="empty-cart">Would you like to order your breakfast ahead?</div>
                                     <div className="empty-cart-button">
-                                        <Link to={{ pathname: '/orderahead'}} >
-                                            <button>Order Ahead</button>
+                                        <Link to={{ pathname: '/orderahead'}} className="order-button">
+                                            <Button 
+                                                variant="contained" 
+                                                color="primary" 
+                                                href="/orderahead"
+                                                style={{ marginLeft: "20" }}
+                                                >
+                                                    Order Ahead
+                                            </Button>
                                         </Link>
                                     </div>
 
@@ -314,8 +329,15 @@ class Cart extends React.Component {
                                     <div className="empty-cart">Lunch order is empty! </div>
                                     <div className="empty-cart">Would you like to order your lunch ahead?</div>
                                     <div className="empty-cart-button">
-                                        <Link to={{ pathname: '/orderahead'}} >
-                                            <button>Order Ahead</button>
+                                        <Link to={{ pathname: '/orderahead'}} className="order-button">
+                                            <Button 
+                                                variant="contained" 
+                                                color="primary" 
+                                                href="/orderahead"
+                                                style={{ marginLeft: "20" }}
+                                                >
+                                                    Order Ahead
+                                            </Button>
                                         </Link>
                                     </div>
 
@@ -339,9 +361,6 @@ class Cart extends React.Component {
                                         <div className="incart-meal">
                                             {this.userFoodsAhead("dinner")}
                                         </div>
-
-                                        {/* <div className="incart-calorie-container" > */}
-                                            {/* The total calorie in your cart is <span style={calorie_exceed ? {color: "red"} :  {color: "black"} } >{food_calories_sum}</span>. */}
                                             
                                             <div className="incart-order">
                                                 {food_calories_sum > restriction_calorie 
@@ -389,17 +408,21 @@ class Cart extends React.Component {
                                                 </>
                                                 }
                                             </div>
-
-                                        {/* </div> */}
-
                                     </>
                                 :
                                     <div className="empty-cart-container">
                                         <div className="empty-cart">Dinner order is empty! </div>
                                         <div className="empty-cart">Would you like to order your dinner ahead?</div>
                                         <div className="empty-cart-button">
-                                            <Link to={{ pathname: '/orderahead'}} >
-                                                <button>Order Ahead</button>
+                                            <Link to={{ pathname: '/orderahead'}} className="order-button" >
+                                                <Button 
+                                                    variant="contained" 
+                                                    color="primary" 
+                                                    href="/orderahead"
+                                                    style={{ marginLeft: "20" }}
+                                                    >
+                                                        Order Ahead
+                                                </Button>
                                             </Link>
                                         </div>
 
