@@ -39,15 +39,29 @@
 - ```npm start```
 
 ## 🚀🚀🚀Into the app 🚀🚀🚀
-#### Sign up with username, password, name, and address. 
+#### Sign in using hospital name, name, MRN number, and DOB
 ![](src/asset/demo/login3.gif)
-![](src/asset/demo/detail.gif)
-![](src/asset/demo/tocart.gif)
+
+#### Once logged in, choose either order now or order ahead if you want to order for later.
 ![](src/asset/demo/ordernow.gif)
+
+#### If you are curious about the details of the meal, please click on the view button and see the meal's ingredients and nutritions.
+![](src/asset/demo/detail.gif)
+
+#### Add your choice of meal to the cart
+![](src/asset/demo/tocart.gif)
+
+#### Please check if you have any restrictions. If you have a restriction and your cart exceed the amount, it will give you a warning and you won't be able to submit the order form. In order to make an order, you need to meet the restriction criteria. 
 ![](src/asset/demo/incart-2.gif)
-![](src/asset/demo/dietEducation.png)
+
+#### You can check your orders and their status in this page.
 ![](src/asset/demo/myorder.png)
 
+#### You can see information about your diet. Educations for patients' diets can be very helpful for both patients and healthcare workers.  
+![](src/asset/demo/dietEducation.png)
+
+
+#### Thank you for your interest! I really enjoyed working on this project because it has so many potentials. I will continue to expand this project in the near future.
 
 
 
