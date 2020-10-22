@@ -40,8 +40,7 @@
 
 ## 🚀🚀🚀Into the app 🚀🚀🚀
 #### Sign up with username, password, name, and address. 
-![](src/asset/demo/login2.gif)
-![](src/asset/images/avo2.png)
+![](src/asset/demo/login3.gif)
 
 
 
