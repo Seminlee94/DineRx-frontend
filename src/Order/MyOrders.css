@@ -7,15 +7,15 @@
 }
 
 .myorders-container-top {
-    font-size: 40px;
-    font-weight: bold;
+    font-size: 30px;
+    /* font-weight: bold; */
     text-align: center;
     margin-bottom: 30px;
 }
 
 .myorders-list-top {
     font-weight: bold;
-    font-size: 35px;
+    font-size: 40px;
     text-align: center;
     margin-top: 100px;
     margin-bottom: 50px;
@@ -36,6 +36,7 @@
     margin-right: 25%;
     margin-bottom: 50px;
     border-width: thin;
+    border-radius: 15px;
 }
 
 .order-x {
@@ -46,4 +47,7 @@
     transform: scale(1.1);
 }
 
-
+.myorders-empty {
+    text-align: center;
+    height: 70px;
+}

@@ -1,6 +1,6 @@
-/* body {
-    overflow: hidden;
-} */
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
 
 .top-welcome {
     width: 100%;
@@ -40,7 +40,8 @@
 }
 
 .order-button-left {
-    margin-right: 50px;
+    margin-right: 30px;
+    margin-left: 20px;
 }
 
 .order-button-right {
@@ -51,5 +52,29 @@
     margin-top: 10%;
     text-align: center;
 }
+
+.home-button {
+    padding: 12px 36px;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 18px;
+    letter-spacing: 2px;
+    /* border-radius: 40px; */
+    background: linear-gradient(90deg, #0162c8, #55e7fc);
+    cursor: pointer;
+}
+
+.home-signout-button {
+    padding: 8px 20px;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 18px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    background: linear-gradient(90deg, #755bea, #ff72c0);
+}
+
 
 

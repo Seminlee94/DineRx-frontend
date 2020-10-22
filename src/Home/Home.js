@@ -20,6 +20,7 @@ class Home extends React.Component {
         localStorage.removeItem("userId")
         localStorage.removeItem("name")
         localStorage.removeItem("diet")
+        localStorage.removeItem("department")
         localStorage.removeItem("allergies")
         localStorage.removeItem("room")
         localStorage.removeItem("hospital")
@@ -50,27 +51,30 @@ class Home extends React.Component {
 
                 <div className="order-buttons">
                     <div className="order-button-left">
-                        <Button 
+                        {/* <Button 
                             variant="contained" 
                             color="primary" 
                             href="/ordernow">
                             Order Now
-                        </Button>
+                        </Button> */}
+                        <a href="ordernow" className="home-button">Order Now</a>
                     </div>
 
                     <div className="order-button-right">
-                        <Button 
+                        {/* <Button 
                             variant="contained" 
                             color="primary" 
                             href="/orderahead"
                             style={{ marginLeft: "20" }}>
                             Order Ahead
-                        </Button>
+                        </Button> */}
+                        <a href="/orderahead" className="home-button">Order Ahead</a>
                     </div>
                 </div>
 
                 <div className="welcome-bottom">
-                    Not you or Room number? <Button onClick={this.logoutHandler} variant="contained" color="secondary" size="small">Sign Out</Button> and contact your nurse!
+                    Not you or Room number? <button onClick={this.logoutHandler} className="home-signout-button">Sign Out</button> and contact your nurse!
+                    {/* <Button onClick={this.logoutHandler} variant="contained" color="secondary" size="small">Sign Out</Button> and contact your nurse! */}
                 </div>
 
             </>

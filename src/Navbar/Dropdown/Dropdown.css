@@ -7,7 +7,7 @@
     text-align: start;
     background-color: #DCDCDCe6;
     z-index: 9999;
-
+    opacity: 1;
   }
 
   .dropdown-item {
@@ -21,6 +21,10 @@
     list-style: none;
     text-decoration: none;
     color: black;
+  }
+
+  .dropdown-item:nth-child(5) {
+    border-bottom-style: none;
   }
   
   
@@ -38,13 +42,14 @@
     
   }
 
-  .nav-dropdown-menu {
+  /* .dropdown-menu {
     text-align: center;
     height: auto;
-    width: auto;
+    width: 200px;
     color: black;
     background-color: #DCDCDC;
-    font-size: 1rem;
+    font-size: 20px;
     transform: translateY(10%);
     padding: 0 10px 0 10px;
-  }
+    opacity: 1; 
+  } */

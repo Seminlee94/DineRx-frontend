@@ -3,6 +3,7 @@ import "./Cart.css"
 import { Link } from "react-router-dom"
 import { connect } from 'react-redux'
 import { deleteUserFood } from '../../Redux/actions'
+import Button from '@material-ui/core/Button';
 
 class CartItem extends React.Component {
 
@@ -33,18 +34,30 @@ class CartItem extends React.Component {
                     {this.props.meal.food.name}
                 </div>
 
-                <div className="incart-meal-calories">
+                <div className="incart-meal-card-calories">
                     {filteredCalories[0].amount} {filteredCalories[0].title}
                 </div>
 
+                <Link to={{ pathname: `product/${meal_id}` }} className="cart-href">
+                    <Button
+                        type="submit"
+                        variant="outlined" 
+                        style={{ marginLeft: "65px" }}
+                        onClick={() => this.props.viewHandler(meal_id)}>
+                        View
+                    </Button>
+
+                </Link>
 
 
-                <div className="incart-buttons">
-                    <Link to={{ pathname: `product/${meal_id}` }}>
-                        <button onClick={() => this.props.viewHandler(meal_id)}>Edit</button>
-                    </Link>
-                    <button onClick={() => this.deleteUserFood(this.props.meal.id)}>Delete</button>
-                </div>
+                <Button
+                    type="submit"
+                    variant="outlined" 
+                    color="secondary" 
+                    onClick={() => this.deleteUserFood(this.props.meal.id)}>
+                    Remove
+                </Button>
+ 
 
             </div>
 

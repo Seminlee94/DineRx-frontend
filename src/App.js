@@ -9,6 +9,14 @@ import Navbar from './Navbar/Navbar'
 import Product from './Meal/Product'
 import Cart from './Order/Cart/Cart'
 import MyOrders from './Order/MyOrders'
+import DietSide from './Diet/DietSide'
+import DietRecommendation from './Diet/containers/DietRecommendation'
+import DietEducation from './Diet/containers/DietEducation'
+import DietAllergies from './Diet/containers/DietAllergies'
+import DietAbout from './Diet/containers/DietAbout'
+
+let userDiet = localStorage.getItem("diet")
+
 
 class App extends React.Component {
 
@@ -53,6 +61,37 @@ class App extends React.Component {
 
             <Route path="/diet">
               <Navbar/>
+              <DietSide />
+            </Route>
+
+            <Route exact path={`/about/${userDiet}`} >
+              <Navbar />
+              <DietAbout />
+            </Route>
+
+            <Route exact path="/allergies" >
+              <Navbar />
+              <DietAllergies />
+            </Route>
+
+            <Route exact path="/edu_diets" >
+              <Navbar />
+              <DietEducation />
+            </Route>
+
+            <Route exact path="/eat_healthy" >
+              <Navbar />
+              <DietSide />
+            </Route>
+
+            <Route exact path="/recommendation" >
+              <Navbar />
+              <DietRecommendation />
+            </Route>
+
+            <Route exact path="/qna" >
+              <Navbar />
+              <DietSide />
             </Route>
 
             <Route path="/cart" >

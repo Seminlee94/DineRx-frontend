@@ -110,11 +110,13 @@ class RightSideItem extends React.Component {
                             {this.userFoods("dinner")}
                         </div>
                     </div>
-                    <Link to={{ pathname: 'cart' }} >
+                    {/* <Link to={{ pathname: 'cart' }} > */}
+                    <a href="/cart" className="go-cart-href">
                         <div className="go-to-cart">
                             Go to Cart
                         </div>
-                    </Link>
+                    </a>
+                    {/* </Link> */}
 
 
                 </div>
@@ -135,25 +137,14 @@ class RightSideItem extends React.Component {
                         <div className="ordernow-meal-container">
                             {this.userFoodsNow()}
                         </div>
-                        {/* <div className={this.state.bclicked ? "contentBx-active" : "contentBx" } >
-                            <div className="content-container" onClick={this.breakfastClickHandler} style={{ background: "#CCCCCB" }}>
-                                <div className="label">
-                                    Breakfast
-                                </div>
-                                <div className="icon">
-                                    {this.state.bclicked ? <faIcons.IoIosArrowUp /> : <faIcons.IoIosArrowDown /> }
-                                </div>
-                            </div>
-                            <div className={this.state.bclicked ? "content-active" :  "content" } >
-                                {this.userFoods("breakfast")}
-                            </div>
-                        </div> */}
 
-                        <Link to={{ pathname: 'cart' }} >
+                        {/* <Link to={{ pathname: '/cart' }} > */}
+                        <a href="/cart">
                             <div className="go-to-cart">
                                 Go to Cart
                             </div>
-                        </Link>
+                        </a>
+                        {/* </Link> */}
                     </div>
                     
                 </>
