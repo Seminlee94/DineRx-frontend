@@ -1,68 +1,70 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Cart-In Mod4 Front-end
 
-## Available Scripts
+## About✅
+- I was inspired to do this project while working as a Nursing Assistant at trauma 1 hospital. I've seen many frustration in patients' eyes when they had to wait 10~15 minutes each time they call cafeteria to order their meal. With DineRx, patients now can order food online, and educate themselves about their diet as they order. 
 
-In the project directory, you can run:
+- Patients' diets can change several times throughout their stay in the hospital. If they have a surgery scheduled, they would be placed in NPO, which means no food is allowed until further notice. A lot of patients don't know what NPO is, as well as what other diets, such as Cariac diet or Low-Sodium diet. With DineRx, patients can learn about their diet in their free time and see more importance of eating healthy. 
 
-### `yarn start`
+## Included Features✅
+- User can log in using Google Map API/Auto Completion to search for their hospital.
+- User can add item to the cart, view more details of the item, which includes ingredients and nutritions of the item.
+- User can add items to either "order now", or "order ahead," where they can choose the date and time for the food to be delivered. 
+- User can view the ordered items
+- User can view the education page about their diet.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Versions...✅
+- npm 6.14.8
+- yarn 1.22.4
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Used...✅
+- Redux
+- Thunk
+- React Bootstrap
+- Spoonacular API
+- Postman
 
-### `yarn test`
+## Stretch goals✅
+- Have more allergy lists available
+- Work on the education page
+- styling of meal cards
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting started✅
+- Clone the repository
+- ```npm install``` or ```yarn install```
+- https://github.com/Seminlee94/mod4project-backend Clone this back end repository
+- Bundle install
+- ```brew install yarn``` to install yarn
+- ```rails db:migrate```
+- ```rails db:seed``` after uncommenting lines 19~26, and change the category & sub_category in item.rb lines 74 & 75 to the approriate categories.
+- ```npm start```
 
-### `yarn build`
+## 🚀🚀🚀Into the app 🚀🚀🚀
+#### Sign up with username, password, name, and address. 
+![](asset/demo/login2.gif)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Developers✅
+### Se Min Lee
+- email: seminlee2794@gmail.com
+- github: https://github.com/Seminlee94
+- linkedin: https://www.linkedin.com/in/se-min-lee-149188105/
+- medium: https://medium.com/@mlsml94
+- portfolio: https://seminlee94.github.io/semin/
 
-### `yarn eject`
+# Demo✅
+- https://youtu.be/djjivshj63w
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Please check out Se Min Lee's previous demos and projects.
+#### Demo
+- https://youtu.be/KqbWtAAxiPc << Cart-In
+- https://www.youtube.com/watch?v=sn4SqkDkPZQ&t=62s << Flatiron Consulting
+- https://www.youtube.com/watch?v=TVFmlVFrffw&t=5s << Shop N Cook
+- https://www.youtube.com/watch?v=58Dlbg41p70 << WALL-E
+#### Github Codes
+- https://github.com/Seminlee94/mod4project-react << Cart-In(Front end)
+- https://github.com/Seminlee94/mod4project-backend << Cart-In(Back end)
+- https://github.com/cdemarti/mod2_final_project << code for Flatiron Consulting
+- https://github.com/jakelozano94/ruby-project-guidelines-nyc01-seng-ft-071320 << code for Shop N Cook
+- https://github.com/abeciana1/wal-e-frontend << WALL-E(Front end)
+- https://github.com/abeciana1/wal-e-backend << WALL-E(Back end)
