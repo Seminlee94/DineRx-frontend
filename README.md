@@ -41,6 +41,13 @@
 ## 🚀🚀🚀Into the app 🚀🚀🚀
 #### Sign up with username, password, name, and address. 
 ![](src/asset/demo/login3.gif)
+![](src/asset/demo/detail.gif)
+![](src/asset/demo/tocart.gif)
+![](src/asset/demo/ordernow.gif)
+![](src/asset/demo/incart-2.gif)
+![](src/asset/demo/dietEducation.png)
+![](src/asset/demo/myorder.png)
+
 
 
 
