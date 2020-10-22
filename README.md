@@ -41,6 +41,7 @@
 ## 🚀🚀🚀Into the app 🚀🚀🚀
 #### Sign up with username, password, name, and address. 
 ![](./asset/demo/login2.gif)
+![](./asset/images/avo2.png)
 
 
 
