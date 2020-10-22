@@ -35,12 +35,12 @@
 - Bundle install
 - ```brew install yarn``` to install yarn
 - ```rails db:migrate```
-- ```rails db:seed``` after uncommenting lines 19~26, and change the category & sub_category in item.rb lines 74 & 75 to the approriate categories.
+- ```rails db:seed``` 
 - ```npm start```
 
 ## 🚀🚀🚀Into the app 🚀🚀🚀
 #### Sign up with username, password, name, and address. 
-![](asset/demo/login2.gif)
+![](./asset/demo/login2.gif)
 
 
 
