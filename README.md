@@ -42,23 +42,46 @@
 #### Sign in using hospital name, name, MRN number, and DOB
 ![](src/asset/demo/login3.gif)
 
-#### Once logged in, choose either order now or order ahead if you want to order for later.
+<br/>
+<br/>
+
+#### Once logged in, choose either order now or order ahead if you want to order for later. In this order now page, breakfast menu will be rendered between 7AM ~ 11AM, lunch between 12PM ~ 4PM, and dinner between 5PM ~ 9PM. In anything between, the page will render a CLOSED page.  
 ![](src/asset/demo/ordernow.gif)
 
-#### If you are curious about the details of the meal, please click on the view button and see the meal's ingredients and nutritions.
+<br/>
+<br/>
+
+#### If you are curious about the details of the meal, please click on the view button and see the meal's ingredients and nutritions. Future stretch goal includes deleting/adding ingredients to the user's meal. 
 ![](src/asset/demo/detail.gif)
 
-#### Add your choice of meal to the cart
+<br/>
+<br/>
+
+#### This is Order ahead page. Breakfast, Lunch, and Dinner are all in one page, so patients can easily scroll up and down, and use the button to scroll to the top. If the meal is for breakfast, breakfast button will be shown upon hover. If the meal is for lunch and dinner, lunch and dinner buttons will be shown. 
 ![](src/asset/demo/tocart.gif)
+
+<br/>
+<br/>
+
 
 #### Please check if you have any restrictions. If you have a restriction and your cart exceed the amount, it will give you a warning and you won't be able to submit the order form. In order to make an order, you need to meet the restriction criteria. 
 ![](src/asset/demo/incart-2.gif)
 
+<br/>
+<br/>
+
 #### You can check your orders and their status in this page.
 ![](src/asset/demo/myorder.png)
 
+<br/>
+<br/>
+
 #### You can see information about your diet. Educations for patients' diets can be very helpful for both patients and healthcare workers.  
 ![](src/asset/demo/dietEducation.png)
+
+<br/>
+<br/>
+<br/>
 
 
 #### Thank you for your interest! I really enjoyed working on this project because it has so many potentials. I will continue to expand this project in the near future.
