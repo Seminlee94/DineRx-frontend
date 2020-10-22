@@ -1,0 +1,31 @@
+[
+    {
+
+        "pancake": [
+            {
+                "url": "https://www.flaticon.com/svg/static/icons/svg/590/590710.svg" 
+            }
+        ],
+        "omelet": [
+            {
+                "url": "https://www.flaticon.com/svg/static/icons/svg/1814/1814182.svg"
+            }
+        ],
+        "egg": [
+            {
+                "url": "https://www.flaticon.com/svg/static/icons/svg/2030/2030008.svg"
+            }
+        ],
+        "bakery": [
+            {
+                "url": "https://www.flaticon.com/svg/static/icons/svg/3081/3081918.svg"
+            }
+        ],
+        "dessert": [
+            {
+                "url": "https://www.flaticon.com/svg/static/icons/svg/860/860919.svg"
+            }
+        ]
+
+    }
+]

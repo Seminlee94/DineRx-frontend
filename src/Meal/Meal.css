@@ -24,21 +24,50 @@
     border-bottom-style: solid;
 }
 
+.left-sidebar-breakfast {
+    width: 20%;
+    height: 500px;
+    border-right-style: solid;
+    border-right-width: thin;
+    background-color: #e9e9e9;
+    border-top-style: solid;
+    border-bottom-style: solid;
+}
+
+.left-sidebar-ul-breakfast {
+    list-style: none;
+    height: 100%;
+}
+
+.left-sidebar-ul-breakfast li {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.5rem;
+    height: 15%;
+    width: 100%;
+    cursor: pointer;
+}
+
+.left-sidebar-ul-breakfast li:nth-child(1) {
+    margin-top: 30px;
+}
+
 .left-sidebar-ul {
     list-style: none;
+    height: 100%;
 }
 
 .left-sidebar li {
     margin-bottom: 20px;
     text-align: center;
     font-size: 1.5rem;
-    height: 10%;
+    height: 11.5%;
     width: 100%;
     cursor: pointer;
 }
 
 .left-sidebar li:nth-child(1) {
-    margin-top: 15px;
+    margin-top: 30px;
 }
 
 .meal-card {
