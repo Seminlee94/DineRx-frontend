@@ -1,4 +1,4 @@
-# DineRx 
+# DineRx 💊💊💊
 
 ## About✅
 - I was inspired to do this project while working as a Nursing Assistant at trauma 1 hospital. I've seen many frustration in patients' eyes when they had to wait 10~15 minutes each time they call cafeteria to order their meal. With DineRx, patients now can order food online, and educate themselves about their diet as they order. 
@@ -31,7 +31,7 @@
 ## Getting started✅
 - Clone the repository
 - ```npm install``` or ```yarn install```
-- https://github.com/Seminlee94/mod4project-backend Clone this back end repository
+- https://github.com/Seminlee94/DineRx-backend Clone this back end repository
 - Bundle install
 - ```brew install yarn``` to install yarn
 - ```rails db:migrate```
