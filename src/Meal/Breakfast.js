@@ -1,97 +1,82 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import "./Meal.css"
 import MealCard from './Components/MealCard'
 import MealCardNow from './Components/MealCardNow'
 import { connect } from 'react-redux'
 import { getMeal } from '../Redux/actions'
 import FilteredMain from './Containers/FilteredMain'
-// import IconCard from "./Components/IconCard.json"
-// import { Icons } from '@material-ui/core';
 
 let userDiet = localStorage.getItem("diet")
 
-class Breakfast extends React.Component {
-
-    state = {
-        clicked: false,
-        filteredCategory: []
-    }
+function Breakfast(props) {
     
-    componentDidMount(){
-        this.props.fetchMeals(userDiet)
-    }
-    
-    shopSideBarClicker = (category) => {
-        let filteredCategory = this.props.meals.filter(el => el.category === category)
-        this.setState(() => ({
-          filteredCategory: [...filteredCategory],
-          clicked: true,
-        }))
+    const [clicked, setClicked] = useState(false)
+    const [filteredCategory, setFilteredCategory] = useState([filteredArray.map(el => el.category)])
+
+    useEffect(() => {
+        props.fetchMeals(userDiet)
+    })
+
+    const shopSideBarClicker = (category) => {
+        let filteredCategory = props.meals.filter(el => el.category === category)
+        setFilteredCategory([...filteredCategory])
+        setClicked(true)
     }
 
 
-    breakfast = () => {
-        let newArray = this.props.meals
+    const breakfast = () => {
+        let newArray = props.meals
         let filteredArray = newArray.filter(el => el.breakfast === true)
-        if(this.props.schedule==="order_ahead"){
+        if(props.schedule==="order_ahead"){
             return filteredArray.map((el) => (<MealCard 
                     key={el.id} 
                     meal={el} 
-                    viewHandler={this.props.viewHandler}
+                    viewHandler={props.viewHandler}
                 />))
         } else {
             return filteredArray.map((el) => (<MealCardNow 
-                key={el.id} 
-                meal={el} 
-                viewHandler={this.props.viewHandler}
-            />))
+                    key={el.id} 
+                    meal={el} 
+                    viewHandler={props.viewHandler}
+                />))
         }
     }
 
-    render() {
-        let filteredArray = this.props.meals.filter(el => el.breakfast === true)
-        let filteredCategory = filteredArray.map(el => el.category)
-        let uniqueCategory = [...new Set(filteredCategory)]
+    let filteredArray = props.meals.filter(el => el.breakfast === true)
+    let uniqueCategory = [...new Set(filteredCategory)]
 
-
-
-        
-        return (
-            <div className="order-ahead-container">
-                <div className="left-sidebar-breakfast">
-                    <ul className="left-sidebar-ul-breakfast">
-                        {uniqueCategory.map((item, index) => {
-                            return (
-                                <li 
-                                    key={index}
-                                    onClick={()=> this.shopSideBarClicker(item)}
-                                >
-                                    {item}
-                                </li>
-                            )
-                        } )}
-                    </ul>
-                </div>
-
-                   {this.state.clicked ? 
-                    
-                    <FilteredMain meal={this.state.filteredCategory} viewHandler={this.props.viewHandler} />
-
-                    :
-                    
-                    <div className="breakfast-container">
-                        {this.breakfast()}
-                    </div>
-        
-                    }     
-
-
+    return (
+        <div className="order-ahead-container">
+            <div className="left-sidebar-breakfast">
+                <ul className="left-sidebar-ul-breakfast">
+                    {uniqueCategory.map((item, index) => {
+                        return (
+                            <li 
+                                key={index}
+                                onClick={()=> shopSideBarClicker(item)}
+                            >
+                                {item}
+                            </li>
+                        )
+                    } )}
+                </ul>
             </div>
 
-    
-        )
-    }
+            {clicked ? 
+            
+            <FilteredMain meal={filteredCategory} viewHandler={props.viewHandler} />
+
+            :
+            
+            <div className="breakfast-container">
+                {breakfast()}
+            </div>
+
+            }     
+        </div>
+    )
 }
+
 
 const mapStateToProps = (state) => {
     return { meals: state.meals }

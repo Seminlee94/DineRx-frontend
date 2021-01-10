@@ -1,61 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import "./Meal.css"
 import MealCard from './Components/MealCard'
 import MealCardNow from './Components/MealCardNow'
 import { connect } from 'react-redux'
 import { getMeal } from '../Redux/actions'
 import FilteredMain from './Containers/FilteredMain'
-// import LeftSidebar from './Containers/LeftSidebar'
 
 let userDiet = localStorage.getItem("diet")
 
-class Dinner extends React.Component {
+function Dinner(props) {
 
-    state = {
-        clicked: false,
-        filteredCategory: []
-    }
+    const [clicked, setClicked] = useState(false)
+    const [filteredCategory, setFilteredCategory] = useState(filteredArray.map(el => el.category))
 
-
-    componentDidMount(){
-        this.props.fetchMeals(userDiet)
-    }
+    useEffect(() => {
+        props.fetchMeals(userDiet)
+    })
     
-    shopSideBarClicker = (category) => {
-        let filteredCategory = this.props.meals.filter(el => el.category === category)
-        this.setState(() => ({
-          filteredCategory: [...filteredCategory],
-          clicked: true,
-        }))
+    const shopSideBarClicker = (category) => {
+        let filteredCategory = props.meals.filter(el => el.category === category)
+        setFilteredCategory([...filteredCategory])
+        setClicked(true)
     }
 
 
-    dinnerAhead = () => {
-        let newArray = this.props.meals
+    const dinnerAhead = () => {
+        let newArray = props.meals
         let filteredArray = newArray.filter(el => el.dinner === true)
-        return filteredArray.map(el => <MealCard key={el.id} meal={el} viewHandler={this.props.viewHandler} schedule={this.props.schedule} />)
+        return filteredArray.map(el => <MealCard key={el.id} meal={el} viewHandler={props.viewHandler} schedule={props.schedule} />)
     }
 
-    dinnerNow = () => {
-        let newArray = this.props.meals
+    const dinnerNow = () => {
+        let newArray = props.meals
         let filteredArray = newArray.filter(el => el.dinner === true)
-        return filteredArray.map(el => <MealCardNow key={el.id} meal={el} viewHandler={this.props.viewHandler} schedule={this.props.schedule} />)
+        return filteredArray.map(el => <MealCardNow key={el.id} meal={el} viewHandler={props.viewHandler} schedule={props.schedule} />)
     }
 
-
-    // submitHandler = (e) => {
-    //     e.preventDefault()
-    //     this.props.submitHandler
-    // }
-
-    render() {
-
-    let filteredArray = this.props.meals.filter(el => el.dinner === true)
-    let filteredCategory = filteredArray.map(el => el.category)
+    let filteredArray = props.meals.filter(el => el.dinner === true)
     let uniqueCategory = [...new Set(filteredCategory)]
     
     return (
-
 
         <div className="order-ahead-container">
             <div className="left-sidebar">
@@ -64,7 +48,7 @@ class Dinner extends React.Component {
                         return (
                             <li 
                                 key={index}
-                                onClick={()=> this.shopSideBarClicker(item)}
+                                onClick={()=> shopSideBarClicker(item)}
                             >
                                 {item}
                             </li>
@@ -73,40 +57,34 @@ class Dinner extends React.Component {
                 </ul>
             </div>
 
-                {this.state.clicked ? (
-    
-                    <>
-                
-                        <FilteredMain meal={this.state.filteredCategory} viewHandler={this.props.viewHandler} />
-                    </>
+            {clicked ? (
 
-                ) :
+                <>
+            
+                    <FilteredMain meal={filteredCategory} viewHandler={props.viewHandler} />
+                </>
 
-                    <div className="breakfast-container">
-                        {this.props.schedule === "order_ahead" 
-                        
-                        ?
-                        
-                        this.dinnerAhead()
+            ) :
 
-                        :
-
-                        this.dinnerNow()
+                <div className="breakfast-container">
+                    {props.schedule === "order_ahead" 
                     
-                    }
+                    ?
+                    
+                    dinnerAhead()
 
-                    </div>
+                    :
 
-    
+                    dinnerNow()
+                
                 }
 
-
+                </div>
+            }
         </div>
-
-    
-        )
-    }
+    )
 }
+
 
 ///read action
 
