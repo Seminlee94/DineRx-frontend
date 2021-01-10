@@ -73,6 +73,7 @@ export class Login extends Component {
                 localStorage.setItem("room", data.user.room)
                 localStorage.setItem("hospital", data.user.hospital.name)
                 localStorage.setItem("restriction", data.user.restrictions)
+                // eslint-disable-next-line react/prop-types
                 this.setState( () => ({ user: data.user }), () => this.props.history.push('/'))
             })
     }
@@ -145,7 +146,7 @@ export class Login extends Component {
                                         className: 'location-search-input',
                                         })}
                                     />
-                                        <button className="search-icon" onClick={this.showNameForm}><i class="material-icons">search </i></button>
+                                        <button className="search-icon" onClick={this.showNameForm}><i className="material-icons">search </i></button>
                                 </div>
                                 <div className="dropdown-container">
                                     {loading && <div>Loading...</div>}
@@ -155,9 +156,9 @@ export class Login extends Component {
                                         ? { backgroundColor: '#42a5f5', cursor: 'pointer' }
                                         : { backgroundColor: '#ffffff', cursor: 'pointer' };
                                     return (
+                                        // eslint-disable-next-line react/jsx-key
                                         <div className="input-suggestion"
-                                            {...getSuggestionItemProps(suggestion, {style,})}
-                                        >
+                                            { ...getSuggestionItemProps(suggestion, {style}) }>
                                             <i className="material-icons">location_on  </i> <span>{suggestion.description}</span>
                                         </div>
                                     );

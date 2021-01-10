@@ -5,8 +5,8 @@ import MealCardNow from './Components/MealCardNow'
 import { connect } from 'react-redux'
 import { getMeal } from '../Redux/actions'
 import FilteredMain from './Containers/FilteredMain'
-import IconCard from "./Components/IconCard.json"
-import { Icons } from '@material-ui/core';
+// import IconCard from "./Components/IconCard.json"
+// import { Icons } from '@material-ui/core';
 
 let userDiet = localStorage.getItem("diet")
 

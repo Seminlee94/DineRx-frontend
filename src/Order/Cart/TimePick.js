@@ -10,7 +10,6 @@ function TimePick(props) {
     let user_id = props.meal.map(obj => obj.user_id)[0]
     let meal_type = props.type
     let meal_schedule = props.schedule
-    let date = new Date()
     const options = {  weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
 
 
@@ -22,17 +21,16 @@ function TimePick(props) {
             "Accepts": "application/json"
         },
             body: JSON.stringify({
-            time: time,
-            food_id: props.meal.map(obj => obj.food_id),
-            user_id: user_id,
-            order_id: order_id
+                time: time,
+                food_id: props.meal.map(obj => obj.food_id),
+                user_id: user_id,
+                order_id: order_id
         })
     })
         .then(res => res.json())
         .then(window.alert("Order has been successful!"))
     }
     
-    console.log(props.schedule)
     return (
         <>
             
@@ -69,8 +67,6 @@ function TimePick(props) {
 
             }}>
 
-                
-
                 {({ handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
 
@@ -89,7 +85,6 @@ function TimePick(props) {
                             style={{ marginLeft: "20" }}>
                             Submit
                         </Button>
-                        {/* <button type="submit" className="form-submit">Submit</button> */}
 
 
                     </form>

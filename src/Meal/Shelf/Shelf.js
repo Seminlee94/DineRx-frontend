@@ -6,12 +6,13 @@ class Shelf extends React.Component {
   state = {
     displayIndex: 0,
   };
-  next = (event) => {
+
+  next = () => {
     this.setState({
       displayIndex: this.state.displayIndex + 6,
     });
   };
-  prev = (event) => {
+  prev = () => {
     this.setState({
       displayIndex: this.state.displayIndex - 6,
     });

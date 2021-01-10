@@ -1,8 +1,9 @@
-import { $CombinedState } from "redux"
+// import { $CombinedState } from "redux"
 
 export const addMeal = (mealObj) => ({ type: "add_meal", payload: mealObj })
 
-export const getMeal = (diet) => {
+// export const getMeal = (diet) => {
+export const getMeal = () => {
     // console.log(diet.toLowerCase())
     // let diet_lowercase = diet.toLowerCase()
     return function(dispatch){
