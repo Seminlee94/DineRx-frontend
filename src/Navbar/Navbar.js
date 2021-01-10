@@ -10,9 +10,6 @@ import DietDropdown from './Dropdown/DietDropdown'
 import NameDropdown from './Dropdown/NameDropdown'
 import 'rsuite/lib/styles/index.less'
 
-
-
-
 function Navbar() {
 
   const [dropdown, setDropdown] = useState(false);

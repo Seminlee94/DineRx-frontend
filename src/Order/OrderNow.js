@@ -19,6 +19,7 @@ function OrderNow(props) {
     const promptHandler = () => setattentionClicked(!attentionClicked);
 
 
+    // eslint-disable-next-line no-unused-vars
     const [Ctime, setCtime] = useState(time)
 
 
@@ -177,7 +178,7 @@ function OrderNow(props) {
                                     </div>
                                 </div>
                                 <div className="timeout-prompt">
-                                    The cafeteria is closed at this hour. Would you like to order for tomorrow's meal? If so, please press Shop Ahead
+                                    The cafeteria is closed at this hour. Would you like to order for tomorrow`s meal? If so, please press Shop Ahead
                                 </div>
 
 

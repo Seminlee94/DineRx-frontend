@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from "react-router-dom"
 import { connect } from 'react-redux'
 import { getUserFood } from '../../Redux/actions'
 import RightSideItemCard from './RightSideItemCard'

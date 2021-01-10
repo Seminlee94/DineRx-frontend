@@ -67,6 +67,8 @@ class Cart extends React.Component {
         let food_calories_amounts = food_calories_filter.map(calorie => parseInt(calorie.amount))
         let food_calories_sum = food_calories_amounts.reduce((a,b) => a+b, 0)
 
+        console.log(user_restriction)
+
         let restriction_calorie = user_restriction.split(" ")[2]
         let calorie_exceed = food_calories_sum > restriction_calorie
 
@@ -202,8 +204,8 @@ class Cart extends React.Component {
                                                     Caution
                                                 </div>
                                                 <div className="incart-exceed-center">
-                                                    You have <span style={calorie_exceed ? {color: "red"} :  {color: "black"} }>{food_calories_sum}</span> calories in the cart. 
-                                                    You can't submit orders until you meet the restricted calorie amount.
+                                                    You have <span style={calorie_exceed ? {color: "red"} :  {color: "black"} }>{food_calories_sum}</span> calories in the cart.
+                                                    You can`t submit orders until you meet the restricted calorie amount.
                                                 </div>
                                             </div> 
 
@@ -285,7 +287,7 @@ class Cart extends React.Component {
                                                     </div>
                                                     <div className="incart-exceed-center">
                                                         You have <span style={calorie_exceed ? {color: "red"} :  {color: "black"} }>{food_calories_sum}</span> calories in the cart. 
-                                                        You can't submit orders until you meet the restricted calorie amount.
+                                                        You can`t submit orders until you meet the restricted calorie amount.
                                                     </div>
                                                 </div> 
                                                 : 
@@ -372,7 +374,7 @@ class Cart extends React.Component {
                                                         </div>
                                                         <div className="incart-exceed-center">
                                                             You have <span style={calorie_exceed ? {color: "red"} :  {color: "black"} }>{food_calories_sum}</span> calories in the cart. 
-                                                            You can't submit orders until you meet the restricted calorie amount.
+                                                            You can`t submit orders until you meet the restricted calorie amount.
                                                         </div>
                                                     </div> 
   

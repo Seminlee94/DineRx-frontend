@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import './OrderAhead.css'
 import Breakfast from "../Meal/Breakfast.js"
 import Lunch from "../Meal/Lunch.js"
@@ -6,85 +6,76 @@ import Dinner from "../Meal/Dinner.js"
 import {FaArrowCircleUp} from 'react-icons/fa';
 import RightSidebar from './RightSidebar'
 
+function OrderAhead(props) {
 
-class OrderAhead extends React.Component {
+    const [showScroll, setShowScroll] = useState(false)
 
-    state = {
-        showScroll: false,
-    }
-    
-
-    checkScrollTop = () => {    
+    const checkScrollTop = () => {    
         if (window.pageYOffset > 400){
-            this.setState({ showScroll: true })
+            setShowScroll(true)
         } else if (window.pageYOffset <= 400){
-           this.setState({ showScroll: false })
+            setShowScroll(false)
         }  
      };
 
 
-    scrollTop = () =>{
-        window.scrollTo({top: 0, behavior: 'smooth'});
+    const scrollTop = () => {
+        setShowScroll(window.scrollTo({top: 0, behavior: 'smooth'}))
     };
         
-    componentDidMount() {
-        window.addEventListener('scroll', this.checkScrollTop);
-    }
+    useEffect(() => {
+        window.addEventListener('scroll', checkScrollTop);
+    })
 
-    render() {
-        return (
-            <>
-                <FaArrowCircleUp 
-                    className="scrollTop" 
-                    onClick={this.scrollTop} 
-                    style={{height: 40, display: this.state.showScroll ? 'flex' : 'none'}}
-                />
-                <div className="meal-types">
-                    <a href="#breakfast-meal" className="meal" >Breakfast</a>
-                        
-                    <a href="#lunch-meal" className="meal" >Lunch</a>
-                        
-                    <a href="#dinner-meal" className="meal" >Dinner</a>
+    return (
+        <>
+            <FaArrowCircleUp 
+                className="scrollTop" 
+                onClick={scrollTop} 
+                style={{height: 40, display: showScroll ? 'flex' : 'none'}}
+            />
+            <div className="meal-types">
+                <a href="#breakfast-meal" className="meal" >Breakfast</a>
                     
-                </div>
+                <a href="#lunch-meal" className="meal" >Lunch</a>
+                    
+                <a href="#dinner-meal" className="meal" >Dinner</a>
+                
+            </div>
 
-                <div className="order-ahead-page">
-                    <section>
-                        <div id="breakfast-meal">
-                            <>
-                                <div className="meal-type">
-                                    Breakfast
-                                </div>
-                                <Breakfast viewHandler={this.props.viewHandler} schedule="order_ahead" />
-                            </>
-                        </div>
-                        <div id="lunch-meal">
-                            <>
-                                <div className="meal-type">
-                                    Lunch
-                                </div>
-                                <Lunch viewHandler={this.props.viewHandler} schedule="order_ahead" />
-                            </>
-                        </div>
-                        <div id="dinner-meal">
-                            <>
-                                <div className="meal-type">
-                                    Dinner
-                                </div>
-                                <Dinner viewHandler={this.props.viewHandler} schedule="order_ahead" />
-                            </>
-                        </div>
-                    </section>
+            <div className="order-ahead-page">
+                <section>
+                    <div id="breakfast-meal">
+                        <>
+                            <div className="meal-type">
+                                Breakfast
+                            </div>
+                            <Breakfast viewHandler={props.viewHandler} schedule="order_ahead" />
+                        </>
+                    </div>
+                    <div id="lunch-meal">
+                        <>
+                            <div className="meal-type">
+                                Lunch
+                            </div>
+                            <Lunch viewHandler={props.viewHandler} schedule="order_ahead" />
+                        </>
+                    </div>
+                    <div id="dinner-meal">
+                        <>
+                            <div className="meal-type">
+                                Dinner
+                            </div>
+                            <Dinner viewHandler={props.viewHandler} schedule="order_ahead" />
+                        </>
+                    </div>
+                </section>
 
-                </div>
+            </div>
 
-                <RightSidebar schedule="order_ahead"/>
-
-
-            </>
-        )
-    }
-
+            <RightSidebar schedule="order_ahead"/>
+        </>
+    )
 }
 
 

@@ -1,34 +1,28 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './OrderAhead.css'
 import RightSideItem from './Cart/RightSideItem'
 
-class RightSidebarNow extends React.Component {
+function RightSidebarNow(props) {
 
-    state = {
-        showSide: false
-    }
+    const [showSide, setShowSide] = useState(false)
 
-    checkScrollTop = () => {    
+    const checkScrollTop = () => {    
         if (window.pageYOffset > 600){
-            this.setState({ showSide: true })
+            setShowSide(true)
         } else if (window.pageYOffset <= 600){
-           this.setState({ showSide: false })
+            setShowSide(false)
         }  
-     };
+    };
 
-    componentDidMount() {
-        window.addEventListener('scroll', this.checkScrollTop)
-    }
+    useEffect(() => {
+        window.addEventListener('scroll', checkScrollTop)
+    })
 
-    render() {
-        
-        return(
-            <div className={this.state.showSide ? "right-sidebar" : "right-sidebar-inactive"}>
-                <RightSideItem schedule={this.props.schedule} />
-            </div>
-
-        )
-    }
+    return (
+        <div className={showSide ? "right-sidebar" : "right-sidebar-inactive"}>
+            <RightSideItem schedule={props.schedule} />
+        </div>
+    )
 }
 
 
