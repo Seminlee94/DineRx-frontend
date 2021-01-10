@@ -3,8 +3,10 @@ import './home.css'
 import nyc from '../asset/images/nyc.jpeg'
 import { withRouter } from "react-router-dom"
 
-class Home extends React.Component {
-    logoutHandler = () => {
+// class Home extends React.Component {
+function Home(props) {
+
+    const logoutHandler = () => {
         localStorage.clear()
         localStorage.removeItem("token")
         localStorage.removeItem("user")
@@ -17,47 +19,45 @@ class Home extends React.Component {
         localStorage.removeItem("hospital")
         localStorage.removeItem("restriction")
         // eslint-disable-next-line react/prop-types
-        this.props.history.push('/login')
+        props.history.push('/login')
     };
-
-    render(){
         
-        let userName = localStorage.getItem("name")
-        let userHospital = localStorage.getItem("hospital")
+    let userName = localStorage.getItem("name")
+    let userHospital = localStorage.getItem("hospital")
 
-        return (
+    return (
 
-            <>
-                <div className="top-welcome">
-                    <img 
-                        src={nyc}
-                        style={{ width: "100%", height: "30vh" }}
-                        alt="city-img" />
-                </div>
-                <div className="welcome-city">
-                    New York
-                </div>
-                <div className="welcome-hospital">
-                    Welcome to {userHospital}, {userName} 
-                </div>
+        <>
+            <div className="top-welcome">
+                <img 
+                    src={nyc}
+                    style={{ width: "100%", height: "30vh" }}
+                    alt="city-img" />
+            </div>
+            <div className="welcome-city">
+                New York
+            </div>
+            <div className="welcome-hospital">
+                Welcome to {userHospital}, {userName} 
+            </div>
 
-                <div className="order-buttons">
-                    <div className="order-button-left">
-                        <a href="ordernow" className="home-button">Order Now</a>
-                    </div>
-
-                    <div className="order-button-right">
-                        <a href="/orderahead" className="home-button">Order Ahead</a>
-                    </div>
+            <div className="order-buttons">
+                <div className="order-button-left">
+                    <a href="ordernow" className="home-button">Order Now</a>
                 </div>
 
-                <div className="welcome-bottom">
-                    Not you or Room number? <button onClick={this.logoutHandler} className="home-signout-button">Sign Out</button> and contact your nurse!
+                <div className="order-button-right">
+                    <a href="/orderahead" className="home-button">Order Ahead</a>
                 </div>
-            </>
-        )
-    }
+            </div>
+
+            <div className="welcome-bottom">
+                Not you or Room number? <button onClick={logoutHandler} className="home-signout-button">Sign Out</button> and contact your nurse!
+            </div>
+        </>
+    )
 }
+
 
 
 export default withRouter(Home)

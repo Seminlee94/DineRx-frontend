@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../Meal.css'
 import { Link } from "react-router-dom"
 import { connect } from 'react-redux'
@@ -6,88 +6,78 @@ import { addUserFood } from '../../Redux/actions'
 
 let user_id = localStorage.getItem("userId")
 
-class MealCard extends React.Component {
+function MealCard(props) {
 
-    state = {
-        toggleState: false,
-        mouseState: false,
-    }
+    const [mouseState, setMouseState] = useState(false)
 
-    addUserFood(meal_id) {
+    const addUserFood = (meal_id) => {
         // let userFoodObj = {food_id: parseInt(meal_id), user_id: parseInt(user_id), meal_types: meal_type, meal_schedule: "order_ahead" }
         let userFoodObj = {food_id: parseInt(meal_id), user_id: parseInt(user_id), meal_schedule: "order_now" }
-        this.props.addUserFood(userFoodObj)
+        props.addUserFood(userFoodObj)
     }
 
-    toggle = () => {
-        this.setState({ toggleState: !this.state.toggleState })
+    const mouseOverHandler = () => {
+        setMouseState(true)
     }
 
-    mouseOverHandler = () => {
-        this.setState({ mouseState: true })
+    const mouseLeaveHandler = () => {
+        setMouseState(false)
     }
 
-    mouseLeaveHandler = () => {
-        this.setState({ mouseState: false })
-    }
+        let meal_id = props.meal.id
 
-    render() {
-        let meal_id = this.props.meal.id
+    return(
 
-        return(
-    
-            <div className="meal-card" >
+        <div className="meal-card" >
 
-                <div className="box">
+            <div className="box">
 
-                    <img className="meal-card-image" src={this.props.meal.image} alt={this.props.meal.name} style={{ height:"220px", width: "200px" }} onMouseOver={this.mouseOverHandler}/>
-                    <div className={this.state.mouseState ? "overlay" : "overlay-inactive"} onMouseLeave={this.mouseLeaveHandler}>
-                        <div className="text" >
+                <img className="meal-card-image" src={props.meal.image} alt={props.meal.name} style={{ height:"220px", width: "200px" }} onMouseOver={mouseOverHandler}/>
+                <div className={mouseState ? "overlay" : "overlay-inactive"} onMouseLeave={mouseLeaveHandler}>
+                    <div className="text" >
 
-                            <button className="breakfast-button" onClick={() => this.addUserFood(meal_id)}>Add Cart</button>
-                            
-                            {/* {(this.props.meal.breakfast && this.props.meal.lunch===false && this.props.meal.dinner===false) ?
-                            
-                            <button className="breakfast-button" onClick={() => this.addUserFood(meal_id, "breakfast")}>Add Cart</button>
-                            :
+                        <button className="breakfast-button" onClick={() => addUserFood(meal_id)}>Add Cart</button>
+                        
+                        {/* {(props.meal.breakfast && props.meal.lunch===false && props.meal.dinner===false) ?
+                        
+                        <button className="breakfast-button" onClick={() => addUserFood(meal_id, "breakfast")}>Add Cart</button>
+                        :
 
-                            null
-                            }
-                            
-                            {(this.props.meal.lunch && this.props.meal.dinner) ?
-                            <>
-                            <button className="lunch-button" onClick={() => this.addUserFood(meal_id, "lunch")}>Add Lunch</button>
-                            <button className="dinner-button" onClick={() => this.addUserFood(meal_id, "dinner")}>Add Dinner</button>
-                            </>
-                            :
-                            null
-                            } */}
+                        null
+                        }
+                        
+                        {(props.meal.lunch && props.meal.dinner) ?
+                        <>
+                        <button className="lunch-button" onClick={() => addUserFood(meal_id, "lunch")}>Add Lunch</button>
+                        <button className="dinner-button" onClick={() => addUserFood(meal_id, "dinner")}>Add Dinner</button>
+                        </>
+                        :
+                        null
+                        } */}
 
 
-                            <Link to={{ pathname: `product/${meal_id}`,
-                                state: { id: meal_id }
-                            }} >
-                            <button className="view-button" onClick={() => this.props.viewHandler(meal_id)}>View Detail</button>
-                                </Link>    
-                        </div>
+                        <Link to={{ pathname: `product/${meal_id}`,
+                            state: { id: meal_id }
+                        }} >
+                        <button className="view-button" onClick={() => props.viewHandler(meal_id)}>View Detail</button>
+                            </Link>    
                     </div>
                 </div>
-
-
-            
-                <div className="meal-card-container">
-                    <div className="meal-card-name">
-                        {this.props.meal.name}
-                    </div>
-                </div>
-
             </div>
-    
-    
-    
-        )
-    }
 
+
+        
+            <div className="meal-card-container">
+                <div className="meal-card-name">
+                    {props.meal.name}
+                </div>
+            </div>
+
+        </div>
+
+
+
+    )
 }
         
 const mapStateToProps = (state) => {

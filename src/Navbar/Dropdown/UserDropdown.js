@@ -1,17 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Dropdown.css'
 
-class UserDropdown extends React.Component {
+function UserDropdown(props) {
 
-    state = {
-        click: false
+    const [click, setClick] = useState(false)
+
+    const handleClick = () => {
+        setClick(!click)
     }
 
-    handleClick = () => {
-        this.setState=({ click: !this.state.click })
-    }
-
-    logoutHandler = () => {
+    const logoutHandler = () => {
         localStorage.clear()
         localStorage.removeItem("token")
         localStorage.removeItem("user")
@@ -23,38 +21,32 @@ class UserDropdown extends React.Component {
         localStorage.removeItem("hospital")
         localStorage.removeItem("restriction")
         localStorage.removeItem("department")
-        this.props.history.push('/login')
+        props.history.push('/login')
       };
 
 
-    render(){
+    return (
+        <div onClick={()=>handleClick} className={click ? 'dropdown-menu clicked' : 'dropdown-menu'}>
 
-        return (
-            <>
-
-                    <div onClick={()=>this.handleClick} className={this.state.click ? 'dropdown-menu clicked' : 'dropdown-menu'}>
-
-                        <div className="dropdown-item">
-                            <a className="dropdown-list" href="/diet" onClick={()=>this.handleClick}>About my Diet</a>
-                        </div>
-                        <div className="dropdown-item">
-                            <a className="dropdown-list" href="/cart" onClick={()=>this.handleClick}>My Cart</a>
-                        </div>
-                        <div className="dropdown-item">
-                            <a className="dropdown-list" href="/myorders" onClick={()=>this.handleClick}>My Orders</a>
-                        </div>
-                        <div className="dropdown-item">
-                            <a className="dropdown-list" href="/previousorders" onClick={()=>this.handleClick}>Previous Orders</a>
-                        </div>
-                        <div className="dropdown-item">
-                            <a className="dropdown-list" href="/login" onClick={this.logoutHandler}>Sign Out</a>
-                        </div>
-                    </div>
-            </>
-        )
-    }
-
-
+            <div className="dropdown-item">
+                <a className="dropdown-list" href="/diet" onClick={()=>handleClick}>About my Diet</a>
+            </div>
+            <div className="dropdown-item">
+                <a className="dropdown-list" href="/cart" onClick={()=>handleClick}>My Cart</a>
+            </div>
+            <div className="dropdown-item">
+                <a className="dropdown-list" href="/myorders" onClick={()=>handleClick}>My Orders</a>
+            </div>
+            <div className="dropdown-item">
+                <a className="dropdown-list" href="/previousorders" onClick={()=>handleClick}>Previous Orders</a>
+            </div>
+            <div className="dropdown-item">
+                <a className="dropdown-list" href="/login" onClick={logoutHandler}>Sign Out</a>
+            </div>
+        </div>
+    )
 }
+
+
 
 export default UserDropdown

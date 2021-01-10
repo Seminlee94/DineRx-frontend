@@ -2,27 +2,17 @@ import React from 'react'
 import NutritionCard from '../Components/NutritionCard'
 import "../Meal.css"
 
-class Nutrition extends React.Component{
+function Nutrition(props) {
 
-
-    nutritions = () => {
-        return this.props.nutritions.map(el => <NutritionCard key={el.id} nutrition={el} />)
+    const nutritions = () => {
+        return props.nutritions.map(el => <NutritionCard key={el.id} nutrition={el} />)
     }
 
-
-    
-    
-    
-    
-    render(){
-        return (
-                <div className="nutrition-container">
-                    {this.nutritions()}
-                </div>
-        )
-    }
-
+    return (
+            <div className="nutrition-container">
+                {nutritions()}
+            </div>
+    )
 }
-
 
 export default Nutrition

@@ -1,26 +1,18 @@
 import React from 'react'
 import MealCard from '../Components/MealCard'
 
-
-class FilteredMain extends React.Component {
-
-    
-
+function FilteredMain(props) {
         
-    breakfast = () => {
-        return this.props.meal.map(el => <MealCard key={el.id} meal={el} viewHandler={this.props.viewHandler}/>)
+    const breakfast = () => {
+        return props.meal.map(el => <MealCard key={el.id} meal={el} viewHandler={props.viewHandler}/>)
     }
 
+    return (
+        <div className="breakfast-container">
+            {breakfast()}
+        </div>
 
-    render() {
-
-        return (
-            <div className="breakfast-container">
-                {this.breakfast()}
-            </div>
-    
-        )
-    }
+    )
 }
 
 export default FilteredMain
