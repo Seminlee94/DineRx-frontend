@@ -11,7 +11,6 @@ let userDiet = localStorage.getItem("diet")
 function Breakfast(props) {
     
     const [clicked, setClicked] = useState(false)
-    const [filteredCategory, setFilteredCategory] = useState([filteredArray.map(el => el.category)])
 
     useEffect(() => {
         props.fetchMeals(userDiet)
@@ -43,6 +42,7 @@ function Breakfast(props) {
     }
 
     let filteredArray = props.meals.filter(el => el.breakfast === true)
+    const [filteredCategory, setFilteredCategory] = useState([filteredArray.map(el => el.category)])
     let uniqueCategory = [...new Set(filteredCategory)]
 
     return (
