@@ -1,0 +1,53 @@
+@import '../styles/utils/mixins';
+
+.welcome {
+    &__top {
+        height: 30vh;
+        z-index: 0;
+        position: absolute;
+        @include widthAndAlign;
+    }
+
+    &__city {
+        position: relative;
+        z-index: 1;
+        height: 80%;
+        font-size: 300px;
+        font-weight: bold;
+        color: wheat;
+        opacity: .75;
+        font-family: Arial, Helvetica, sans-serif;
+        @include widthAndAlign;
+    }
+
+    &__hospital {
+        margin-top: 1%;
+        font-size: 70px;
+        font-family: Arial, Helvetica, sans-serif;
+        @include widthAndAlign;
+    }
+
+    &__buttons {
+        width: 100%;
+        margin-top: 10%;
+        display: flex;
+        justify-content: center;
+
+        &__order {
+            margin-right: 30px;
+            margin-left: 20px;
+            @include buttonStyle;
+            background: linear-gradient(90deg, #0162c8, #55e7fc);
+        }
+    }
+
+    &__bottom {
+        margin-top: 10%;
+        text-align: center;
+    }
+
+    &__signout {
+        @include buttonStyle;
+        background: linear-gradient(90deg, #755bea, #ff72c0);
+    }
+}

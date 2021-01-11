@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"
 // import './home.css'
 import nyc from '../asset/images/nyc.jpeg'
 import { withRouter } from "react-router-dom"
@@ -33,18 +34,22 @@ function Home(props) {
                 Welcome to New York Hospital
             </div>
 
-            <div className="order-buttons">
-                <div className="order-buttons__left">
-                    <a href="ordernow">Order Now</a>
-                </div>
+            <div className="welcome__buttons">
+                <Link to={{pathname: 'ordernow'}} >
+                    <button className="welcome__buttons__order">
+                        Order Now
+                    </button>
+                </Link>
 
-                <div className="order-buttons__right">
-                    <a href="/orderahead">Order Ahead</a>
-                </div>
+                <Link to={{pathname: 'orderahead'}} >
+                    <button className="welcome__buttons__order">
+                        Order Ahead
+                    </button>
+                </Link>
             </div>
 
             <div className="welcome__bottom">
-                Not you or Room number? <button onClick={logoutHandler} className="home-signout-button">Sign Out</button> and contact your nurse!
+                Not you or Room number? <button onClick={logoutHandler} className="welcome__signout">Sign Out</button> and contact your nurse!
             </div>
         </div>
     )
