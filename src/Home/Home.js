@@ -1,60 +1,57 @@
 import React from "react";
-import './home.css'
+import { Link } from "react-router-dom"
+// import './home.css'
 import nyc from '../asset/images/nyc.jpeg'
 import { withRouter } from "react-router-dom"
+import './Styles.scss'
 
 // class Home extends React.Component {
 function Home(props) {
 
     const logoutHandler = () => {
         localStorage.clear()
-        localStorage.removeItem("token")
-        localStorage.removeItem("user")
-        localStorage.removeItem("userId")
-        localStorage.removeItem("name")
-        localStorage.removeItem("diet")
-        localStorage.removeItem("department")
-        localStorage.removeItem("allergies")
-        localStorage.removeItem("room")
-        localStorage.removeItem("hospital")
-        localStorage.removeItem("restriction")
         // eslint-disable-next-line react/prop-types
         props.history.push('/login')
     };
         
-    let userName = localStorage.getItem("name")
-    let userHospital = localStorage.getItem("hospital")
+    // let userName = localStorage.getItem("name")
+    // let userHospital = localStorage.getItem("hospital")
 
     return (
 
-        <>
-            <div className="top-welcome">
+        <div className="welcome">
+            <div className="welcome__top">
                 <img 
                     src={nyc}
                     style={{ width: "100%", height: "30vh" }}
                     alt="city-img" />
             </div>
-            <div className="welcome-city">
+            <div className="welcome__city">
                 New York
             </div>
-            <div className="welcome-hospital">
-                Welcome to {userHospital}, {userName} 
+            <div className="welcome__hospital">
+                {/* Welcome to {userHospital}, {userName}  */}
+                Welcome to New York Hospital
             </div>
 
-            <div className="order-buttons">
-                <div className="order-button-left">
-                    <a href="ordernow" className="home-button">Order Now</a>
-                </div>
+            <div className="welcome__buttons">
+                <Link to={{pathname: 'ordernow'}} >
+                    <button className="welcome__buttons__order">
+                        Order Now
+                    </button>
+                </Link>
 
-                <div className="order-button-right">
-                    <a href="/orderahead" className="home-button">Order Ahead</a>
-                </div>
+                <Link to={{pathname: 'orderahead'}} >
+                    <button className="welcome__buttons__order">
+                        Order Ahead
+                    </button>
+                </Link>
             </div>
 
-            <div className="welcome-bottom">
-                Not you or Room number? <button onClick={logoutHandler} className="home-signout-button">Sign Out</button> and contact your nurse!
+            <div className="welcome__bottom">
+                Not you or Room number? <button onClick={logoutHandler} className="welcome__signout">Sign Out</button> and contact your nurse!
             </div>
-        </>
+        </div>
     )
 }
 

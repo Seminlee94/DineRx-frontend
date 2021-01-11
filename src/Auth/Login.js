@@ -28,6 +28,7 @@ export class Login extends Component {
         this.setState({ hospitalClicked: true })
     }
 
+
     handleNameKeyPress = (event) => {
         if(event.key === 'Enter'){
           this.setState({ nameClicked: true })
@@ -87,12 +88,12 @@ export class Login extends Component {
         }))
     }
 
-    //result from auto search
+    // //result from auto search
     possibleHospitalHandler = possibleHospital => {
         this.setState(() => ({ possibleHospital }),() => (this.hospitalState(possibleHospital)));
     };
 
-    //split to get only hospital
+    // //split to get only hospital
     hospitalState = possibleHospital => {
         let hospital = possibleHospital.split(", ")[0]
         this.setState(() => ({ hospital: hospital }))

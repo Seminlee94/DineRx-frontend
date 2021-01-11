@@ -1,0 +1,14 @@
+@mixin widthAndAlign {
+    text-align: center;
+    width: 100%;
+}
+
+@mixin buttonStyle {
+    padding: 12px 36px;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 18px;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
