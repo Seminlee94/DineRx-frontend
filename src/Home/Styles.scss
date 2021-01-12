@@ -1,53 +1,74 @@
 @import '../styles/utils/mixins';
+@import '../styles/utils/breakpoints';
 
 .welcome {
-    &__top {
-        height: 30vh;
-        z-index: 0;
-        position: absolute;
-        @include widthAndAlign;
-    }
+  &__top {
+    height: 30vh;
+    width: 100%;
+    z-index: -1;
+    position: relative;
+    object-fit: contain;
 
     &__city {
-        position: relative;
-        z-index: 1;
-        height: 80%;
-        font-size: 300px;
+      position: absolute;
+      z-index: 50;
+      height: 100%;
+
+      color: wheat;
+      opacity: 0.75;
+      font-family: Arial, Helvetica, sans-serif;
+      @include widthAndAlign;
+      top: 0;
+
+      p {
+        display: inline-block;
+        font-size: 16vw;
         font-weight: bold;
-        color: wheat;
-        opacity: .75;
-        font-family: Arial, Helvetica, sans-serif;
-        @include widthAndAlign;
+        vertical-align: middle;
+        line-height: 30vh;
+      }
+    }
+  }
+
+  &__hospital {
+    margin-top: 1%;
+    font-size: 10vw;
+    font-family: Arial, Helvetica, sans-serif;
+    @include widthAndAlign;
+  }
+
+  &__buttons {
+    width: 100%;
+    height: 50%;
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+
+    @media only screen and (max-width: $mobile) {
+      display: block;
+      text-align: center;
     }
 
-    &__hospital {
-        margin-top: 1%;
-        font-size: 70px;
-        font-family: Arial, Helvetica, sans-serif;
-        @include widthAndAlign;
-    }
+    &__order {
+      margin-right: 30px;
+      margin-left: 20px;
+      @include buttonStyle;
+      background: linear-gradient(90deg, #0162c8, #55e7fc);
 
-    &__buttons {
+      @media only screen and (max-width: $mobile) {
         width: 100%;
-        margin-top: 10%;
-        display: flex;
-        justify-content: center;
-
-        &__order {
-            margin-right: 30px;
-            margin-left: 20px;
-            @include buttonStyle;
-            background: linear-gradient(90deg, #0162c8, #55e7fc);
-        }
+        margin: 10px;
+      }
     }
+  }
 
-    &__bottom {
-        margin-top: 10%;
-        text-align: center;
-    }
+  &__bottom {
+    margin-top: 10%;
+    text-align: center;
+  }
 
-    &__signout {
-        @include buttonStyle;
-        background: linear-gradient(90deg, #755bea, #ff72c0);
-    }
+  &__signout {
+    @include buttonStyle;
+    background: linear-gradient(90deg, #755bea, #ff72c0);
+  }
 }

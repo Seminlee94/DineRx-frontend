@@ -22,13 +22,17 @@ function Home(props) {
         <div className="welcome">
             <div className="welcome__top">
                 <img 
+                    className="welcome__top--img"
                     src={nyc}
                     style={{ width: "100%", height: "30vh" }}
                     alt="city-img" />
+
+                <div className="welcome__top__city">
+                    <p>New York</p>
+                </div>
+
             </div>
-            <div className="welcome__city">
-                New York
-            </div>
+
             <div className="welcome__hospital">
                 {/* Welcome to {userHospital}, {userName}  */}
                 Welcome to New York Hospital
