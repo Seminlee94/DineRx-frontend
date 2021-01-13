@@ -1,5 +1,5 @@
 import React from 'react'
-import '../MyOrders.css'
+import '../MyOrders/MyOrders.css'
 import * as faIcons from "react-icons/fa"
 import { connect } from 'react-redux'
 import { deleteUserOrder } from '../../Redux/actions'

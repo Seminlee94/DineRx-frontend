@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import './OrderAhead.css'
-import Breakfast from "../Meal/Breakfast.js"
-import Lunch from "../Meal/Lunch.js"
-import Dinner from "../Meal/Dinner.js"
+import Breakfast from "../../Meal/Breakfast.js"
+import Lunch from "../../Meal/Lunch.js"
+import Dinner from "../../Meal/Dinner.js"
 import {FaArrowCircleUp} from 'react-icons/fa';
-import RightSidebar from './RightSidebar'
+import RightSidebar from '../RightSidebar'
 
 function OrderAhead(props) {
 

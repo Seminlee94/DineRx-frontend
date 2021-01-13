@@ -3,12 +3,12 @@ import './App.css'
 import { Switch, Route, BrowserRouter, withRouter } from "react-router-dom"
 import Login from "./Auth/Login"
 import Home from "./Home/Home"
-import OrderNow from './Order/OrderNow'
-import OrderAhead from './Order/OrderAhead'
+import OrderNow from './Order/OrderNow/OrderNow'
+import OrderAhead from './Order/OrderAhead/OrderAhead'
 import Navbar from './Navbar/Navbar'
 import Product from './Meal/Product'
 import Cart from './Order/Cart/Cart'
-import MyOrders from './Order/MyOrders'
+import MyOrders from './Order/MyOrders/MyOrders'
 import DietSide from './Diet/DietSide'
 import DietRecommendation from './Diet/containers/DietRecommendation'
 import DietEducation from './Diet/containers/DietEducation'

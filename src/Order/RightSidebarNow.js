@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import './OrderAhead.css'
+import './OrderAhead/OrderAhead.css'
 import RightSideItem from './Cart/RightSideItem'
 
 function RightSidebarNow(props) {

@@ -1,7 +1,9 @@
+// import './MyOrders.css'
+import './Styles.scss'
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { getUserOrder } from '../Redux/actions'
-import MyOrderCard from './components/MyOrderCard'
+import { getUserOrder } from '../../Redux/actions'
+import MyOrderCard from '../components/MyOrderCard'
 
 let userId = localStorage.getItem("userId")
 

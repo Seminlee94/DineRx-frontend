@@ -1,6 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom"
-// import './home.css'
 import nyc from '../asset/images/nyc.jpeg'
 import { withRouter } from "react-router-dom"
 import './Styles.scss'
