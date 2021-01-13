@@ -35,25 +35,27 @@ function Home(props) {
 
             <div className="welcome__hospital">
                 {/* Welcome to {userHospital}, {userName}  */}
-                Welcome to New York Hospital
+                <p>Welcome to New York Hospital</p>
             </div>
 
             <div className="welcome__buttons">
-                <Link to={{pathname: 'ordernow'}} >
-                    <button className="welcome__buttons__order">
-                        Order Now
-                    </button>
-                </Link>
+                <a href="/ordernow"
+                    className="welcome__buttons__order">
+                    Order Now
+                </a>
 
-                <Link to={{pathname: 'orderahead'}} >
-                    <button className="welcome__buttons__order">
-                        Order Ahead
-                    </button>
-                </Link>
+                <a href="/orderahead"
+                    className="welcome__buttons__order">
+                    Order Ahead
+                </a>
             </div>
 
             <div className="welcome__bottom">
-                Not you or Room number? <button onClick={logoutHandler} className="welcome__signout">Sign Out</button> and contact your nurse!
+                <h3>Not you or Room number?</h3> 
+                <button onClick={logoutHandler}            
+                    className="welcome__signout">
+                    Sign Out
+                </button>
             </div>
         </div>
     )

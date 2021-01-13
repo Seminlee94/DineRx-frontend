@@ -4,13 +4,14 @@
 }
 
 @mixin buttonStyle {
-    padding: 12px 36px;
+    padding: 12px 36px 12px 36px;
     color: #fff;
-    text-decoration: none;
+    text-decoration: none !important;
     text-transform: uppercase;
-    font-size: 18px;
+    font-size: 1.3vw;
     letter-spacing: 2px;
     cursor: pointer;
-    width: 40%;
+    // width: 15vw;
     height: 100%;
+    // text-align: center;
 }
